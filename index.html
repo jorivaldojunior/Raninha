@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Terço dos Homens Mãe Rainha</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fonte -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            overflow: hidden;
+        }
+
+        .fade-out {
+            animation: fadeOut .45s forwards;
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+
+            to {
+                opacity: 0;
+            }
+        }
+
+        .pulse {
+            animation: pulse 2.5s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .fadeUp {
+            animation: fadeUp 1s ease;
+        }
+
+        @keyframes fadeUp {
+
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0px);
+            }
+
+        }
+    </style>
+
+</head>
+
+<body class="bg-white">
+
+    <main id="splash"
+        class="w-screen h-screen flex flex-col justify-center items-center cursor-pointer select-none">
+
+        <img src="assets/imagem1.png" alt="Logo Schoenstatt"
+            class="pulse w-52 md:w-64 lg:w-72 transition-all duration-500">
+
+        <h1 class="mt-10 text-3xl md:text-4xl font-bold text-blue-900 fadeUp text-center">
+            Terço dos Homens
+        </h1>
+
+        <h2 class="text-2xl md:text-3xl font-semibold text-yellow-600 fadeUp text-center">
+            Mãe Rainha
+        </h2>
+
+        <p class="mt-10 text-gray-500 animate-pulse text-center">
+            Toque em qualquer lugar para entrar
+        </p>
+
+    </main>
+
+    <script>
+
+        const splash = document.getElementById("splash");
+
+        function entrar() {
+
+            splash.classList.add("fade-out");
+
+            setTimeout(() => {
+
+                window.location.href = "home.html";
+
+            }, 450);
+
+        }
+
+        splash.addEventListener("click", entrar);
+
+    </script>
+
+</body>
+
+</html>
