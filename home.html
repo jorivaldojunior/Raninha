@@ -110,16 +110,16 @@
             color: #6b7280;
         }
 
-        /* Grid para cards 2 por linha */
+        /* Grid para cards 2 por linha - MAIS COMPACTOS */
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
+            gap: 0.75rem;
         }
 
         @media (max-width: 480px) {
             .cards-grid {
-                gap: 0.75rem;
+                gap: 0.5rem;
             }
         }
 
@@ -361,6 +361,84 @@
             background: #1e40af;
             transform: scale(1.05);
         }
+
+        /* CARDS MAIS COMPACTOS */
+        .card-modern {
+            padding: 1rem !important;
+            border-radius: 1rem !important;
+        }
+
+        .card-modern .icon-wrapper {
+            width: 2.5rem !important;
+            height: 2.5rem !important;
+            margin-bottom: 0.5rem !important;
+        }
+
+        .card-modern .icon-wrapper svg {
+            width: 1.25rem !important;
+            height: 1.25rem !important;
+        }
+
+        .card-modern h4 {
+            font-size: 0.875rem !important;
+            font-weight: 700 !important;
+        }
+
+        .card-modern p {
+            font-size: 0.7rem !important;
+            margin-top: 0.15rem !important;
+        }
+
+        /* Título do banner em telas pequenas */
+        @media (max-width: 640px) {
+            .banner-title-small .title {
+                font-size: 1.5rem !important;
+                line-height: 1.3 !important;
+            }
+            .banner-title-small .highlight {
+                font-size: 1.5rem !important;
+                display: inline !important;
+            }
+            .banner-title-small .title br {
+                display: none !important;
+            }
+            .banner-title-small .title .break-mobile {
+                display: inline !important;
+            }
+        }
+
+        @media (min-width: 641px) {
+            .banner-title-small .title .break-mobile {
+                display: none !important;
+            }
+        }
+
+        /* Ajuste do padding do banner em telas pequenas */
+        @media (max-width: 640px) {
+            .banner-white .relative {
+                padding: 1.5rem !important;
+            }
+            .convite-box {
+                padding: 10px 12px !important;
+            }
+            .convite-box .dia {
+                font-size: 11px !important;
+                padding: 1px 10px !important;
+            }
+            .convite-box .horario {
+                font-size: 13px !important;
+            }
+            .convite-box p {
+                font-size: 12px !important;
+            }
+            .btn-convite {
+                font-size: 12px !important;
+                padding: 6px 16px !important;
+            }
+            .banner-white .flex-shrink-0 {
+                width: 8rem !important;
+            }
+        }
     </style>
 </head>
 
@@ -514,19 +592,21 @@
         </div>
     </header>
 
-    <!-- BANNER BRANCO COM PROPAGANDA -->
+    <!-- BANNER BRANCO COM PROPAGANDA - TÍTULO AJUSTADO EM TELAS PEQUENAS -->
     <section class="max-w-7xl mx-auto mt-6 px-4 sm:px-5">
         <div class="banner-white rounded-3xl shadow-xl relative">
             <!-- Decorações -->
             <div class="banner-decoration"></div>
             <div class="banner-decoration"></div>
             
-            <div class="relative z-10 p-8 sm:p-12 flex flex-col md:flex-row items-center gap-8">
+            <div class="relative z-10 p-8 sm:p-12 flex flex-col md:flex-row items-center gap-8 banner-title-small">
                 <div class="flex-1 text-center md:text-left"> 
-                    <!-- Título -->
+                    <!-- Título com ajuste para telas pequenas -->
                     <h2 class="title text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight">
                         Bem-vindo ao<br>
-                        <span class="highlight">Terço dos Homens</span>
+                        <span class="highlight">
+                            Terço <span class="break-mobile"> </span>dos Homens
+                        </span>
                     </h2>
                     
                     <p class="subtitle mt-3 text-base md:text-lg max-w-md mx-auto md:mx-0">
@@ -558,8 +638,6 @@
                             </a>
                         </div>
                     </div>
-
-                    
                 </div>
                 
                 <div class="flex-shrink-0 w-48 md:w-64">
@@ -571,80 +649,80 @@
         </div>
     </section>
 
-    <!-- CARDS 2 POR LINHA -->
+    <!-- CARDS 2 POR LINHA - MAIS COMPACTOS -->
     <section class="max-w-7xl mx-auto px-4 sm:px-5 mt-8">
-        <div class="flex items-center justify-between mb-6">
+        <div class="flex items-center justify-between mb-4">
             <div>
-                <h3 class="text-xl font-bold text-gray-800">Menu Principal</h3>
-                <p class="text-gray-500 text-sm">Acesse as funcionalidades</p>
+                <h3 class="text-lg font-bold text-gray-800">Menu Principal</h3>
+                <p class="text-gray-500 text-xs">Acesse as funcionalidades</p>
             </div>
         </div>
 
         <div class="cards-grid">
             <!-- Card 1 -->
-            <a href="coordenador.html" class="card-modern rounded-2xl p-5 shadow-sm hover:shadow-xl">
-                <div class="icon-wrapper w-12 h-12 rounded-xl flex items-center justify-center mb-3">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <a href="coordenador.html" class="card-modern rounded-2xl p-4 shadow-sm hover:shadow-xl">
+                <div class="icon-wrapper w-10 h-10 rounded-xl flex items-center justify-center mb-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
                     </svg>
                 </div>
-                <h4 class="font-bold text-gray-800 text-base">Conduzir o Terço</h4>
-                <p class="text-gray-500 text-xs mt-1">Passo a passo completo</p>
+                <h4 class="font-bold text-gray-800 text-sm">Conduzir o Terço</h4>
+                <p class="text-gray-500 text-xs mt-0.5">Passo a passo completo</p>
             </a>
 
             <!-- Card 2 -->
-            <a href="manual.html" class="card-modern rounded-2xl p-5 shadow-sm hover:shadow-xl">
-                <div class="icon-wrapper w-12 h-12 rounded-xl flex items-center justify-center mb-3">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <a href="manual.html" class="card-modern rounded-2xl p-4 shadow-sm hover:shadow-xl">
+                <div class="icon-wrapper w-10 h-10 rounded-xl flex items-center justify-center mb-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
                     </svg>
                 </div>
-                <h4 class="font-bold text-gray-800 text-base">Manual</h4>
-                <p class="text-gray-500 text-xs mt-1">Manual digital completo</p>
+                <h4 class="font-bold text-gray-800 text-sm">Manual</h4>
+                <p class="text-gray-500 text-xs mt-0.5">Manual digital completo</p>
             </a>
 
             <!-- Card 3 -->
-            <a href="oracoes.html" class="card-modern rounded-2xl p-5 shadow-sm hover:shadow-xl">
-                <div class="icon-wrapper w-12 h-12 rounded-xl flex items-center justify-center mb-3">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <a href="oracoes.html" class="card-modern rounded-2xl p-4 shadow-sm hover:shadow-xl">
+                <div class="icon-wrapper w-10 h-10 rounded-xl flex items-center justify-center mb-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
                     </svg>
                 </div>
-                <h4 class="font-bold text-gray-800 text-base">Orações</h4>
-                <p class="text-gray-500 text-xs mt-1">Orações do movimento</p>
+                <h4 class="font-bold text-gray-800 text-sm">Orações</h4>
+                <p class="text-gray-500 text-xs mt-0.5">Orações do movimento</p>
             </a>
 
             <!-- Card 4 -->
-            <a href="agenda.html" class="card-modern rounded-2xl p-5 shadow-sm hover:shadow-xl">
-                <div class="icon-wrapper w-12 h-12 rounded-xl flex items-center justify-center mb-3">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <a href="agenda.html" class="card-modern rounded-2xl p-4 shadow-sm hover:shadow-xl">
+                <div class="icon-wrapper w-10 h-10 rounded-xl flex items-center justify-center mb-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                     </svg>
                 </div>
-                <h4 class="font-bold text-gray-800 text-base">Agenda</h4>
-                <p class="text-gray-500 text-xs mt-1">Próximos encontros</p>
+                <h4 class="font-bold text-gray-800 text-sm">Agenda</h4>
+                <p class="text-gray-500 text-xs mt-0.5">Próximos encontros</p>
             </a>
 
             <!-- Card 5 -->
-            <a href="noticias.html" class="card-modern rounded-2xl p-5 shadow-sm hover:shadow-xl">
-                <div class="icon-wrapper w-12 h-12 rounded-xl flex items-center justify-center mb-3">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <a href="noticias.html" class="card-modern rounded-2xl p-4 shadow-sm hover:shadow-xl">
+                <div class="icon-wrapper w-10 h-10 rounded-xl flex items-center justify-center mb-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
                     </svg>
                 </div>
-                <h4 class="font-bold text-gray-800 text-base">Notícias</h4>
-                <p class="text-gray-500 text-xs mt-1">Informações da coordenação</p>
+                <h4 class="font-bold text-gray-800 text-sm">Notícias</h4>
+                <p class="text-gray-500 text-xs mt-0.5">Informações da coordenação</p>
             </a>
 
             <!-- Card 6 -->
-            <a href="galeria.html" class="card-modern rounded-2xl p-5 shadow-sm hover:shadow-xl">
-                <div class="icon-wrapper w-12 h-12 rounded-xl flex items-center justify-center mb-3">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <a href="galeria.html" class="card-modern rounded-2xl p-4 shadow-sm hover:shadow-xl">
+                <div class="icon-wrapper w-10 h-10 rounded-xl flex items-center justify-center mb-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                     </svg>
                 </div>
-                <h4 class="font-bold text-gray-800 text-base">Galeria</h4>
-                <p class="text-gray-500 text-xs mt-1">Fotos e eventos</p>
+                <h4 class="font-bold text-gray-800 text-sm">Galeria</h4>
+                <p class="text-gray-500 text-xs mt-0.5">Fotos e eventos</p>
             </a>
         </div>
     </section>
