@@ -556,37 +556,6 @@
             transform: scale(0.95);
         }
 
-        .footer-menu .footer-item.active .icon-wrapper {
-            background: #1e3a8a;
-        }
-
-        .footer-menu .footer-item.active .icon-wrapper svg {
-            stroke: white;
-        }
-
-        .footer-menu .footer-item.active span {
-            color: #1e3a8a;
-        }
-
-        /* Seta de indicação de scroll */
-        .footer-menu .scroll-indicator {
-            position: absolute;
-            right: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255, 255, 255, 0.9);
-            padding: 8px 4px;
-            border-radius: 8px 0 0 8px;
-            box-shadow: -4px 0 15px rgba(0, 0, 0, 0.05);
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .footer-menu .scroll-indicator.show {
-            opacity: 1;
-        }
-
         /* Mostra o rodapé apenas em telas pequenas */
         @media (max-width: 640px) {
             .footer-menu {
@@ -598,9 +567,19 @@
                 display: none !important;
             }
             
+            /* Esconde o título do menu principal em telas pequenas */
+            .menu-title {
+                display: none !important;
+            }
+            
             /* Ajusta o padding do body para o rodapé */
             body {
                 padding-bottom: 90px;
+            }
+
+            /* Ajusta o menu lateral para não ficar escondido pelo rodapé */
+            .menu {
+                padding-bottom: 80px !important;
             }
         }
 
@@ -629,6 +608,10 @@
             
             .cards-grid {
                 display: grid !important;
+            }
+            
+            .menu-title {
+                display: block !important;
             }
             
             body {
@@ -749,17 +732,17 @@
                     </a>
                 </div>
             </div>
-        </div>
 
-        <!-- BOTÃO SAIR -->
-        <div class="p-4 border-t border-gray-100 mt-auto">
-            <button onclick="abrirModal()"
-                class="btn-sair w-full text-white font-semibold py-3 rounded-xl flex items-center justify-center gap-3 shadow-lg">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
-                </svg>
-                Sair do App
-            </button>
+            <!-- BOTÃO SAIR - MAIS PRÓXIMO DAS REDES SOCIAIS -->
+            <div class="pt-3 border-t border-gray-100">
+                <button onclick="abrirModal()"
+                    class="btn-sair w-full text-white font-semibold py-3 rounded-xl flex items-center justify-center gap-3 shadow-lg">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                    </svg>
+                    Sair do App
+                </button>
+            </div>
         </div>
     </aside>
 
@@ -788,7 +771,7 @@
         </div>
     </header>
 
-    <!-- BANNER BRANCO COM PROPAGANDA - TÍTULO AJUSTADO EM TELAS PEQUENAS -->
+    <!-- BANNER BRANCO COM PROPAGANDA -->
     <section class="max-w-7xl mx-auto mt-6 px-4 sm:px-5">
         <div class="banner-white rounded-3xl shadow-xl relative">
             <!-- Decorações -->
@@ -808,7 +791,7 @@
                         "Nada sem Vós. Nada sem nós."
                     </p>
 
-                    <!-- CONVITE DINÂMICO - SÓ ISSO MUDA -->
+                    <!-- CONVITE DINÂMICO -->
                     <div id="conviteContainer">
                         <!-- O conteúdo será inserido pelo JavaScript -->
                     </div>
@@ -823,9 +806,9 @@
         </div>
     </section>
 
-    <!-- CARDS 2 POR LINHA - MAIS COMPACTOS (VISÍVEL EM TELAS GRANDES) -->
+    <!-- CARDS 2 POR LINHA (VISÍVEL EM TELAS GRANDES) -->
     <section class="max-w-7xl mx-auto px-4 sm:px-5 mt-8">
-        <div class="flex items-center justify-between mb-4">
+        <div class="menu-title flex items-center justify-between mb-4">
             <div>
                 <h3 class="text-lg font-bold text-gray-800">Menu Principal</h3>
                 <p class="text-gray-500 text-xs">Acesse as funcionalidades</p>
