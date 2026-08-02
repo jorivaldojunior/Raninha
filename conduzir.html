@@ -500,6 +500,41 @@
             transform: scale(1.03);
         }
 
+        /* Botão Home no header - apenas telas grandes */
+        .btn-home-header {
+            display: none;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0.3rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+            color: #4b5563;
+        }
+
+        .btn-home-header:hover {
+            background: #f3f4f6;
+            color: #1e3a8a;
+            transform: scale(1.05);
+        }
+
+        .btn-home-header:active {
+            transform: scale(0.95);
+        }
+
+        .btn-home-header svg {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+
+        @media (min-width: 641px) {
+            .btn-home-header {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+
         @media (max-width: 480px) {
             .misterios-grid {
                 grid-template-columns: 1fr;
@@ -738,15 +773,23 @@
         </div>
     </aside>
 
-    <!-- HEADER SEM BOTÃO VOLTAR -->
+    <!-- HEADER COM BOTÃO HOME (APENAS TELAS GRANDES) -->
     <header class="header-white shadow-xl sticky top-0 z-40">
         <div class="max-w-7xl mx-auto flex justify-between items-center p-4">
-            <button onclick="abrirMenu()" 
-                    class="menu-icon hover:bg-gray-100 p-2 rounded-xl transition-all duration-300">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-                </svg>
-            </button>
+            <div class="flex items-center gap-2">
+                <button onclick="abrirMenu()" 
+                        class="menu-icon hover:bg-gray-100 p-2 rounded-xl transition-all duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+                <!-- Botão Home - apenas telas grandes -->
+                <a href="home.html" class="btn-home-header" title="Voltar para Home">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                    </svg>
+                </a>
+            </div>
 
             <div class="flex items-center gap-3">
                 <img src="assets/imagem1.png" class="w-10 h-10 object-contain">
@@ -763,7 +806,7 @@
         </div>
     </header>
 
-    <!-- CONTEÚDO PRINCIPAL - ROTEIRO OFICIAL THMR COMPLETO -->
+    <!-- CONTEÚDO PRINCIPAL -->
     <main class="max-w-3xl mx-auto px-4 sm:px-5 mt-6">
         <div class="bg-white rounded-2xl shadow-lg p-4 sm:p-6 mb-6">
             <div class="text-center mb-4">
@@ -777,7 +820,7 @@
             </div>
 
             <!-- ============================================================ -->
-            <!-- 1. INTENÇÕES DO ROSÁRIO - COM EXIBIÇÃO DINÂMICA -->
+            <!-- 1. INTENÇÕES DO ROSÁRIO -->
             <!-- ============================================================ -->
             <div class="step-card border-yellow-200 bg-yellow-50/30">
                 <div class="flex items-center gap-3 mb-2">
@@ -786,7 +829,7 @@
                 </div>
                 <div class="step-content">
                     <div class="intencao-box" id="intencoesDisplay">
-                        <!-- Conteúdo será inserido pelo JavaScript -->
+                        <!-- Conteúdo inserido pelo JavaScript -->
                     </div>
                     <div class="mt-2 text-right">
                         <a href="intencoes.html" class="btn-gerenciar">
@@ -1231,14 +1274,7 @@
                 </div>
                 <span>Intenções</span>
             </a>
-            <a href="intencoes.html" class="footer-item">
-                <div class="icon-wrapper">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
-                    </svg>
-                </div>
-                <span>Intenções</span>
-            </a>
+           
             <a href="oracoes.html" class="footer-item">
                 <div class="icon-wrapper">
                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1352,13 +1388,12 @@
         document.addEventListener('DOMContentLoaded', function() {
             carregarIntencoes();
             
-            // Recarregar as intenções quando a página receber foco (voltando da página de intenções)
+            // Recarregar as intenções quando a página receber foco
             window.addEventListener('focus', function() {
                 carregarIntencoes();
             });
         });
     </script>
-
 </body>
 
 </html>
