@@ -110,7 +110,7 @@
             color: #6b7280;
         }
 
-        /* Grid para cards 2 por linha - MAIS COMPACTOS */
+        /* Grid para cards - PADRÃO 2 colunas */
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -362,7 +362,7 @@
             transform: scale(1.05);
         }
 
-        /* CARDS MAIS COMPACTOS */
+        /* CARDS MAIS COMPACTOS - PADRÃO */
         .card-modern {
             padding: 1rem !important;
             border-radius: 1rem !important;
@@ -372,6 +372,7 @@
             width: 2.5rem !important;
             height: 2.5rem !important;
             margin-bottom: 0.5rem !important;
+            border-radius: 0.75rem !important;
         }
 
         .card-modern .icon-wrapper svg {
@@ -476,6 +477,147 @@
         .convite-box,
         .convite-box-semterco {
             transition: opacity 0.5s ease-in-out;
+        }
+
+        /* ================================================================ */
+        /* ALTERAÇÕES APENAS PARA TELAS PEQUENAS - APENAS ÍCONE E TEXTO */
+        /* ================================================================ */
+        @media (max-width: 640px) {
+            /* Muda para 3 colunas */
+            .cards-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 0.5rem;
+            }
+
+            /* Remove o card - apenas ícone e texto */
+            .card-modern {
+                background: transparent !important;
+                border: none !important;
+                box-shadow: none !important;
+                padding: 0.25rem !important;
+                border-radius: 0 !important;
+                aspect-ratio: auto !important;
+                display: flex !important;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                transform: none !important;
+            }
+
+            .card-modern:hover {
+                transform: scale(1.05) !important;
+                box-shadow: none !important;
+                background: transparent !important;
+            }
+
+            /* Mantém o fundo do ícone */
+            .card-modern .icon-wrapper {
+                background: #f5f5f5 !important;
+                width: 2.2rem !important;
+                height: 2.2rem !important;
+                margin-bottom: 0.15rem !important;
+                border-radius: 0.5rem !important;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .card-modern .icon-wrapper svg {
+                width: 1.1rem !important;
+                height: 1.1rem !important;
+                stroke: #1a1a1a !important;
+            }
+
+            .card-modern:hover .icon-wrapper {
+                background: #e5e5e5 !important;
+                transform: scale(1.05) !important;
+            }
+
+            /* Texto abaixo do ícone */
+            .card-modern h4 {
+                font-size: 0.55rem !important;
+                line-height: 1.1 !important;
+                font-weight: 700 !important;
+                color: #1f2937 !important;
+            }
+
+            .card-modern p {
+                display: none !important;
+            }
+        }
+
+        /* Ajuste para telas muito pequenas */
+        @media (max-width: 380px) {
+            .cards-grid {
+                gap: 0.3rem;
+            }
+
+            .card-modern .icon-wrapper {
+                width: 1.8rem !important;
+                height: 1.8rem !important;
+            }
+
+            .card-modern .icon-wrapper svg {
+                width: 0.9rem !important;
+                height: 0.9rem !important;
+            }
+
+            .card-modern h4 {
+                font-size: 0.45rem !important;
+            }
+        }
+
+        /* Garante que em telas grandes continue 2 colunas e cards normais */
+        @media (min-width: 641px) {
+            .cards-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .card-modern {
+                background: white !important;
+                border: 1px solid #e5e7eb !important;
+                box-shadow: none !important;
+                padding: 1rem !important;
+                border-radius: 1rem !important;
+                aspect-ratio: auto !important;
+                display: block !important;
+                transform: none !important;
+            }
+
+            .card-modern:hover {
+                transform: translateY(-4px) !important;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08) !important;
+                border-color: #1e40af !important;
+                background: white !important;
+            }
+
+            .card-modern .icon-wrapper {
+                background: #f5f5f5 !important;
+                width: 2.5rem !important;
+                height: 2.5rem !important;
+                margin-bottom: 0.5rem !important;
+                border-radius: 0.75rem !important;
+            }
+
+            .card-modern .icon-wrapper svg {
+                width: 1.25rem !important;
+                height: 1.25rem !important;
+            }
+
+            .card-modern h4 {
+                font-size: 0.875rem !important;
+            }
+
+            .card-modern p {
+                font-size: 0.7rem !important;
+                display: block !important;
+            }
+
+            .card-modern:hover .icon-wrapper {
+                background: #e5e5e5 !important;
+                transform: scale(1.05) !important;
+            }
         }
     </style>
 </head>
@@ -781,7 +923,7 @@
                 horario: '--:--', 
                 emoji: '📌', 
                 semTerco: true,
-                texto: 'Não há Terço nos dias de hoje!',
+                texto: 'Não há Terço hoje.',
                 tag: 'Sem Terço'
             },
             { 
