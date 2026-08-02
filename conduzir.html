@@ -439,6 +439,27 @@
             stroke: #1f2937;
         }
 
+        .canto-box {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border: 2px solid #2e7d32;
+            border-radius: 1rem;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .canto-box .canto-title {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #1b5e20;
+        }
+
+        .canto-box .canto-text {
+            font-size: 0.95rem;
+            color: #1b5e20;
+            line-height: 1.8;
+            font-style: italic;
+        }
+
         @media (max-width: 480px) {
             .misterios-grid {
                 grid-template-columns: 1fr;
@@ -702,7 +723,7 @@
             </div>
 
             <div class="flex items-center gap-2">
-                <a href="home.html" class="btn-voltar">
+                <a href="index.html" class="btn-voltar">
                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
                     </svg>
@@ -720,7 +741,7 @@
     <main class="max-w-3xl mx-auto px-4 sm:px-5 mt-6">
         <div class="bg-white rounded-2xl shadow-lg p-4 sm:p-6 mb-6">
             <div class="text-center mb-4">
-                <h1 class="text-2xl font-extrabold text-gray-800"> Roteiro do Rosário</h1>
+                <h1 class="text-2xl font-extrabold text-gray-800">🎯 Roteiro do Rosário</h1>
                 <p class="text-sm text-gray-500 mt-1">Forma como é rezado no <strong>Terço dos Homens Mãe Rainha</strong></p>
                 <div class="mt-3 p-3 bg-blue-50 rounded-xl border border-blue-100">
                     <p class="text-sm text-blue-800 font-medium">
@@ -1048,11 +1069,27 @@
             </div>
 
             <!-- ============================================================ -->
-            <!-- 14. ORAÇÕES FINAIS - SALVE RAINHA -->
+            <!-- 12. ORAÇÃO - INFINITAS GRAÇAS -->
+            <!-- ============================================================ -->
+            <div class="step-card border-purple-200 bg-purple-50/30">
+                <div class="flex items-center gap-3 mb-2">
+                    <span class="step-number" style="background: #7c3aed;">12</span>
+                    <span class="step-title" style="color: #7c3aed;">Infinitas Graças</span>
+                </div>
+                <div class="step-content">
+                    <div class="prayer" style="border-left-color: #7c3aed;">
+                        <p class="prayer-title" style="color: #7c3aed;">🙏 Ação de Graças</p>
+                        <p>"Infinitas graças vos damos, Soberana Rainha, pelos benefícios que todos os dias recebemos de vosso liberalíssimo Coração. Dignai-vos, ó Mãe amabilíssima, de nos receber em vossa proteção e de nos alcançar a graça de amarmos a vosso Filho Jesus e a vós com todo o nosso coração, para que, servindo-vos fielmente nesta vida, mereçamos louvar-vos eternamente no Céu. Amém."</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================================ -->
+            <!-- 13. SALVE RAINHA -->
             <!-- ============================================================ -->
             <div class="step-card">
                 <div class="flex items-center gap-3 mb-2">
-                    <span class="step-number" style="background: #059669;">12</span>
+                    <span class="step-number" style="background: #059669;">13</span>
                     <span class="step-title" style="color: #059669;">Salve Rainha</span>
                 </div>
                 <div class="step-content">
@@ -1060,16 +1097,70 @@
                         <p class="prayer-title">🙏 Salve Rainha</p>
                         <p>"Salve Rainha, Mãe de Misericórdia, vida, doçura, esperança nossa, salve! A vós bradamos, os degredados filhos de Eva; a vós suspiramos, gemendo e chorando neste vale de lágrimas. Eia, pois, advogada nossa, esses vossos olhos misericordiosos a nós volvei, e depois deste desterro nos mostrai a Jesus, bendito fruto do vosso ventre, ó Clemente, ó Piedosa, ó Doce, sempre Virgem Maria. Rogai por nós, Santa Mãe de Deus, para que sejamos dignos das promessas de Cristo. Amém."</p>
                     </div>
-                    <p class="mt-2"><strong>Sinal da Cruz</strong> final</p>
                 </div>
             </div>
 
             <!-- ============================================================ -->
-            <!-- 15. BÊNÇÃO DE SÃO FRANCISCO -->
+            <!-- 14. SANTO ANJO DO SENHOR -->
+            <!-- ============================================================ -->
+            <div class="step-card">
+                <div class="flex items-center gap-3 mb-2">
+                    <span class="step-number" style="background: #f59e0b;">14</span>
+                    <span class="step-title" style="color: #f59e0b;">Santo Anjo do Senhor</span>
+                </div>
+                <div class="step-content">
+                    <div class="prayer" style="border-left-color: #f59e0b;">
+                        <p class="prayer-title" style="color: #f59e0b;">👼 Oração ao Anjo da Guarda</p>
+                        <p>"Santo Anjo do Senhor, meu zeloso guardador, se a ti me confiou a piedade divina, sempre me rege, guarda, governa e ilumina. Amém."</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================================ -->
+            <!-- 15. ORAÇÃO DO TERÇO DOS HOMENS -->
+            <!-- ============================================================ -->
+            <div class="step-card border-red-200 bg-red-50/30">
+                <div class="flex items-center gap-3 mb-2">
+                    <span class="step-number red">15</span>
+                    <span class="step-title red">Oração do Terço dos Homens</span>
+                </div>
+                <div class="step-content">
+                    <div class="prayer red">
+                        <p class="prayer-title">🙏 Oração do Terço dos Homens</p>
+                        <p>"Ó Deus, Pai de misericórdia, que nos chamais a ser soldados de vossa Mãe Santíssima, concedei-nos a graça de rezar o Terço com fé e devoção. Fortalecei-nos no combate espiritual, para que, unidos a Maria, possamos vencer o mal e anunciar o Evangelho com coragem e amor. Por Cristo, Nosso Senhor. Amém."</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================================ -->
+            <!-- 16. CANTO DE CONSAGRAÇÃO À NOSSA SENHORA -->
+            <!-- ============================================================ -->
+            <div class="step-card">
+                <div class="flex items-center gap-3 mb-2">
+                    <span class="step-number" style="background: #1e40af;">16</span>
+                    <span class="step-title" style="color: #1e40af;">Canto de Consagração à Nossa Senhora</span>
+                </div>
+                <div class="step-content">
+                    <div class="canto-box">
+                        <p class="canto-title">🎵 Consagração a Nossa Senhora</p>
+                        <p class="canto-text mt-2">"Ó Maria, Mãe e Rainha,<br>
+                        a vós nos consagramos.<br>
+                        Oferecemos nosso coração,<br>
+                        nossa vida e nosso caminho.<br>
+                        Sede nossa guia e protetora,<br>
+                        conduzi-nos sempre a Jesus.<br>
+                        Amém."</p>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2">(Canto de consagração)</p>
+                </div>
+            </div>
+
+            <!-- ============================================================ -->
+            <!-- 17. BÊNÇÃO DE SÃO FRANCISCO -->
             <!-- ============================================================ -->
             <div class="step-card border-amber-200 bg-amber-50/30">
                 <div class="flex items-center gap-3 mb-2">
-                    <span class="step-number gold">★</span>
+                    <span class="step-number gold">17</span>
                     <span class="step-title gold">Benção de São Francisco</span>
                 </div>
                 <div class="step-content">
@@ -1107,7 +1198,7 @@
     <!-- RODAPÉ FIXO COM SCROLL HORIZONTAL (APENAS TELAS PEQUENAS) -->
     <nav class="footer-menu">
         <div class="scroll-container">
-            <a href="index.html" class="footer-item">
+            <a href="home.html" class="footer-item">
                 <div class="icon-wrapper">
                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
