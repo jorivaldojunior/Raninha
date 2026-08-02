@@ -439,6 +439,44 @@
                 width: 8rem !important;
             }
         }
+
+        /* Estilo para dia sem terço */
+        .convite-box-semterco {
+            background: #f3f4f6;
+            border-left: 4px solid #6b7280;
+            padding: 12px 16px;
+            border-radius: 12px;
+            margin-top: 12px;
+        }
+
+        .convite-box-semterco .dia {
+            background: #6b7280;
+            color: white;
+            padding: 2px 12px;
+            border-radius: 9999px;
+            font-size: 13px;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        @media (max-width: 640px) {
+            .convite-box-semterco {
+                padding: 10px 12px !important;
+            }
+            .convite-box-semterco .dia {
+                font-size: 11px !important;
+                padding: 1px 10px !important;
+            }
+            .convite-box-semterco p {
+                font-size: 12px !important;
+            }
+        }
+
+        /* Transição suave para o convite */
+        .convite-box,
+        .convite-box-semterco {
+            transition: opacity 0.5s ease-in-out;
+        }
     </style>
 </head>
 
@@ -587,7 +625,7 @@
 
             <span class="online-status">
                 <span class="dot"></span>
-                Jesus Mestre...
+                <span id="igrejaStatus">Carregando...</span>
             </span>
         </div>
     </header>
@@ -603,7 +641,6 @@
                 <div class="flex-1 text-center md:text-left"> 
                     <!-- Título com ajuste para telas pequenas -->
                     <h2 class="title text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight">
-                        
                         <span class="highlight">
                             Terço <span class="break-mobile"> </span>dos Homens
                         </span>
@@ -613,32 +650,9 @@
                         "Nada sem Vós. Nada sem nós."
                     </p>
 
-                    <!-- CONVITE DESTAQUE - PROPAGANDA -->
-                    <div class="convite-box">
-                        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
-                            <div>
-                                <span class="dia">🎯 TODA SEXTA</span>
-                                <span class="font-bold text-gray-800 ml-2">às <span class="horario">19:30</span></span>
-                            </div>
-                            <div class="flex-1">
-                                <p class="text-sm font-semibold text-gray-700">
-                                    🙏 Venha rezar o Terço na Capela de "Jesus Mestre"
-                                     e viva um momento de muita paz, esperança e 
-                                     a presença amoroso de nossa Mãe Rainha 3 vezes admiravél...
-                                </p>
-                            </div>
-                        </div>
-                        <div class="mt-2 flex flex-wrap items-center gap-2">
-                            <span class="text-xs text-gray-600 bg-white/70 px-3 py-1 rounded-full">
-                                ⛪ Capela de Jesus Mestre
-                            </span>
-                            <span class="text-xs text-gray-600 bg-white/70 px-3 py-1 rounded-full">
-                                📍 Todos os homens são bem-vindos
-                            </span>
-                            <a href="#" class="btn-convite">
-                                📅 Quero Participar
-                            </a>
-                        </div>
+                    <!-- CONVITE DINÂMICO - SÓ ISSO MUDA -->
+                    <div id="conviteContainer">
+                        <!-- O conteúdo será inserido pelo JavaScript -->
                     </div>
                 </div>
                 
@@ -730,6 +744,169 @@
     </section>
 
     <script>
+        // ================================================================
+        // DADOS DOS DIAS DA SEMANA
+        // ================================================================
+        const diasSemana = [
+            { 
+                dia: 'Segunda', 
+                igreja: 'Paróquia de São Lucas', 
+                horario: '19:30', 
+                emoji: '🎯', 
+                semTerco: false,
+                texto: 'Venha rezar o Terço na Paróquia de São Lucas e viva um momento de muita paz, esperança e a presença amorosa de nossa Mãe Rainha 3 vezes admirável...',
+                tag: 'Paróquia de São Lucas'
+            },
+            { 
+                dia: 'Terça', 
+                igreja: 'Santuário Mãe Rainha', 
+                horario: '19:30', 
+                emoji: '🎯', 
+                semTerco: false,
+                texto: 'Venha rezar o Terço no Santuário Mãe Rainha e viva um momento de muita paz, esperança e a presença amorosa de nossa Mãe Rainha 3 vezes admirável...',
+                tag: 'Santuário Mãe Rainha'
+            },
+            { 
+                dia: 'Quarta', 
+                igreja: 'Capela de São Pedro e São Paulo', 
+                horario: '19:30', 
+                emoji: '🎯', 
+                semTerco: false,
+                texto: 'Venha rezar o Terço na Capela de São Pedro e São Paulo e viva um momento de muita paz, esperança e a presença amorosa de nossa Mãe Rainha 3 vezes admirável...',
+                tag: 'Capela de São Pedro e São Paulo'
+            },
+            { 
+                dia: 'Quinta', 
+                igreja: 'SEM TERÇO', 
+                horario: '--:--', 
+                emoji: '📌', 
+                semTerco: true,
+                texto: 'Não há celebração hoje.',
+                tag: 'Sem Terço'
+            },
+            { 
+                dia: 'Sexta', 
+                igreja: 'Capela de Jesus Mestre e N.S. Aparecida', 
+                horario: '19:30', 
+                emoji: '🎯', 
+                semTerco: false,
+                texto: 'Venha rezar o Terço na Capela de "Jesus Mestre" e na Capela de "Nossa Senhora Aparecida" e viva um momento de muita paz, esperança e a presença amorosa de nossa Mãe Rainha 3 vezes admirável...',
+                tag: 'Jesus Mestre e N.S. Aparecida'
+            }
+        ];
+
+        let slideAtual = 0;
+        let intervaloTroca = null;
+
+        // ================================================================
+        // FUNÇÃO PARA RENDERIZAR O CONVITE
+        // ================================================================
+        function renderizarConvite(index) {
+            const data = diasSemana[index];
+            const container = document.getElementById('conviteContainer');
+            const statusIgreja = document.getElementById('igrejaStatus');
+            
+            // Atualiza o status no header
+            statusIgreja.textContent = data.semTerco ? 'Sem Terço Hoje' : data.tag;
+            
+            let html = '';
+            
+            if (data.semTerco) {
+                html = `
+                    <div class="convite-box-semterco">
+                        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
+                            <div>
+                                <span class="dia">📌 ${data.dia.toUpperCase()}</span>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-sm font-semibold text-gray-600">
+                                    🙏 Não há celebração hoje.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="mt-2 flex flex-wrap items-center gap-2">
+                            <span class="text-xs text-gray-500 bg-white/70 px-3 py-1 rounded-full">
+                                📅 Volte amanhã!
+                            </span>
+                        </div>
+                    </div>
+                `;
+            } else {
+                html = `
+                    <div class="convite-box">
+                        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
+                            <div>
+                                <span class="dia">${data.emoji} ${data.dia.toUpperCase()}</span>
+                                <span class="font-bold text-gray-800 ml-2">às <span class="horario">${data.horario}</span></span>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-sm font-semibold text-gray-700">
+                                    🙏 ${data.texto}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="mt-2 flex flex-wrap items-center gap-2">
+                            <span class="text-xs text-gray-600 bg-white/70 px-3 py-1 rounded-full">
+                                ⛪ ${data.tag}
+                            </span>
+                            <span class="text-xs text-gray-600 bg-white/70 px-3 py-1 rounded-full">
+                                📍 Todos os homens são bem-vindos
+                            </span>
+                            <a href="#" class="btn-convite">
+                                📅 Quero Participar
+                            </a>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            container.innerHTML = html;
+        }
+
+        // ================================================================
+        // FUNÇÃO PARA MUDAR O SLIDE
+        // ================================================================
+        function mudarSlide() {
+            slideAtual = (slideAtual + 1) % diasSemana.length;
+            renderizarConvite(slideAtual);
+        }
+
+        // ================================================================
+        // FUNÇÃO PARA INICIAR O CARROSSEL
+        // ================================================================
+        function iniciarCarrossel() {
+            // Encontra o dia atual para começar
+            const hoje = new Date();
+            const diaSemana = hoje.getDay();
+            
+            const mapaDia = {
+                1: 0, // Segunda
+                2: 1, // Terça
+                3: 2, // Quarta
+                4: 3, // Quinta
+                5: 4  // Sexta
+            };
+
+            let indiceInicial = 0;
+            if (diaSemana === 0 || diaSemana === 6) {
+                indiceInicial = 0; // Segunda
+            } else {
+                indiceInicial = mapaDia[diaSemana] !== undefined ? mapaDia[diaSemana] : 0;
+            }
+            
+            slideAtual = indiceInicial;
+            renderizarConvite(slideAtual);
+            
+            // Inicia o intervalo de 6 segundos
+            if (intervaloTroca) {
+                clearInterval(intervaloTroca);
+            }
+            intervaloTroca = setInterval(mudarSlide, 6000);
+        }
+
+        // ================================================================
+        // FUNÇÕES DO MENU E MODAL
+        // ================================================================
         const menu = document.getElementById("menu");
         let aberto = false;
 
@@ -743,7 +920,6 @@
             aberto = false;
         }
 
-        // Fechar menu ao clicar fora
         document.addEventListener('click', function(event) {
             const isClickInsideMenu = menu.contains(event.target);
             const isClickOnMenuButton = event.target.closest('button[onclick="abrirMenu()"]');
@@ -753,7 +929,6 @@
             }
         });
 
-        // MODAL MODERNO
         const modal = document.getElementById('modalSair');
 
         function abrirModal() {
@@ -771,11 +946,17 @@
             window.location.href = "index.html";
         }
 
-        // Fechar modal ao clicar fora
         modal.addEventListener('click', function(event) {
             if (event.target === modal) {
                 fecharModal();
             }
+        });
+
+        // ================================================================
+        // INICIALIZAÇÃO
+        // ================================================================
+        document.addEventListener('DOMContentLoaded', function() {
+            iniciarCarrossel();
         });
     </script>
 
