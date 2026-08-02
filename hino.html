@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aprenda - Terço dos Homens</title>
+    <title>Hino - Terço dos Homens</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -92,9 +92,9 @@
         .modal-btn:active { transform: scale(0.95); }
 
         /* ================================================================ */
-        /* CONTEÚDO - IMAGEM DO ROSÁRIO */
+        /* CONTEÚDO - HINO DO TERÇO DOS HOMENS */
         /* ================================================================ */
-        .rosario-container {
+        .hino-container {
             background: white;
             border-radius: 1.5rem;
             padding: 1.5rem;
@@ -103,7 +103,7 @@
             margin: 0 auto;
         }
 
-        .rosario-title {
+        .hino-title {
             text-align: center;
             font-size: 1.8rem;
             font-weight: 900;
@@ -111,60 +111,83 @@
             margin-bottom: 0.2rem;
         }
 
-        .rosario-subtitle {
+        .hino-subtitle {
             text-align: center;
             font-size: 0.9rem;
             color: #6b7280;
             margin-bottom: 1.2rem;
         }
 
-        .image-container {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        .hino-content {
             background: #f8fafc;
             border-radius: 1rem;
-            padding: 1rem;
-            border: 2px dashed #d1d5db;
-            min-height: 400px;
-            position: relative;
+            padding: 1.5rem;
+            border: 1px solid #e5e7eb;
         }
 
-        .image-container img {
-            width: 100%;
-            height: auto;
-            max-width: 100%;
-            border-radius: 0.5rem;
-            object-fit: contain;
+        .hino-strophe {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px dashed #e5e7eb;
         }
 
-        .image-placeholder {
-            text-align: center;
-            color: #9ca3af;
-            padding: 2rem;
+        .hino-strophe:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
         }
 
-        .image-placeholder svg {
-            width: 4rem;
-            height: 4rem;
-            margin: 0 auto 1rem;
-            color: #d1d5db;
+        .hino-strophe .strophe-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin-bottom: 0.3rem;
+            font-style: italic;
         }
 
-        .image-placeholder p {
+        .hino-strophe .strophe-title .number {
+            background: #1e3a8a;
+            color: white;
+            padding: 0.05rem 0.5rem;
+            border-radius: 9999px;
+            font-size: 0.7rem;
+            margin-right: 0.3rem;
+        }
+
+        .hino-line {
             font-size: 1rem;
+            line-height: 1.8;
+            color: #1f2937;
+            text-align: center;
+            padding: 0.1rem 0;
+            font-weight: 500;
         }
 
-        .image-placeholder .hint {
-            font-size: 0.8rem;
-            margin-top: 0.5rem;
-            color: #d1d5db;
+        .hino-line.chorus {
+            font-weight: 700;
+            color: #1e3a8a;
+            font-size: 1.05rem;
         }
 
-        /* ================================================================ */
-        /* BOTÃO HOME NO HEADER - APENAS TELAS GRANDES */
-        /* ================================================================ */
+        .hino-line.italic {
+            font-style: italic;
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+
+        .hino-refrao {
+            background: #dbeafe;
+            border-radius: 0.75rem;
+            padding: 0.75rem 1rem;
+            margin: 0.5rem 0;
+            border-left: 4px solid #1e3a8a;
+        }
+
+        .hino-refrao .hino-line {
+            color: #1e3a8a;
+        }
+
+        /* Botão Home no header - apenas telas grandes */
         .btn-home-header {
             display: none;
             background: transparent;
@@ -199,9 +222,7 @@
             }
         }
 
-        /* ================================================================ */
-        /* RODAPÉ - MANTENDO O PADRÃO DAS OUTRAS PÁGINAS */
-        /* ================================================================ */
+        /* Rodapé */
         .footer-menu {
             display: none;
             position: fixed;
@@ -240,7 +261,6 @@
             transition: all 0.3s ease;
         }
 
-        /* TAMANHO PADRÃO DOS ÍCONES - IGUAL AO DAS OUTRAS PÁGINAS */
         .footer-menu .footer-item .icon-wrapper {
             width: 2.5rem !important;
             height: 2.5rem !important;
@@ -282,15 +302,19 @@
 
         @media (max-width: 640px) {
             .footer-menu { display: block; }
-            .rosario-title { font-size: 1.3rem; }
-            .rosario-container { padding: 0.8rem; }
-            .image-container { min-height: 250px; padding: 0.5rem; }
+            .hino-title { font-size: 1.3rem; }
+            .hino-container { padding: 0.8rem; }
+            .hino-content { padding: 1rem; }
+            .hino-line { font-size: 0.85rem; }
+            .hino-line.chorus { font-size: 0.9rem; }
         }
 
         @media (max-width: 380px) {
-            .rosario-title { font-size: 1.1rem; }
-            .rosario-container { padding: 0.5rem; }
-            .image-container { min-height: 180px; }
+            .hino-title { font-size: 1.1rem; }
+            .hino-container { padding: 0.5rem; }
+            .hino-content { padding: 0.75rem; }
+            .hino-line { font-size: 0.75rem; }
+            .hino-line.chorus { font-size: 0.8rem; }
             .footer-menu .footer-item .icon-wrapper {
                 width: 2rem !important;
                 height: 2rem !important;
@@ -395,7 +419,7 @@
         </div>
     </aside>
 
-    <!-- HEADER COM BOTÃO HOME (APENAS TELAS GRANDES) -->
+    <!-- HEADER -->
     <header class="header-white shadow-xl sticky top-0 z-40">
         <div class="max-w-7xl mx-auto flex justify-between items-center p-4">
             <div class="flex items-center gap-2">
@@ -404,7 +428,6 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
                     </svg>
                 </button>
-                <!-- Botão Home - apenas telas grandes (alinhado à esquerda) -->
                 <a href="index.html" class="btn-home-header" title="Voltar para Home">
                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
@@ -415,44 +438,90 @@
             <div class="flex items-center gap-3">
                 <img src="assets/imagem1.png" class="w-10 h-10 object-contain">
                 <div class="hidden sm:block">
-                    <h1 class="font-bold text-lg tracking-tight">Aprenda a Rezar</h1>
-                    <p class="text-xs">Esquema do Rosário</p>
+                    <h1 class="font-bold text-lg tracking-tight">Hino do Terço</h1>
+                    <p class="text-xs">Cânticos</p>
                 </div>
             </div>
 
             <span class="online-status">
                 <span class="dot"></span>
-                Passo a Passo
+                Hino
             </span>
         </div>
     </header>
 
     <!-- CONTEÚDO -->
     <main class="max-w-3xl mx-auto px-4 sm:px-5 mt-6">
-        <div class="rosario-container">
-            <h1 class="rosario-title">🙏 Como Rezar o Rosário</h1>
-            <p class="rosario-subtitle">Esquema visual do Terço dos Homens Mãe Rainha</p>
+        <div class="hino-container">
+            <h1 class="hino-title">🎵 Hino do Terço dos Homens</h1>
+            <p class="hino-subtitle">Pe. Antônio Maria</p>
 
-            <!-- ÁREA PARA A IMAGEM PNG -->
-            <div class="image-container">
-                <!-- COLOQUE O CAMINHO DA SUA IMAGEM AQUI -->
-                <img src="assets/aprenda1.png" alt="Esquema do Rosário - Terço dos Homens Mãe Rainha">
-                
-                <!-- Se a imagem não carregar, mostra um placeholder -->
-                <!--
-                <div class="image-placeholder">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                    </svg>
-                    <p>Imagem do esquema do Rosário</p>
-                    <p class="hint">Coloque o arquivo aprenda.png na pasta assets/</p>
+            <div class="hino-content">
+                <!-- Refrão -->
+                <div class="hino-refrao">
+                    <div class="hino-line chorus">Ó Mãe e Rainha do Santo Rosário</div>
+                    <div class="hino-line chorus">Mãe Admirável, Mãe do Santuário</div>
+                    <div class="hino-line chorus">O mundo sem fé na dor se consome</div>
+                    <div class="hino-line chorus">Ajuda esse mundo com o Terço dos Homens</div>
                 </div>
-                -->
+
+                <!-- Estrofe 1 -->
+                <div class="hino-strophe">
+                    <div class="strophe-title"><span class="number">1</span> No Teu Santuário</div>
+                    <div class="hino-line">No Teu Santuário, que é fonte e berço,</div>
+                    <div class="hino-line">Nasceu a missão dos Homens do Terço.</div>
+                    <div class="hino-line">O primeiro homem, um santo varão,</div>
+                    <div class="hino-line">Como o bem amado, se chama João.</div>
+                </div>
+
+                <!-- Estrofe 2 -->
+                <div class="hino-strophe">
+                    <div class="strophe-title"><span class="number">2</span> O Terço é presente</div>
+                    <div class="hino-line">O Terço é presente de Tua ternura</div>
+                    <div class="hino-line">As mãos que o levam são nossas são duras.</div>
+                    <div class="hino-line">O homem rezando se torna menino,</div>
+                    <div class="hino-line">Que pode mudar do mundo o destino.</div>
+                </div>
+
+                <!-- Estrofe 3 -->
+                <div class="hino-strophe">
+                    <div class="strophe-title"><span class="number">3</span> O Terço tem contas</div>
+                    <div class="hino-line">O Terço tem contas e é meditado,</div>
+                    <div class="hino-line">Mas Tu, Mãe, não contas o nosso pecado.</div>
+                    <div class="hino-line">Convidas a todos, o Terço é do povo,</div>
+                    <div class="hino-line">Só queres que o homem seja Homem novo.</div>
+                </div>
+
+                <!-- Estrofe 4 -->
+                <div class="hino-strophe">
+                    <div class="strophe-title"><span class="number">4</span> É Tua escola o Terço</div>
+                    <div class="hino-line">É Tua escola o Terço, ele é luz.</div>
+                    <div class="hino-line">Ninguém como Tu sabe mais de Jesus.</div>
+                    <div class="hino-line">O Santo Evangelho ensina de novo</div>
+                    <div class="hino-line">Teu Terço é Bíblia que Deus deu ao povo.</div>
+                </div>
+
+                <!-- Estrofe 5 - NOVA -->
+                <div class="hino-strophe">
+                    <div class="strophe-title"><span class="number">5</span> Nas Ave-Marias</div>
+                    <div class="hino-line">Nas Ave-Marias que aqui repetimos,</div>
+                    <div class="hino-line">Falamos do amor que por Ti sentimos.</div>
+                    <div class="hino-line">Com o Terço na mão em santas vigílias</div>
+                    <div class="hino-line">Rezamos unidos às nossas famílias.</div>
+                </div>
+
+                <!-- Refrão Final -->
+                <div class="hino-refrao" style="margin-top: 0.5rem;">
+                    <div class="hino-line chorus">Ó Mãe e Rainha do Santo Rosário</div>
+                    <div class="hino-line chorus">Mãe Admirável, Mãe do Santuário</div>
+                    <div class="hino-line chorus">O mundo sem fé na dor se consome</div>
+                    <div class="hino-line chorus">Ajuda esse mundo com o Terço dos Homens</div>
+                </div>
             </div>
         </div>
     </main>
 
-    <!-- RODAPÉ COM TAMANHO PADRÃO -->
+    <!-- RODAPÉ -->
     <nav class="footer-menu">
         <div class="scroll-container">
             <a href="home.html" class="footer-item">
@@ -471,14 +540,6 @@
                 </div>
                 <span>Conduzir</span>
             </a>
-            <a href="aprenda.html" class="footer-item active">
-                <div class="icon-wrapper">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
-                    </svg>
-                </div>
-                <span>Aprenda</span>
-            </a>
             <a href="hino.html" class="footer-item active">
                 <div class="icon-wrapper">
                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -486,6 +547,14 @@
                     </svg>
                 </div>
                 <span>Hino</span>
+            </a>
+            <a href="aprenda.html" class="footer-item">
+                <div class="icon-wrapper">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+                    </svg>
+                </div>
+                <span>Aprenda</span>
             </a>
             <a href="noticias.html" class="footer-item">
                 <div class="icon-wrapper">
