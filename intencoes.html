@@ -94,6 +94,7 @@
         }
         .modal-icon-confirm.warning { background: #fef3c7; color: #d97706; }
         .modal-icon-confirm.danger { background: #fef2f2; color: #dc2626; }
+        .modal-icon-confirm.info { background: #dbeafe; color: #1e3a8a; }
         .modal-icon-confirm svg { width: 32px; height: 32px; }
 
         .modal-title-custom { font-size: 20px; font-weight: 700; color: #1f2937; margin-bottom: 6px; }
@@ -115,7 +116,20 @@
         .modal-btn-custom.confirm:hover { background: #b91c1c; transform: scale(1.02); }
         .modal-btn-custom.confirm.warning { background: #d97706; }
         .modal-btn-custom.confirm.warning:hover { background: #b45309; }
+        .modal-btn-custom.confirm.primary { background: #1e3a8a; }
+        .modal-btn-custom.confirm.primary:hover { background: #1e40af; }
         .modal-btn-custom:active { transform: scale(0.95); }
+        .modal-input {
+            width: 100%;
+            padding: 10px 14px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s ease;
+            margin-bottom: 16px;
+        }
+        .modal-input:focus { border-color: #1e3a8a; box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1); }
 
         /* ================================================================ */
         /* INTENÇÕES - ESTILOS */
@@ -146,9 +160,10 @@
             justify-content: center;
             color: #6b7280;
         }
-        .btn-icone:hover { background: #f3f4f6; color: #dc2626; transform: scale(1.1); }
+        .btn-icone:hover { background: #f3f4f6; color: #1e3a8a; transform: scale(1.1); }
         .btn-icone:active { transform: scale(0.95); }
         .btn-icone svg { width: 1.1rem; height: 1.1rem; }
+        .btn-icone.danger:hover { color: #dc2626; }
 
         .intencao-vazia { text-align: center; padding: 2.5rem 1rem; color: #6b7280; }
         .intencao-vazia svg { width: 3.5rem; height: 3.5rem; margin: 0 auto 0.5rem; color: #d1d5db; }
@@ -335,6 +350,24 @@
         </div>
     </div>
 
+    <!-- MODAL DE EDIÇÃO (Editar Intenção) -->
+    <div id="modalEditar" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-icon-confirm info">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                </svg>
+            </div>
+            <h3 class="modal-title-custom">Editar Intenção</h3>
+            <p class="modal-subtitle-custom">Faça as alterações necessárias:</p>
+            <input type="text" id="editarInput" class="modal-input" placeholder="Digite a intenção corrigida...">
+            <div class="modal-actions-custom">
+                <button class="modal-btn-custom cancel" onclick="fecharModalEditar()">Cancelar</button>
+                <button class="modal-btn-custom confirm primary" onclick="confirmarEditar()">Salvar</button>
+            </div>
+        </div>
+    </div>
+
     <!-- MENU LATERAL -->
     <aside id="menu" class="menu fixed top-0 left-[-320px] w-80 h-screen bg-white shadow-2xl z-50 flex flex-col overflow-y-auto">
         <div class="relative bg-white p-6 border-b border-gray-100">
@@ -469,10 +502,6 @@
                 <div class="icon-wrapper"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg></div>
                 <span>Conduzir</span>
             </a>
-            <a href="intencoes.html" class="footer-item">
-                <div class="icon-wrapper"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg></div>
-                <span>Intenções</span>
-            </a>
             <a href="oracoes.html" class="footer-item">
                 <div class="icon-wrapper"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg></div>
                 <span>Orações</span>
@@ -494,9 +523,30 @@
 
     <script>
         // ================================================================
+        // FUNÇÃO PARA CAPITALIZAR TEXTO (Primeira letra maiúscula)
+        // ================================================================
+        function capitalizarTexto(texto) {
+            if (!texto) return texto;
+            
+            let palavras = texto.split(' ');
+            
+            const palavrasMinusculas = ['da', 'de', 'do', 'das', 'dos', 'e', 'para', 'com', 'sem', 'por', 'em', 'na', 'no', 'nas', 'nos', 'a', 'o', 'as', 'os'];
+            
+            palavras = palavras.map((palavra, index) => {
+                if (index === 0 || !palavrasMinusculas.includes(palavra.toLowerCase())) {
+                    return palavra.charAt(0).toUpperCase() + palavra.slice(1).toLowerCase();
+                }
+                return palavra.toLowerCase();
+            });
+            
+            return palavras.join(' ');
+        }
+
+        // ================================================================
         // VARIÁVEIS PARA OS MODAIS
         // ================================================================
         let indexParaRemover = null;
+        let indexParaEditar = null;
 
         // ================================================================
         // MODAL SAIR
@@ -538,6 +588,46 @@
         function fecharModalAlerta() { modalAlerta.classList.remove('active'); document.body.style.overflow = 'auto'; }
 
         // ================================================================
+        // MODAL EDIÇÃO
+        // ================================================================
+        const modalEditar = document.getElementById('modalEditar');
+        const editarInput = document.getElementById('editarInput');
+        
+        function abrirModalEditar(index) {
+            indexParaEditar = index;
+            const intencoes = JSON.parse(localStorage.getItem('intencoes_rosario') || '[]');
+            editarInput.value = intencoes[index];
+            modalEditar.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            setTimeout(() => editarInput.focus(), 300);
+        }
+        
+        function fecharModalEditar() {
+            modalEditar.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            indexParaEditar = null;
+            editarInput.value = '';
+        }
+        
+        function confirmarEditar() {
+            const novoTexto = editarInput.value.trim();
+            
+            if (novoTexto === '') {
+                alert('Por favor, digite um texto válido.');
+                return;
+            }
+            
+            if (indexParaEditar !== null) {
+                const intencoes = JSON.parse(localStorage.getItem('intencoes_rosario') || '[]');
+                const textoFormatado = capitalizarTexto(novoTexto);
+                intencoes[indexParaEditar] = textoFormatado;
+                localStorage.setItem('intencoes_rosario', JSON.stringify(intencoes));
+                carregarIntencoes();
+            }
+            fecharModalEditar();
+        }
+
+        // ================================================================
         // GERENCIAR INTENÇÕES
         // ================================================================
         function carregarIntencoes() {
@@ -562,14 +652,22 @@
             
             let html = '';
             intencoes.forEach((texto, index) => {
+                const textoFormatado = capitalizarTexto(texto);
                 html += `
                     <div class="intencao-card">
-                        <span class="intencao-texto">${texto}</span>
-                        <button onclick="abrirModalRemover(${index})" class="btn-icone" title="Remover intenção">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                            </svg>
-                        </button>
+                        <span class="intencao-texto">${textoFormatado}</span>
+                        <div class="flex items-center gap-1">
+                            <button onclick="abrirModalEditar(${index})" class="btn-icone" title="Editar intenção">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                </svg>
+                            </button>
+                            <button onclick="abrirModalRemover(${index})" class="btn-icone danger" title="Remover intenção">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                                </svg>
+                            </button>
+                        </div>
                     </div>
                 `;
             });
@@ -585,8 +683,10 @@
                 return;
             }
             
+            const textoFormatado = capitalizarTexto(texto);
+            
             const intencoes = JSON.parse(localStorage.getItem('intencoes_rosario') || '[]');
-            intencoes.push(texto);
+            intencoes.push(textoFormatado);
             localStorage.setItem('intencoes_rosario', JSON.stringify(intencoes));
             
             input.value = '';
@@ -626,6 +726,7 @@
                     this.classList.remove('active');
                     document.body.style.overflow = 'auto';
                     if (this.id === 'modalRemover') indexParaRemover = null;
+                    if (this.id === 'modalEditar') { indexParaEditar = null; editarInput.value = ''; }
                 }
             });
         });
