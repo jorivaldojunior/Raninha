@@ -257,6 +257,14 @@
             background: #dc2626;
         }
 
+        .step-number.purple {
+            background: #7c3aed;
+        }
+
+        .step-number.orange {
+            background: #f59e0b;
+        }
+
         .step-title {
             font-size: 1.1rem;
             font-weight: 700;
@@ -273,6 +281,14 @@
 
         .step-title.red {
             color: #dc2626;
+        }
+
+        .step-title.purple {
+            color: #7c3aed;
+        }
+
+        .step-title.orange {
+            color: #f59e0b;
         }
 
         .step-content {
@@ -327,6 +343,22 @@
 
         .step-content .prayer.gold .prayer-title {
             color: #d97706;
+        }
+
+        .step-content .prayer.purple {
+            border-left-color: #7c3aed;
+        }
+
+        .step-content .prayer.purple .prayer-title {
+            color: #7c3aed;
+        }
+
+        .step-content .prayer.orange {
+            border-left-color: #f59e0b;
+        }
+
+        .step-content .prayer.orange .prayer-title {
+            color: #f59e0b;
         }
 
         .step-content ul {
@@ -412,33 +444,6 @@
             color: #1e3a8a;
         }
 
-        /* Botão Voltar fixo no header */
-        .btn-voltar {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            background: #f3f4f6;
-            color: #1f2937;
-            padding: 6px 14px;
-            border-radius: 9999px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            border: 1px solid #e5e7eb;
-        }
-
-        .btn-voltar:hover {
-            background: #e5e7eb;
-            transform: scale(1.02);
-        }
-
-        .btn-voltar svg {
-            width: 1rem;
-            height: 1rem;
-            stroke: #1f2937;
-        }
-
         .canto-box {
             background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
             border: 2px solid #2e7d32;
@@ -472,12 +477,6 @@
             }
             .step-content {
                 font-size: 0.85rem;
-            }
-            .btn-voltar span {
-                display: none;
-            }
-            .btn-voltar {
-                padding: 6px 10px;
             }
         }
 
@@ -704,7 +703,7 @@
         </div>
     </aside>
 
-    <!-- HEADER COM BOTÃO VOLTAR FIXO -->
+    <!-- HEADER SEM BOTÃO VOLTAR -->
     <header class="header-white shadow-xl sticky top-0 z-40">
         <div class="max-w-7xl mx-auto flex justify-between items-center p-4">
             <button onclick="abrirMenu()" 
@@ -722,18 +721,10 @@
                 </div>
             </div>
 
-            <div class="flex items-center gap-2">
-                <a href="index.html" class="btn-voltar">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
-                    </svg>
-                    <span>Voltar</span>
-                </a>
-                <span class="online-status">
-                    <span class="dot"></span>
-                    Guia
-                </span>
-            </div>
+            <span class="online-status">
+                <span class="dot"></span>
+                Guia do Coordenador
+            </span>
         </div>
     </header>
 
@@ -1073,12 +1064,12 @@
             <!-- ============================================================ -->
             <div class="step-card border-purple-200 bg-purple-50/30">
                 <div class="flex items-center gap-3 mb-2">
-                    <span class="step-number" style="background: #7c3aed;">12</span>
-                    <span class="step-title" style="color: #7c3aed;">Infinitas Graças</span>
+                    <span class="step-number purple">12</span>
+                    <span class="step-title purple">Infinitas Graças</span>
                 </div>
                 <div class="step-content">
-                    <div class="prayer" style="border-left-color: #7c3aed;">
-                        <p class="prayer-title" style="color: #7c3aed;">🙏 Ação de Graças</p>
+                    <div class="prayer purple">
+                        <p class="prayer-title">🙏 Ação de Graças</p>
                         <p>"Infinitas graças vos damos, Soberana Rainha, pelos benefícios que todos os dias recebemos de vosso liberalíssimo Coração. Dignai-vos, ó Mãe amabilíssima, de nos receber em vossa proteção e de nos alcançar a graça de amarmos a vosso Filho Jesus e a vós com todo o nosso coração, para que, servindo-vos fielmente nesta vida, mereçamos louvar-vos eternamente no Céu. Amém."</p>
                     </div>
                 </div>
@@ -1105,30 +1096,31 @@
             <!-- ============================================================ -->
             <div class="step-card">
                 <div class="flex items-center gap-3 mb-2">
-                    <span class="step-number" style="background: #f59e0b;">14</span>
-                    <span class="step-title" style="color: #f59e0b;">Santo Anjo do Senhor</span>
+                    <span class="step-number orange">14</span>
+                    <span class="step-title orange">Santo Anjo do Senhor</span>
                 </div>
                 <div class="step-content">
-                    <div class="prayer" style="border-left-color: #f59e0b;">
-                        <p class="prayer-title" style="color: #f59e0b;">👼 Oração ao Anjo da Guarda</p>
+                    <div class="prayer orange">
+                        <p class="prayer-title">👼 Oração ao Anjo da Guarda</p>
                         <p>"Santo Anjo do Senhor, meu zeloso guardador, se a ti me confiou a piedade divina, sempre me rege, guarda, governa e ilumina. Amém."</p>
                     </div>
                 </div>
             </div>
 
             <!-- ============================================================ -->
-            <!-- 15. ORAÇÃO DO TERÇO DOS HOMENS -->
+            <!-- 15. ORAÇÃO OFICIAL DOS HOMENS DO TERÇO -->
             <!-- ============================================================ -->
-            <div class="step-card border-red-200 bg-red-50/30">
+            <div class="step-card border-blue-200 bg-blue-50/30">
                 <div class="flex items-center gap-3 mb-2">
-                    <span class="step-number red">15</span>
-                    <span class="step-title red">Oração do Terço dos Homens</span>
+                    <span class="step-number" style="background: #1e3a8a;">15</span>
+                    <span class="step-title" style="color: #1e3a8a;">Oração Oficial do THMR</span>
                 </div>
                 <div class="step-content">
-                    <div class="prayer red">
-                        <p class="prayer-title">🙏 Oração do Terço dos Homens</p>
-                        <p>"Ó Deus, Pai de misericórdia, que nos chamais a ser soldados de vossa Mãe Santíssima, concedei-nos a graça de rezar o Terço com fé e devoção. Fortalecei-nos no combate espiritual, para que, unidos a Maria, possamos vencer o mal e anunciar o Evangelho com coragem e amor. Por Cristo, Nosso Senhor. Amém."</p>
+                    <div class="prayer blue">
+                        <p class="prayer-title">🙏 Mãe, Rainha e Vencedora Três Vezes Admirável!</p>
+                        <p class="mt-1">"Mãe do Salvador e nossa Mãe! Com o Terço na mão, peregrinamos com alegria ao teu Santuário. Tudo o que somos e temos, te oferecemos como dons para o Capital de Graças. Inspira nossos gestos, atitudes e palavras, e o jeito certo de servir e amar. Mãe do Rosário, cuida de todas as nossas necessidades. A nós, homens do Terço, ajuda-nos a conduzir nossas famílias no amor a Cristo e à Igreja. Acolhe-nos, transforma-nos e envia-nos como teus missionários. Amém."</p>
                     </div>
+                    <p class="text-xs text-gray-500 mt-2">Fonte: Oração Oficial do Terço dos Homens Mãe Rainha</p>
                 </div>
             </div>
 
@@ -1177,28 +1169,13 @@
                     <p class="text-xs text-gray-500 mt-3">Fonte: Livro dos Números 6,24-26</p>
                 </div>
             </div>
-
-            <!-- Oração Oficial do THMR -->
-            <div class="step-card border-blue-200 bg-blue-50/30 mt-4">
-                <div class="flex items-center gap-3 mb-2">
-                    <span class="step-number" style="background: #1e3a8a;">⭐</span>
-                    <span class="step-title">Oração Oficial do THMR</span>
-                </div>
-                <div class="step-content">
-                    <div class="prayer blue">
-                        <p class="prayer-title">🙏 Mãe, Rainha e Vencedora Três Vezes Admirável!</p>
-                        <p class="mt-1">"Mãe do Salvador e nossa Mãe! Com o Terço na mão, peregrinamos com alegria ao teu Santuário. Tudo o que somos e temos, te oferecemos como dons para o Capital de Graças. Inspira nossos gestos, atitudes e palavras, e o jeito certo de servir e amar. Mãe do Rosário, cuida de todas as nossas necessidades. A nós, homens do Terço, ajuda-nos a conduzir nossas famílias no amor a Cristo e à Igreja. Acolhe-nos, transforma-nos e envia-nos como teus missionários. Amém."</p>
-                    </div>
-                    <p class="text-xs text-gray-500 mt-2">Fonte: Oração Oficial do Terço dos Homens Mãe Rainha</p>
-                </div>
-            </div>
         </div>
     </main>
 
     <!-- RODAPÉ FIXO COM SCROLL HORIZONTAL (APENAS TELAS PEQUENAS) -->
     <nav class="footer-menu">
         <div class="scroll-container">
-            <a href="home.html" class="footer-item">
+            <a href="index.html" class="footer-item">
                 <div class="icon-wrapper">
                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
