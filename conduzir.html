@@ -410,6 +410,23 @@
             font-size: 0.9rem;
         }
 
+        .intencao-box .intencao-item {
+            padding: 0.25rem 0;
+            border-bottom: 1px dashed #fcd34d;
+            font-size: 0.85rem;
+            color: #78350f;
+        }
+
+        .intencao-box .intencao-item:last-child {
+            border-bottom: none;
+        }
+
+        .intencao-box .intencao-vazia {
+            color: #92400e;
+            font-style: italic;
+            font-size: 0.85rem;
+        }
+
         .benção-box {
             background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
             border: 2px solid #d97706;
@@ -463,6 +480,24 @@
             color: #1b5e20;
             line-height: 1.8;
             font-style: italic;
+        }
+
+        .btn-gerenciar {
+            display: inline-block;
+            background: #1e3a8a;
+            color: white;
+            padding: 6px 18px;
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            margin-top: 4px;
+        }
+
+        .btn-gerenciar:hover {
+            background: #1e40af;
+            transform: scale(1.03);
         }
 
         @media (max-width: 480px) {
@@ -742,7 +777,7 @@
             </div>
 
             <!-- ============================================================ -->
-            <!-- 1. INTENÇÕES DO ROSÁRIO -->
+            <!-- 1. INTENÇÕES DO ROSÁRIO - COM EXIBIÇÃO DINÂMICA -->
             <!-- ============================================================ -->
             <div class="step-card border-yellow-200 bg-yellow-50/30">
                 <div class="flex items-center gap-3 mb-2">
@@ -750,8 +785,13 @@
                     <span class="step-title gold">Intenções do Rosário</span>
                 </div>
                 <div class="step-content">
-                    <div class="intencao-box">
-                        <p>📌 Ler as intenções dos participantes, escritas num livro próprio, disponibilizado no lugar da recepção.</p>
+                    <div class="intencao-box" id="intencoesDisplay">
+                        <!-- Conteúdo será inserido pelo JavaScript -->
+                    </div>
+                    <div class="mt-2 text-right">
+                        <a href="intencoes.html" class="btn-gerenciar">
+                            ✏️ Gerenciar Intenções
+                        </a>
                     </div>
                 </div>
             </div>
@@ -1183,7 +1223,15 @@
                 </div>
                 <span>Home</span>
             </a>
-            <a href="intençoes.html" class="footer-item">
+            <a href="intencoes.html" class="footer-item">
+                <div class="icon-wrapper">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+                    </svg>
+                </div>
+                <span>Intenções</span>
+            </a>
+            <a href="intencoes.html" class="footer-item">
                 <div class="icon-wrapper">
                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
@@ -1227,6 +1275,26 @@
     </nav>
 
     <script>
+        // ================================================================
+        // CARREGAR INTENÇÕES DO LOCAL STORAGE
+        // ================================================================
+        function carregarIntencoes() {
+            const container = document.getElementById('intencoesDisplay');
+            const intencoes = JSON.parse(localStorage.getItem('intencoes_rosario') || '[]');
+            
+            if (intencoes.length === 0) {
+                container.innerHTML = `
+                    <p class="intencao-vazia">📌 Não há intenções registradas. Clique em "Gerenciar Intenções" para adicionar.</p>
+                `;
+            } else {
+                let html = '';
+                intencoes.forEach((texto, index) => {
+                    html += `<div class="intencao-item">• ${texto}</div>`;
+                });
+                container.innerHTML = html;
+            }
+        }
+
         // ================================================================
         // MENU LATERAL
         // ================================================================
@@ -1276,6 +1344,18 @@
             if (event.target === modal) {
                 fecharModal();
             }
+        });
+
+        // ================================================================
+        // INICIALIZAÇÃO
+        // ================================================================
+        document.addEventListener('DOMContentLoaded', function() {
+            carregarIntencoes();
+            
+            // Recarregar as intenções quando a página receber foco (voltando da página de intenções)
+            window.addEventListener('focus', function() {
+                carregarIntencoes();
+            });
         });
     </script>
 
