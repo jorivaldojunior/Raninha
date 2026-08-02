@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aprenda - Terço dos Homens</title>
+    <title>Liturgia - Terço dos Homens</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -92,9 +92,9 @@
         .modal-btn:active { transform: scale(0.95); }
 
         /* ================================================================ */
-        /* CONTEÚDO - IMAGEM DO ROSÁRIO */
+        /* CONTEÚDO - LITURGIA */
         /* ================================================================ */
-        .rosario-container {
+        .liturgia-container {
             background: white;
             border-radius: 1.5rem;
             padding: 1.5rem;
@@ -103,7 +103,7 @@
             margin: 0 auto;
         }
 
-        .rosario-title {
+        .liturgia-title {
             text-align: center;
             font-size: 1.8rem;
             font-weight: 900;
@@ -111,60 +111,79 @@
             margin-bottom: 0.2rem;
         }
 
-        .rosario-subtitle {
+        .liturgia-subtitle {
             text-align: center;
             font-size: 0.9rem;
             color: #6b7280;
             margin-bottom: 1.2rem;
         }
 
-        .image-container {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        .liturgia-card {
             background: #f8fafc;
             border-radius: 1rem;
-            padding: 1rem;
-            border: 2px dashed #d1d5db;
-            min-height: 400px;
-            position: relative;
-        }
-
-        .image-container img {
-            width: 100%;
-            height: auto;
-            max-width: 100%;
-            border-radius: 0.5rem;
-            object-fit: contain;
-        }
-
-        .image-placeholder {
+            padding: 2rem 1.5rem;
+            border: 2px solid #e5e7eb;
             text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .liturgia-card:hover {
+            border-color: #1e3a8a;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .liturgia-card .icon-large {
+            width: 5rem;
+            height: 5rem;
+            margin: 0 auto 0.8rem;
+            color: #1e3a8a;
+            background: #dbeafe;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .liturgia-card .icon-large:hover {
+            background: #bfdbfe;
+            transform: scale(1.05);
+        }
+
+        .liturgia-card .icon-large:active {
+            transform: scale(0.95);
+        }
+
+        .liturgia-card .icon-large svg {
+            width: 2.5rem;
+            height: 2.5rem;
+            stroke: #1e3a8a;
+        }
+
+        .liturgia-card .message {
+            font-size: 1.05rem;
+            color: #1f2937;
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+        }
+
+        .liturgia-card .message strong {
+            color: #1e3a8a;
+        }
+
+        .liturgia-card .hint {
+            font-size: 0.85rem;
+            color: #6b7280;
+        }
+
+        .icon-click-hint {
+            font-size: 0.75rem;
             color: #9ca3af;
-            padding: 2rem;
+            margin-top: 0.3rem;
         }
 
-        .image-placeholder svg {
-            width: 4rem;
-            height: 4rem;
-            margin: 0 auto 1rem;
-            color: #d1d5db;
-        }
-
-        .image-placeholder p {
-            font-size: 1rem;
-        }
-
-        .image-placeholder .hint {
-            font-size: 0.8rem;
-            margin-top: 0.5rem;
-            color: #d1d5db;
-        }
-
-        /* ================================================================ */
-        /* BOTÃO HOME NO HEADER - APENAS TELAS GRANDES */
-        /* ================================================================ */
+        /* Botão Home no header - apenas telas grandes */
         .btn-home-header {
             display: none;
             background: transparent;
@@ -199,9 +218,7 @@
             }
         }
 
-        /* ================================================================ */
-        /* RODAPÉ - MANTENDO O PADRÃO DAS OUTRAS PÁGINAS */
-        /* ================================================================ */
+        /* Rodapé */
         .footer-menu {
             display: none;
             position: fixed;
@@ -240,7 +257,6 @@
             transition: all 0.3s ease;
         }
 
-        /* TAMANHO PADRÃO DOS ÍCONES - IGUAL AO DAS OUTRAS PÁGINAS */
         .footer-menu .footer-item .icon-wrapper {
             width: 2.5rem !important;
             height: 2.5rem !important;
@@ -282,15 +298,21 @@
 
         @media (max-width: 640px) {
             .footer-menu { display: block; }
-            .rosario-title { font-size: 1.3rem; }
-            .rosario-container { padding: 0.8rem; }
-            .image-container { min-height: 250px; padding: 0.5rem; }
+            .liturgia-title { font-size: 1.3rem; }
+            .liturgia-container { padding: 0.8rem; }
+            .liturgia-card { padding: 1.5rem 1rem; }
+            .liturgia-card .message { font-size: 0.9rem; }
+            .liturgia-card .icon-large { width: 4rem; height: 4rem; }
+            .liturgia-card .icon-large svg { width: 2rem; height: 2rem; }
         }
 
         @media (max-width: 380px) {
-            .rosario-title { font-size: 1.1rem; }
-            .rosario-container { padding: 0.5rem; }
-            .image-container { min-height: 180px; }
+            .liturgia-title { font-size: 1.1rem; }
+            .liturgia-container { padding: 0.5rem; }
+            .liturgia-card { padding: 1rem 0.75rem; }
+            .liturgia-card .message { font-size: 0.8rem; }
+            .liturgia-card .icon-large { width: 3.5rem; height: 3.5rem; }
+            .liturgia-card .icon-large svg { width: 1.6rem; height: 1.6rem; }
             .footer-menu .footer-item .icon-wrapper {
                 width: 2rem !important;
                 height: 2rem !important;
@@ -395,7 +417,7 @@
         </div>
     </aside>
 
-    <!-- HEADER COM BOTÃO HOME (APENAS TELAS GRANDES) -->
+    <!-- HEADER -->
     <header class="header-white shadow-xl sticky top-0 z-40">
         <div class="max-w-7xl mx-auto flex justify-between items-center p-4">
             <div class="flex items-center gap-2">
@@ -404,7 +426,6 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
                     </svg>
                 </button>
-                <!-- Botão Home - apenas telas grandes (alinhado à esquerda) -->
                 <a href="index.html" class="btn-home-header" title="Voltar para Home">
                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
@@ -415,44 +436,43 @@
             <div class="flex items-center gap-3">
                 <img src="assets/imagem1.png" class="w-10 h-10 object-contain">
                 <div class="hidden sm:block">
-                    <h1 class="font-bold text-lg tracking-tight">Aprenda a Rezar</h1>
-                    <p class="text-xs">Esquema do Rosário</p>
+                    <h1 class="font-bold text-lg tracking-tight">Liturgia Diária</h1>
+                    <p class="text-xs">Canção Nova</p>
                 </div>
             </div>
 
             <span class="online-status">
                 <span class="dot"></span>
-                Passo a Passo
+                Liturgia
             </span>
         </div>
     </header>
 
     <!-- CONTEÚDO -->
     <main class="max-w-3xl mx-auto px-4 sm:px-5 mt-6">
-        <div class="rosario-container">
-            <h1 class="rosario-title">🙏 Como Rezar o Rosário</h1>
-            <p class="rosario-subtitle">Esquema visual do Terço dos Homens Mãe Rainha</p>
+        <div class="liturgia-container">
+            <h1 class="liturgia-title">🕯️ Liturgia Diária</h1>
+            <p class="liturgia-subtitle">Acompanhe as leituras do dia</p>
 
-            <!-- ÁREA PARA A IMAGEM PNG -->
-            <div class="image-container">
-                <!-- COLOQUE O CAMINHO DA SUA IMAGEM AQUI -->
-                <img src="assets/aprenda1.png" alt="Esquema do Rosário - Terço dos Homens Mãe Rainha">
-                
-                <!-- Se a imagem não carregar, mostra um placeholder -->
-                <!--
-                <div class="image-placeholder">
+            <div class="liturgia-card">
+                <!-- Ícone de altar/igreja - Clique aqui para avançar -->
+                <a href="https://liturgia.cancaonova.com/pb/" target="_blank" class="icon-large" title="Clique para acessar a Liturgia Diária">
                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
                     </svg>
-                    <p>Imagem do esquema do Rosário</p>
-                    <p class="hint">Coloque o arquivo aprenda.png na pasta assets/</p>
+                </a>
+
+                <div class="message"> 
+                    Sejá direcionado <strong>Liturgia Diária</strong> <strong>Canção Nova</strong>.<br>
+                    Clique no ícone acima para avançar.
                 </div>
-                -->
+
+                
             </div>
         </div>
     </main>
 
-    <!-- RODAPÉ COM TAMANHO PADRÃO -->
+    <!-- RODAPÉ -->
     <nav class="footer-menu">
         <div class="scroll-container">
             <a href="home.html" class="footer-item">
@@ -471,15 +491,7 @@
                 </div>
                 <span>Conduzir</span>
             </a>
-            <a href="aprenda.html" class="footer-item active">
-                <div class="icon-wrapper">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
-                    </svg>
-                </div>
-                <span>Aprenda</span>
-            </a>
-            <a href="hino.html" class="footer-item active">
+            <a href="hino.html" class="footer-item">
                 <div class="icon-wrapper">
                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/>
@@ -495,6 +507,15 @@
                 </div>
                 <span>Liturgia</span>
             </a>
+            <a href="aprenda.html" class="footer-item">
+                <div class="icon-wrapper">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+                    </svg>
+                </div>
+                <span>Aprenda</span>
+            </a>
+            
         </div>
     </nav>
 
