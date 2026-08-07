@@ -581,6 +581,31 @@
             .menu {
                 padding-bottom: 80px !important;
             }
+            
+            /* Container do carrossel para telas pequenas */
+            .convite-carrossel-container {
+                overflow: hidden;
+                position: relative;
+                min-height: 100px;
+            }
+            
+            .convite-slide {
+                transition: transform 0.5s ease;
+                transform: translateX(100%);
+                position: absolute;
+                width: 100%;
+                top: 0;
+                left: 0;
+            }
+            
+            .convite-slide.active {
+                transform: translateX(0);
+                position: relative;
+            }
+            
+            .convite-slide.exit {
+                transform: translateX(-100%);
+            }
         }
 
         @media (max-width: 380px) {
@@ -616,6 +641,28 @@
             
             body {
                 padding-bottom: 0;
+            }
+            
+            /* Remove estilos do carrossel em telas grandes */
+            .convite-carrossel-container {
+                overflow: visible;
+                position: static;
+                min-height: auto;
+            }
+            
+            .convite-slide {
+                transition: none;
+                transform: none;
+                position: static;
+                width: auto;
+            }
+            
+            .convite-slide.active {
+                position: static;
+            }
+            
+            .convite-slide.exit {
+                display: none;
             }
         }
     </style>
@@ -792,7 +839,7 @@
                     </p>
 
                     <!-- CONVITE DINÂMICO -->
-                    <div id="conviteContainer">
+                    <div id="conviteContainer" class="convite-carrossel-container">
                         <!-- O conteúdo será inserido pelo JavaScript -->
                     </div>
                 </div>
@@ -985,20 +1032,11 @@
         let intervaloTroca = null;
 
         // ================================================================
-        // FUNÇÃO PARA RENDERIZAR O CONVITE
+        // FUNÇÃO PARA GERAR O HTML DO CONVITE
         // ================================================================
-        function renderizarConvite(index) {
-            const data = diasSemana[index];
-            const container = document.getElementById('conviteContainer');
-            const statusIgreja = document.getElementById('igrejaStatus');
-            
-            // Atualiza o status no header
-            statusIgreja.textContent = data.semTerco ? 'Sem Terço Hoje' : data.tag;
-            
-            let html = '';
-            
+        function gerarHTMLConvite(data) {
             if (data.semTerco) {
-                html = `
+                return `
                     <div class="convite-box-semterco">
                         <div class="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
                             <div>
@@ -1018,7 +1056,7 @@
                     </div>
                 `;
             } else {
-                html = `
+                return `
                     <div class="convite-box">
                         <div class="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
                             <div>
@@ -1045,8 +1083,62 @@
                     </div>
                 `;
             }
+        }
+
+        // ================================================================
+        // FUNÇÃO PARA RENDERIZAR O CONVITE
+        // ================================================================
+        function renderizarConvite(index, direcao = 'next') {
+            const data = diasSemana[index];
+            const container = document.getElementById('conviteContainer');
+            const statusIgreja = document.getElementById('igrejaStatus');
             
-            container.innerHTML = html;
+            // Atualiza o status no header
+            statusIgreja.textContent = data.semTerco ? 'Sem Terço Hoje' : data.tag;
+            
+            const html = gerarHTMLConvite(data);
+            
+            // Verifica se é tela pequena (mobile)
+            const isMobile = window.innerWidth <= 640;
+            
+            if (isMobile) {
+                // Pega slides antigos ANTES de adicionar o novo
+                const slidesAntigos = container.querySelectorAll('.convite-slide');
+                
+                // Se não existem slides ainda, limpa o container completamente
+                if (slidesAntigos.length === 0) {
+                    container.innerHTML = '';
+                }
+                
+                // Cria um novo slide
+                const novoTile = document.createElement('div');
+                novoTile.className = 'convite-slide';
+                novoTile.innerHTML = html;
+                
+                // Adiciona o novo slide ao container
+                container.appendChild(novoTile);
+                
+                // Força reflow para a transição funcionar
+                novoTile.offsetHeight;
+                
+                // Marca slides antigos como exit e novo como active
+                slidesAntigos.forEach(slide => {
+                    slide.classList.remove('active');
+                    slide.classList.add('exit');
+                });
+                novoTile.classList.add('active');
+                
+                // Remove slides antigos após a transição
+                setTimeout(() => {
+                    const slidesParaRemover = container.querySelectorAll('.convite-slide.exit');
+                    slidesParaRemover.forEach(slide => {
+                        container.removeChild(slide);
+                    });
+                }, 500); // Tempo da transição (0.5s)
+            } else {
+                // Em telas grandes, mantém o comportamento original
+                container.innerHTML = html;
+            }
         }
 
         // ================================================================
@@ -1054,7 +1146,7 @@
         // ================================================================
         function mudarSlide() {
             slideAtual = (slideAtual + 1) % diasSemana.length;
-            renderizarConvite(slideAtual);
+            renderizarConvite(slideAtual, 'next');
         }
 
         // ================================================================
@@ -1081,13 +1173,23 @@
             }
             
             slideAtual = indiceInicial;
+            
+            // Limpa o container antes de iniciar
+            const container = document.getElementById('conviteContainer');
+            container.innerHTML = '';
+            
             renderizarConvite(slideAtual);
             
-            // Inicia o intervalo de 6 segundos
+            // Limpa intervalo anterior se existir
             if (intervaloTroca) {
                 clearInterval(intervaloTroca);
             }
-            intervaloTroca = setInterval(mudarSlide, 6000);
+            
+            // Determina o intervalo baseado no tamanho da tela
+            const isMobile = window.innerWidth <= 640;
+            const intervalo = isMobile ? 5000 : 6000;
+            
+            intervaloTroca = setInterval(mudarSlide, intervalo);
         }
 
         // ================================================================
@@ -1136,6 +1238,13 @@
             if (event.target === modal) {
                 fecharModal();
             }
+        });
+
+        // Adiciona listener para redimensionamento da tela
+        window.addEventListener('resize', function() {
+            // Reinicia o carrossel quando houver mudança de tamanho de tela
+            clearInterval(intervaloTroca);
+            iniciarCarrossel();
         });
 
         // ================================================================
