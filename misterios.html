@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mistérios do Rosário - Terço dos Homens</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f0f4ff 0%, #e6edf7 100%);
+            min-height: 100vh;
+            padding-bottom: 80px;
+        }
+
+        .menu {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .menu-close-btn {
+            transition: all 0.3s ease;
+        }
+
+        .menu-close-btn:hover {
+            transform: rotate(90deg);
+        }
+
+        .header-white {
+            background: #ffffff;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .header-white .menu-icon {
+            color: #1e3a8a;
+        }
+
+        .header-white h1 {
+            color: #1e3a8a;
+        }
+
+        .header-white p {
+            color: #6b7280;
+        }
+
+        .online-status {
+            background: #f3f4f6;
+            color: #6b7280;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .online-status .dot {
+            width: 6px;
+            height: 6px;
+            background: #22c55e;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .btn-sair {
+            background: #dc2626;
+            transition: all 0.3s ease;
+        }
+
+        .btn-sair:hover {
+            background: #b91c1c;
+            transform: scale(1.02);
+        }
+
+        .btn-sair:active {
+            transform: scale(0.95);
+        }
+
+        .social-icon {
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            transform: scale(1.1);
+            background: #f3f4f6;
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-box {
+            background: white;
+            border-radius: 24px;
+            padding: 40px;
+            max-width: 420px;
+            width: 90%;
+            text-align: center;
+            animation: slideUp 0.4s ease;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .modal-icon {
+            width: 64px;
+            height: 64px;
+            background: #fef2f2;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+        }
+
+        .modal-icon svg {
+            width: 32px;
+            height: 32px;
+            color: #dc2626;
+        }
+
+        .modal-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 8px;
+        }
+
+        .modal-subtitle {
+            font-size: 15px;
+            color: #6b7280;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .modal-btn {
+            padding: 12px 32px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .modal-btn-cancel {
+            background: #f3f4f6;
+            color: #4b5563;
+        }
+
+        .modal-btn-cancel:hover {
+            background: #e5e7eb;
+            transform: scale(1.02);
+        }
+
+        .modal-btn-confirm {
+            background: #dc2626;
+            color: white;
+        }
+
+        .modal-btn-confirm:hover {
+            background: #b91c1c;
+            transform: scale(1.02);
+        }
+
+        .modal-btn:active {
+            transform: scale(0.95);
+        }
+
+        .btn-home-header {
+            display: none;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0.3rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+            color: #4b5563;
+        }
+
+        .btn-home-header:hover {
+            background: #f3f4f6;
+            color: #1e3a8a;
+            transform: scale(1.05);
+        }
+
+        .btn-home-header:active {
+            transform: scale(0.95);
+        }
+
+        .btn-home-header svg {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+
+        @media (min-width: 641px) {
+            .btn-home-header {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+
+        /* Cards dos Mistérios - Estilo sóbrio */
+        .misterio-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 1.25rem;
+            margin-bottom: 0.75rem;
+            border: 1px solid #e5e7eb;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .misterio-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            border-color: #1e40af;
+        }
+
+        .misterio-card .card-icon {
+            width: 3rem;
+            height: 3rem;
+            background: #f5f5f5;
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        .misterio-card:hover .card-icon {
+            background: #e5e5e5;
+            transform: scale(1.05);
+        }
+
+        .misterio-card .card-icon svg {
+            width: 1.5rem;
+            height: 1.5rem;
+            stroke: #1a1a1a;
+        }
+
+        .misterio-card .card-info h3 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #1f2937;
+        }
+
+        .misterio-card .card-info p {
+            font-size: 0.75rem;
+            color: #6b7280;
+            margin-top: 0.15rem;
+        }
+
+        /* Modal dos Mistérios */
+        .misterio-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .misterio-modal.active {
+            display: flex;
+        }
+
+        .misterio-modal-content {
+            background: white;
+            border-radius: 24px;
+            padding: 30px;
+            max-width: 550px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            animation: slideUp 0.4s ease;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .misterio-modal-close {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: #f3f4f6;
+            border: none;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+            color: #4b5563;
+        }
+
+        .misterio-modal-close:hover {
+            background: #e5e7eb;
+            transform: rotate(90deg);
+        }
+
+        .misterio-item-lista {
+            background: #f9fafb;
+            border-left: 4px solid #1e3a8a;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .misterio-item-lista h4 {
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 0.25rem;
+            font-size: 0.95rem;
+        }
+
+        .misterio-item-lista .ref-biblica {
+            font-size: 0.8rem;
+            color: #6b7280;
+            margin-bottom: 0.5rem;
+        }
+
+        .misterio-item-lista p {
+            font-size: 0.9rem;
+            color: #4b5563;
+            line-height: 1.6;
+        }
+
+        .modal-titulo-misterio {
+            color: #1e3a8a;
+            font-size: 1.25rem;
+            font-weight: 800;
+            margin-bottom: 0.25rem;
+        }
+
+        .modal-subtitulo-misterio {
+            color: #6b7280;
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Rodapé */
+        .footer-menu {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+            padding: 10px 12px;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .footer-menu .scroll-container {
+            display: flex;
+            overflow-x: auto;
+            gap: 16px;
+            padding: 4px 0;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+
+        .footer-menu .scroll-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .footer-menu .footer-item {
+            flex: 0 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #4b5563;
+            min-width: 60px;
+            transition: all 0.3s ease;
+        }
+
+        .footer-menu .footer-item .icon-wrapper {
+            width: 3rem !important;
+            height: 3rem !important;
+            background: #f5f5f5;
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .footer-menu .footer-item .icon-wrapper svg {
+            width: 1.5rem !important;
+            height: 1.5rem !important;
+            stroke: #1a1a1a;
+        }
+
+        .footer-menu .footer-item span {
+            font-size: 0.6rem;
+            font-weight: 600;
+            text-align: center;
+            line-height: 1.1;
+            color: #1f2937;
+        }
+
+        .footer-menu .footer-item:hover .icon-wrapper {
+            background: #e5e5e5;
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 640px) {
+            .footer-menu {
+                display: block;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .footer-menu .footer-item .icon-wrapper {
+                width: 2.5rem !important;
+                height: 2.5rem !important;
+            }
+            .footer-menu .footer-item .icon-wrapper svg {
+                width: 1.2rem !important;
+                height: 1.2rem !important;
+            }
+            .footer-menu .footer-item span {
+                font-size: 0.5rem;
+            }
+            .footer-menu .scroll-container {
+                gap: 12px;
+            }
+        }
+
+        @media (min-width: 641px) {
+            .footer-menu {
+                display: none !important;
+            }
+            body {
+                padding-bottom: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- MODAL DE CONFIRMAÇÃO -->
+    <div id="modalSair" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-icon">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                </svg>
+            </div>
+            <h3 class="modal-title">Sair do App</h3>
+            <p class="modal-subtitle">
+                Tem certeza que deseja sair do aplicativo?<br>
+                Você será redirecionado para a página inicial.
+            </p>
+            <div class="modal-actions">
+                <button class="modal-btn modal-btn-cancel" onclick="fecharModal()">
+                    Cancelar
+                </button>
+                <button class="modal-btn modal-btn-confirm" onclick="confirmarSair()">
+                    Sim, Sair
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DOS MISTÉRIOS -->
+    <div id="misterioModal" class="misterio-modal">
+        <div class="misterio-modal-content" id="misterioModalContent">
+            <!-- Conteúdo inserido pelo JavaScript -->
+        </div>
+    </div>
+
+    <!-- MENU LATERAL -->
+    <aside id="menu"
+        class="menu fixed top-0 left-[-320px] w-80 h-screen bg-white shadow-2xl z-50 flex flex-col overflow-y-auto">
+
+        <div class="relative bg-white p-6 border-b border-gray-100">
+            <button onclick="fecharMenu()" 
+                    class="absolute top-4 right-4 menu-close-btn bg-gray-100 hover:bg-gray-200 rounded-full p-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+            
+            <div class="flex flex-col items-center">
+                <img src="assets/imagem1.png" class="w-20 h-20 object-contain">
+                <h2 class="mt-3 font-bold text-xl text-gray-800">Terço dos Homens</h2>
+                <p class="text-sm text-gray-500">Mãe Rainha</p>
+            </div>
+        </div>
+
+        <div class="p-6 space-y-4">
+            <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Local: Capela de Jesus Mestre</h3>
+            
+            <div class="flex items-start gap-3 text-sm text-gray-700">
+                <svg class="w-5 h-5 flex-shrink-0 mt-0.5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                </svg>
+                <div>
+                    <p class="font-medium">Endereço</p>
+                    <p class="text-gray-500 text-xs">Rua Exemplo, 123 - Centro</p>
+                </div>
+            </div>
+
+            <div class="flex items-start gap-3 text-sm text-gray-700">
+                <svg class="w-5 h-5 flex-shrink-0 mt-0.5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                </svg>
+                <div>
+                    <p class="font-medium">Telefone</p>
+                    <p class="text-gray-500 text-xs">(00) 0000-0000</p>
+                </div>
+            </div>
+
+            <div class="flex items-start gap-3 text-sm text-gray-700">
+                <svg class="w-5 h-5 flex-shrink-0 mt-0.5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                </svg>
+                <div>
+                    <p class="font-medium">E-mail</p>
+                    <p class="text-gray-500 text-xs">contato@tercohomens.com</p>
+                </div>
+            </div>
+
+            <div class="pt-2">
+                <p class="font-medium text-sm text-gray-700 mb-3">Redes Sociais</p>
+                <div class="flex gap-3">
+                    <a href="#" class="social-icon w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center">
+                        <svg class="w-5 h-5 text-gray-700" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-icon w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center">
+                        <svg class="w-5 h-5 text-gray-700" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 01-1.93.07 4.28 4.28 0 004 2.98 8.521 8.521 0 01-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-icon w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center">
+                        <svg class="w-5 h-5 text-gray-700" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-icon w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center">
+                        <svg class="w-5 h-5 text-gray-700" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="pt-3 border-t border-gray-100">
+                <button onclick="abrirModal()"
+                    class="btn-sair w-full text-white font-semibold py-3 rounded-xl flex items-center justify-center gap-3 shadow-lg">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                    </svg>
+                    Sair do App
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <!-- HEADER -->
+    <header class="header-white shadow-xl sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto flex justify-between items-center p-4">
+            <div class="flex items-center gap-2">
+                <button onclick="abrirMenu()" 
+                        class="menu-icon hover:bg-gray-100 p-2 rounded-xl transition-all duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+                <a href="index.html" class="btn-home-header" title="Voltar para Home">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                    </svg>
+                </a>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <img src="assets/imagem1.png" class="w-10 h-10 object-contain">
+                <div class="hidden sm:block">
+                    <h1 class="font-bold text-lg tracking-tight">Mistérios do Rosário</h1>
+                    <p class="text-xs">Meditações para o Terço</p>
+                </div>
+            </div>
+
+            <span class="online-status">
+                <span class="dot"></span>
+                Mistérios
+            </span>
+        </div>
+    </header>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="max-w-3xl mx-auto px-4 sm:px-5 mt-6">
+        <div class="text-center mb-6">
+            <h1 class="text-2xl font-extrabold text-gray-800">📿 Mistérios do Santo Rosário</h1>
+            <p class="text-sm text-gray-500 mt-1">Clique em cada mistério para ver as meditações e referências bíblicas</p>
+        </div>
+
+        <div class="space-y-3">
+            <!-- Mistérios Gozosos - Ícone de Bebê -->
+            <div class="misterio-card" onclick="abrirMisterio('gozosos')">
+                <div class="card-icon">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <circle cx="12" cy="8" r="4" stroke-width="2"/>
+                        <path d="M8 14h8M9 18h6" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <div class="card-info">
+                    <h3>Mistérios Gozosos</h3>
+                    <p>Segunda-feira e Sábado</p>
+                </div>
+            </div>
+
+            <!-- Mistérios Dolorosos - Ícone de Cruz -->
+            <div class="misterio-card" onclick="abrirMisterio('dolorosos')">
+                <div class="card-icon">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v18M6 9h12"/>
+                    </svg>
+                </div>
+                <div class="card-info">
+                    <h3>Mistérios Dolorosos</h3>
+                    <p>Terça-feira e Sexta-feira</p>
+                </div>
+            </div>
+
+            <!-- Mistérios Gloriosos - Ícone de Coroa -->
+            <div class="misterio-card" onclick="abrirMisterio('gloriosos')">
+                <div class="card-icon">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 16l2-6h10l2 6M3 16h18M8 16v4m8-4v4M12 9V5"/>
+                        <circle cx="12" cy="4" r="1.5" fill="currentColor"/>
+                    </svg>
+                </div>
+                <div class="card-info">
+                    <h3>Mistérios Gloriosos</h3>
+                    <p>Quarta-feira e Domingo</p>
+                </div>
+            </div>
+
+            <!-- Mistérios Luminosos - Ícone de Vela -->
+            <div class="misterio-card" onclick="abrirMisterio('luminosos')">
+                <div class="card-icon">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18V6m-4 14h8m-4-2v-2m0-4V8"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3c-.5 0-1 .2-1.5.5L9 5h6l-1.5-1.5C13 3.2 12.5 3 12 3z"/>
+                    </svg>
+                </div>
+                <div class="card-info">
+                    <h3>Mistérios Luminosos</h3>
+                    <p>Quinta-feira</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- RODAPÉ FIXO -->
+    <nav class="footer-menu">
+        <div class="scroll-container">
+            <a href="index.html" class="footer-item">
+                <div class="icon-wrapper">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                    </svg>
+                </div>
+                <span>Home</span>
+            </a>
+            <a href="conduzir.html" class="footer-item">
+                <div class="icon-wrapper">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                    </svg>
+                </div>
+                <span>Conduzir</span>
+            </a>
+            <a href="intencoes.html" class="footer-item">
+                <div class="icon-wrapper">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                    </svg>
+                </div>
+                <span>Intenções</span>
+            </a>
+            <a href="aprenda.html" class="footer-item">
+                <div class="icon-wrapper">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+                    </svg>
+                </div>
+                <span>Aprenda</span>
+            </a>
+            <a href="hino.html" class="footer-item">
+                <div class="icon-wrapper">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/>
+                    </svg>
+                </div>
+                <span>Hino</span>
+            </a>
+            <a href="liturgia.html" class="footer-item">
+                <div class="icon-wrapper">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                    </svg>
+                </div>
+                <span>Liturgia</span>
+            </a>
+        </div>
+    </nav>
+
+    <script>
+        // Dados dos Mistérios
+        const misteriosData = {
+            gozosos: {
+                titulo: 'Mistérios Gozosos',
+                subtitulo: 'Segunda-feira e Sábado',
+                items: [
+                    {
+                        numero: '1º',
+                        titulo: 'Anunciação do Anjo a Maria',
+                        ref: 'Lucas 1,26-38',
+                        texto: 'O Anjo Gabriel é enviado por Deus a Nazaré para anunciar a Maria que ela será a Mãe do Salvador. Maria, com humildade e fé, aceita a vontade de Deus: "Eis aqui a serva do Senhor, faça-se em mim segundo a tua palavra."'
+                    },
+                    {
+                        numero: '2º',
+                        titulo: 'Visitação de Maria a Santa Isabel',
+                        ref: 'Lucas 1,39-56',
+                        texto: 'Maria visita sua prima Isabel, que está grávida de João Batista. Ao encontrar Maria, Isabel exclama: "Bendita és tu entre as mulheres e bendito é o fruto do teu ventre!" Maria responde com o cântico do Magnificat.'
+                    },
+                    {
+                        numero: '3º',
+                        titulo: 'Nascimento de Jesus em Belém',
+                        ref: 'Lucas 2,1-20',
+                        texto: 'José e Maria viajam a Belém para o censo. Jesus nasce em uma humilde manjedoura, pois não havia lugar para eles na hospedaria. Os anjos anunciam aos pastores o nascimento do Salvador.'
+                    },
+                    {
+                        numero: '4º',
+                        titulo: 'Apresentação de Jesus no Templo',
+                        ref: 'Lucas 2,22-40',
+                        texto: 'Maria e José apresentam o Menino Jesus no Templo. Simeão, um homem justo e piedoso, toma o Menino nos braços e proclama que Ele é a Luz das Nações. Ana, a profetisa, também louva a Deus.'
+                    },
+                    {
+                        numero: '5º',
+                        titulo: 'Encontro de Jesus no Templo',
+                        ref: 'Lucas 2,41-52',
+                        texto: 'Aos doze anos, Jesus permanece no Templo de Jerusalém enquanto seus pais retornam a Nazaré. Após três dias, Maria e José o encontram no meio dos doutores da Lei, ouvindo e fazendo perguntas.'
+                    }
+                ]
+            },
+            dolorosos: {
+                titulo: 'Mistérios Dolorosos',
+                subtitulo: 'Terça-feira e Sexta-feira',
+                items: [
+                    {
+                        numero: '1º',
+                        titulo: 'Agonia de Jesus no Horto',
+                        ref: 'Mateus 26,36-46',
+                        texto: 'No Jardim do Getsêmani, Jesus sente profunda angústia e tristeza. Ele reza: "Meu Pai, se possível, afasta de mim este cálice, porém não se faça como eu quero, mas como tu queres." Seu suor se torna como gotas de sangue.'
+                    },
+                    {
+                        numero: '2º',
+                        titulo: 'Flagelação de Jesus',
+                        ref: 'João 19,1',
+                        texto: 'Pilatos manda flagelar Jesus. Amarrado a uma coluna, Ele é cruelmente açoitado pelos soldados romanos. Suporta este sofrimento em silêncio, oferecendo-se pela salvação da humanidade.'
+                    },
+                    {
+                        numero: '3º',
+                        titulo: 'Coroação de Espinhos',
+                        ref: 'Mateus 27,27-31',
+                        texto: 'Os soldados tecem uma coroa de espinhos e a colocam sobre a cabeça de Jesus. Zombam dele, ajoelhando-se e dizendo: "Salve, Rei dos Judeus!" Bateram-lhe com uma vara e cuspiram nele.'
+                    },
+                    {
+                        numero: '4º',
+                        titulo: 'Jesus carrega a Cruz a caminho do Calvário',
+                        ref: 'João 19,17',
+                        texto: 'Jesus carrega a pesada Cruz pelas ruas de Jerusalém em direção ao Calvário. Encontra sua Mãe Santíssima, as mulheres de Jerusalém e Simão Cireneu, que o ajuda a levar a Cruz.'
+                    },
+                    {
+                        numero: '5º',
+                        titulo: 'Crucificação e Morte de Jesus',
+                        ref: 'João 19,18-30',
+                        texto: 'Jesus é crucificado entre dois ladrões. Da Cruz, perdoa seus algozes, promete o Paraíso ao bom ladrão e entrega sua Mãe a João. Após três horas de agonia, exclama: "Tudo está consumado" e entrega seu espírito.'
+                    }
+                ]
+            },
+            gloriosos: {
+                titulo: 'Mistérios Gloriosos',
+                subtitulo: 'Quarta-feira e Domingo',
+                items: [
+                    {
+                        numero: '1º',
+                        titulo: 'Ressurreição de Jesus',
+                        ref: 'Mateus 28,1-10',
+                        texto: 'No primeiro dia da semana, Maria Madalena e a outra Maria vão ao sepulcro. Um anjo lhes anuncia: "Ele ressuscitou! Não está aqui!" Jesus triunfa sobre a morte e aparece aos seus discípulos.'
+                    },
+                    {
+                        numero: '2º',
+                        titulo: 'Ascensão de Jesus ao Céu',
+                        ref: 'Atos 1,6-11',
+                        texto: 'Quarenta dias após a Ressurreição, Jesus sobe aos Céus à vista dos apóstolos. Promete enviar o Espírito Santo e abençoa-os. Os anjos anunciam que Ele voltará um dia da mesma forma.'
+                    },
+                    {
+                        numero: '3º',
+                        titulo: 'Vinda do Espírito Santo sobre os Apóstolos',
+                        ref: 'Atos 2,1-13',
+                        texto: 'No dia de Pentecostes, o Espírito Santo desce sobre Maria e os apóstolos reunidos em oração. Línguas de fogo pousam sobre eles e começam a falar em diversas línguas, anunciando as maravilhas de Deus.'
+                    },
+                    {
+                        numero: '4º',
+                        titulo: 'Assunção de Nossa Senhora ao Céu',
+                        ref: 'Apocalipse 12,1',
+                        texto: 'Maria, a Mãe de Jesus, é elevada ao Céu em corpo e alma. A Igreja proclama este dogma: "A Imaculada Mãe de Deus, terminado o curso da vida terrestre, foi assunta em corpo e alma à glória celestial."'
+                    },
+                    {
+                        numero: '5º',
+                        titulo: 'Coroação de Maria como Rainha do Céu e da Terra',
+                        ref: 'Apocalipse 12,1-6',
+                        texto: 'Maria é coroada Rainha do Universo por seu Filho Jesus. Aparece no Céu como "uma Mulher vestida de sol, com a lua sob os pés e uma coroa de doze estrelas na cabeça". É a glória eterna da Mãe de Deus.'
+                    }
+                ]
+            },
+            luminosos: {
+                titulo: 'Mistérios Luminosos',
+                subtitulo: 'Quinta-feira',
+                items: [
+                    {
+                        numero: '1º',
+                        titulo: 'Batismo de Jesus no Rio Jordão',
+                        ref: 'Mateus 3,13-17',
+                        texto: 'Jesus vai ao encontro de João Batista no Rio Jordão para ser batizado. Ao sair da água, os céus se abrem, o Espírito Santo desce como uma pomba e uma voz do céu proclama: "Este é o meu Filho amado."'
+                    },
+                    {
+                        numero: '2º',
+                        titulo: 'Bodas de Caná',
+                        ref: 'João 2,1-12',
+                        texto: 'Nas Bodas de Caná da Galileia, Jesus realiza seu primeiro milagre a pedido de sua Mãe. Transforma água em vinho, manifestando sua glória e despertando a fé de seus discípulos.'
+                    },
+                    {
+                        numero: '3º',
+                        titulo: 'Anúncio do Reino de Deus',
+                        ref: 'Marcos 1,14-15',
+                        texto: 'Jesus proclama: "O Reino de Deus está próximo. Convertei-vos e crede no Evangelho!" Convida todos à conversão e ao perdão, ensinando o caminho da salvação e da misericórdia divina.'
+                    },
+                    {
+                        numero: '4º',
+                        titulo: 'Transfiguração de Jesus',
+                        ref: 'Mateus 17,1-9',
+                        texto: 'Jesus sobe ao Monte Tabor com Pedro, Tiago e João. Lá, transfigura-se diante deles: seu rosto brilha como o sol e suas vestes tornam-se brancas como a luz. Moisés e Elias aparecem conversando com Ele.'
+                    },
+                    {
+                        numero: '5º',
+                        titulo: 'Instituição da Eucaristia',
+                        ref: 'Lucas 22,14-20',
+                        texto: 'Na Última Ceia, Jesus institui a Eucaristia. Toma o pão e o vinho, dá graças e diz: "Isto é o meu Corpo... Este é o cálice da nova Aliança no meu Sangue." Entrega-nos o sacramento do seu amor eterno.'
+                    }
+                ]
+            }
+        };
+
+        function abrirMisterio(tipo) {
+            const data = misteriosData[tipo];
+            const modalContent = document.getElementById('misterioModalContent');
+            
+            let html = `
+                <button class="misterio-modal-close" onclick="fecharMisterioModal()">✕</button>
+                <h2 class="modal-titulo-misterio">📿 ${data.titulo}</h2>
+                <p class="modal-subtitulo-misterio">${data.subtitulo}</p>
+                <div class="space-y-3">
+            `;
+            
+            data.items.forEach(item => {
+                html += `
+                    <div class="misterio-item-lista">
+                        <h4>${item.numero} - ${item.titulo}</h4>
+                        <p class="ref-biblica">📖 ${item.ref}</p>
+                        <p>${item.texto}</p>
+                    </div>
+                `;
+            });
+            
+            html += `</div>`;
+            
+            modalContent.innerHTML = html;
+            document.getElementById('misterioModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function fecharMisterioModal() {
+            document.getElementById('misterioModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        document.addEventListener('click', function(event) {
+            const modal = document.getElementById('misterioModal');
+            if (event.target === modal) {
+                fecharMisterioModal();
+            }
+        });
+
+        const menu = document.getElementById("menu");
+        let aberto = false;
+
+        function abrirMenu() {
+            menu.style.left = "0";
+            aberto = true;
+        }
+
+        function fecharMenu() {
+            menu.style.left = "-320px";
+            aberto = false;
+        }
+
+        document.addEventListener('click', function(event) {
+            const isClickInsideMenu = menu.contains(event.target);
+            const isClickOnMenuButton = event.target.closest('button[onclick="abrirMenu()"]');
+            
+            if (!isClickInsideMenu && !isClickOnMenuButton && aberto) {
+                fecharMenu();
+            }
+        });
+
+        const modalSair = document.getElementById('modalSair');
+
+        function abrirModal() {
+            modalSair.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function fecharModal() {
+            modalSair.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function confirmarSair() {
+            fecharModal();
+            window.location.href = "index.html";
+        }
+
+        modalSair.addEventListener('click', function(event) {
+            if (event.target === modalSair) {
+                fecharModal();
+            }
+        });
+    </script>
+</body>
+
+</html>
