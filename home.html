@@ -10,9 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        * {
-            font-family: 'Inter', sans-serif;
-        }
+        * { font-family: 'Inter', sans-serif; }
 
         body {
             background: linear-gradient(135deg, #f0f4ff 0%, #e6edf7 100%);
@@ -20,148 +18,68 @@
             padding-bottom: 80px;
         }
 
-        .menu {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .menu-item {
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .menu-item:hover {
-            background: #f3f4f6;
-            padding-left: 28px;
-        }
+        .menu { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .menu-item { transition: all 0.3s ease; position: relative; }
+        .menu-item:hover { background: #f3f4f6; padding-left: 28px; }
 
         .card-modern {
             background: white;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             border: 1px solid #e5e7eb;
         }
-
         .card-modern:hover {
             transform: translateY(-4px);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
             border-color: #1e40af;
         }
+        .card-modern .icon-wrapper { transition: all 0.3s ease; }
+        .card-modern:hover .icon-wrapper { transform: scale(1.05); }
 
-        .card-modern .icon-wrapper {
-            transition: all 0.3s ease;
-        }
-
-        .card-modern:hover .icon-wrapper {
-            transform: scale(1.05);
-        }
-
-        /* BANNER BRANCO */
         .banner-white {
             background: #ffffff;
             border: 1px solid #e5e7eb;
             position: relative;
             overflow: hidden;
         }
-
-        .banner-white .badge {
-            background: #1e3a8a;
-            color: white;
-        }
-
-        .banner-white .title {
-            color: #1e3a8a;
-        }
-
-        .banner-white .highlight {
-            color: #1e40af;
-        }
-
-        .banner-white .subtitle {
-            color: #4b5563;
-        }
+        .banner-white .badge { background: #1e3a8a; color: white; }
+        .banner-white .title { color: #1e3a8a; }
+        .banner-white .highlight { color: #1e40af; }
+        .banner-white .subtitle { color: #4b5563; }
 
         .btn-sair {
             background: #dc2626;
             transition: all 0.3s ease;
         }
+        .btn-sair:hover { background: #b91c1c; transform: scale(1.02); }
+        .btn-sair:active { transform: scale(0.95); }
 
-        .btn-sair:hover {
-            background: #b91c1c;
-            transform: scale(1.02);
-        }
+        .header-white { background: #ffffff; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); }
+        .header-white .menu-icon { color: #1e3a8a; }
+        .header-white h1 { color: #1e3a8a; }
+        .header-white p { color: #6b7280; }
 
-        .btn-sair:active {
-            transform: scale(0.95);
-        }
-
-        /* HEADER BRANCO */
-        .header-white {
-            background: #ffffff;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-        }
-
-        .header-white .menu-icon {
-            color: #1e3a8a;
-        }
-
-        .header-white h1 {
-            color: #1e3a8a;
-        }
-
-        .header-white p {
-            color: #6b7280;
-        }
-
-        /* Grid para cards - PADRÃO 2 colunas */
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 0.75rem;
         }
+        @media (max-width: 480px) { .cards-grid { gap: 0.5rem; } }
 
-        @media (max-width: 480px) {
-            .cards-grid {
-                gap: 0.5rem;
-            }
-        }
+        .menu-close-btn { transition: all 0.3s ease; }
+        .menu-close-btn:hover { transform: rotate(90deg); }
 
-        .menu-close-btn {
-            transition: all 0.3s ease;
-        }
+        .social-icon { transition: all 0.3s ease; }
+        .social-icon:hover { transform: scale(1.1); background: #f3f4f6; }
 
-        .menu-close-btn:hover {
-            transform: rotate(90deg);
-        }
+        .icon-wrapper svg { stroke: #1a1a1a; }
+        .icon-wrapper { background: #f5f5f5; }
+        .card-modern:hover .icon-wrapper { background: #e5e5e5; }
 
-        .social-icon {
-            transition: all 0.3s ease;
-        }
-
-        .social-icon:hover {
-            transform: scale(1.1);
-            background: #f3f4f6;
-        }
-
-        /* Ícones em preto e branco */
-        .icon-wrapper svg {
-            stroke: #1a1a1a;
-        }
-
-        .icon-wrapper {
-            background: #f5f5f5;
-        }
-
-        .card-modern:hover .icon-wrapper {
-            background: #e5e5e5;
-        }
-
-        /* MODAL DE CONFIRMAÇÃO MODERNO */
+        /* MODAL */
         .modal-overlay {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(8px);
             z-index: 9999;
@@ -169,10 +87,7 @@
             align-items: center;
             animation: fadeIn 0.3s ease;
         }
-
-        .modal-overlay.active {
-            display: flex;
-        }
+        .modal-overlay.active { display: flex; }
 
         .modal-box {
             background: white;
@@ -185,62 +100,23 @@
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px) scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
+            from { opacity: 0; transform: translateY(30px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
         .modal-icon {
-            width: 64px;
-            height: 64px;
+            width: 64px; height: 64px;
             background: #fef2f2;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
             margin: 0 auto 16px;
         }
-
-        .modal-icon svg {
-            width: 32px;
-            height: 32px;
-            color: #dc2626;
-        }
-
-        .modal-title {
-            font-size: 22px;
-            font-weight: 700;
-            color: #1f2937;
-            margin-bottom: 8px;
-        }
-
-        .modal-subtitle {
-            font-size: 15px;
-            color: #6b7280;
-            line-height: 1.6;
-            margin-bottom: 24px;
-        }
-
-        .modal-actions {
-            display: flex;
-            gap: 12px;
-            justify-content: center;
-        }
+        .modal-icon svg { width: 32px; height: 32px; color: #dc2626; }
+        .modal-title { font-size: 22px; font-weight: 700; color: #1f2937; margin-bottom: 8px; }
+        .modal-subtitle { font-size: 15px; color: #6b7280; line-height: 1.6; margin-bottom: 24px; }
+        .modal-actions { display: flex; gap: 12px; justify-content: center; }
 
         .modal-btn {
             padding: 12px 32px;
@@ -251,30 +127,11 @@
             cursor: pointer;
             border: none;
         }
-
-        .modal-btn-cancel {
-            background: #f3f4f6;
-            color: #4b5563;
-        }
-
-        .modal-btn-cancel:hover {
-            background: #e5e7eb;
-            transform: scale(1.02);
-        }
-
-        .modal-btn-confirm {
-            background: #dc2626;
-            color: white;
-        }
-
-        .modal-btn-confirm:hover {
-            background: #b91c1c;
-            transform: scale(1.02);
-        }
-
-        .modal-btn:active {
-            transform: scale(0.95);
-        }
+        .modal-btn-cancel { background: #f3f4f6; color: #4b5563; }
+        .modal-btn-cancel:hover { background: #e5e7eb; transform: scale(1.02); }
+        .modal-btn-confirm { background: #dc2626; color: white; }
+        .modal-btn-confirm:hover { background: #b91c1c; transform: scale(1.02); }
+        .modal-btn:active { transform: scale(0.95); }
 
         .online-status {
             background: #f3f4f6;
@@ -285,44 +142,39 @@
             display: flex;
             align-items: center;
             gap: 6px;
+            max-width: 180px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
-
         .online-status .dot {
-            width: 6px;
-            height: 6px;
+            width: 6px; height: 6px;
             background: #22c55e;
             border-radius: 50%;
             animation: pulse 2s infinite;
+            flex-shrink: 0;
         }
-
         @keyframes pulse {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.4; }
         }
 
-        /* Decoração do banner branco */
         .banner-decoration {
             position: absolute;
             border-radius: 50%;
             background: rgba(30, 58, 138, 0.03);
         }
-
         .banner-decoration:nth-child(1) {
-            width: 300px;
-            height: 300px;
-            top: -100px;
-            right: -100px;
+            width: 300px; height: 300px;
+            top: -100px; right: -100px;
         }
-
         .banner-decoration:nth-child(2) {
-            width: 200px;
-            height: 200px;
-            bottom: -80px;
-            left: -80px;
+            width: 200px; height: 200px;
+            bottom: -80px; left: -80px;
             background: rgba(30, 58, 138, 0.02);
         }
 
-        /* Destaque do convite */
+        /* CONVITE - box amarelo */
         .convite-box {
             background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
             border-left: 4px solid #d97706;
@@ -330,7 +182,6 @@
             border-radius: 12px;
             margin-top: 12px;
         }
-
         .convite-box .dia {
             background: #d97706;
             color: white;
@@ -340,11 +191,7 @@
             font-weight: 700;
             display: inline-block;
         }
-
-        .convite-box .horario {
-            font-weight: 800;
-            color: #92400e;
-        }
+        .convite-box .horario { font-weight: 800; color: #92400e; }
 
         .btn-convite {
             display: inline-block;
@@ -357,92 +204,9 @@
             transition: all 0.3s ease;
             margin-top: 8px;
         }
+        .btn-convite:hover { background: #1e40af; transform: scale(1.05); }
 
-        .btn-convite:hover {
-            background: #1e40af;
-            transform: scale(1.05);
-        }
-
-        /* CARDS MAIS COMPACTOS - PADRÃO */
-        .card-modern {
-            padding: 1rem !important;
-            border-radius: 1rem !important;
-        }
-
-        .card-modern .icon-wrapper {
-            width: 2.5rem !important;
-            height: 2.5rem !important;
-            margin-bottom: 0.5rem !important;
-            border-radius: 0.75rem !important;
-        }
-
-        .card-modern .icon-wrapper svg {
-            width: 1.25rem !important;
-            height: 1.25rem !important;
-        }
-
-        .card-modern h4 {
-            font-size: 0.875rem !important;
-            font-weight: 700 !important;
-        }
-
-        .card-modern p {
-            font-size: 0.7rem !important;
-            margin-top: 0.15rem !important;
-        }
-
-        /* Título do banner em telas pequenas */
-        @media (max-width: 640px) {
-            .banner-title-small .title {
-                font-size: 1.5rem !important;
-                line-height: 1.3 !important;
-            }
-            .banner-title-small .highlight {
-                font-size: 1.5rem !important;
-                display: inline !important;
-            }
-            .banner-title-small .title br {
-                display: none !important;
-            }
-            .banner-title-small .title .break-mobile {
-                display: inline !important;
-            }
-        }
-
-        @media (min-width: 641px) {
-            .banner-title-small .title .break-mobile {
-                display: none !important;
-            }
-        }
-
-        /* Ajuste do padding do banner em telas pequenas */
-        @media (max-width: 640px) {
-            .banner-white .relative {
-                padding: 1.5rem !important;
-            }
-            .convite-box {
-                padding: 10px 12px !important;
-            }
-            .convite-box .dia {
-                font-size: 11px !important;
-                padding: 1px 10px !important;
-            }
-            .convite-box .horario {
-                font-size: 13px !important;
-            }
-            .convite-box p {
-                font-size: 12px !important;
-            }
-            .btn-convite {
-                font-size: 12px !important;
-                padding: 6px 16px !important;
-            }
-            .banner-white .flex-shrink-0 {
-                width: 8rem !important;
-            }
-        }
-
-        /* Estilo para dia sem terço */
+        /* Convite - box cinza (sem programação) */
         .convite-box-semterco {
             background: #f3f4f6;
             border-left: 4px solid #6b7280;
@@ -450,7 +214,6 @@
             border-radius: 12px;
             margin-top: 12px;
         }
-
         .convite-box-semterco .dia {
             background: #6b7280;
             color: white;
@@ -461,189 +224,96 @@
             display: inline-block;
         }
 
-        @media (max-width: 640px) {
-            .convite-box-semterco {
-                padding: 10px 12px !important;
-            }
-            .convite-box-semterco .dia {
-                font-size: 11px !important;
-                padding: 1px 10px !important;
-            }
-            .convite-box-semterco p {
-                font-size: 12px !important;
-            }
-        }
-
-        /* Transição suave para o convite */
-        .convite-box,
-        .convite-box-semterco {
-            transition: opacity 0.5s ease-in-out;
-        }
-
-        /* ================================================================ */
-        /* RODAPÉ FIXO COM SCROLL HORIZONTAL - APENAS TELAS PEQUENAS */
-        /* ================================================================ */
-        .footer-menu {
-            display: none;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: white;
-            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
-            z-index: 100;
-            padding: 10px 12px;
-            border-top: 1px solid #e5e7eb;
-        }
-
-        .footer-menu .scroll-container {
+        /* Indicadores */
+        .indicadores {
             display: flex;
-            overflow-x: auto;
-            gap: 16px;
-            padding: 4px 0;
-            scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
-        }
-
-        .footer-menu .scroll-container::-webkit-scrollbar {
-            display: none;
-        }
-
-        .footer-menu .footer-item {
-            flex: 0 0 auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-decoration: none;
-            color: #4b5563;
-            min-width: 60px;
-            transition: all 0.3s ease;
-        }
-
-        .footer-menu .footer-item .icon-wrapper {
-            width: 3rem !important;
-            height: 3rem !important;
-            background: #f5f5f5;
-            border-radius: 0.75rem;
-            display: flex;
-            align-items: center;
+            gap: 6px;
             justify-content: center;
-            margin-bottom: 4px;
+            margin-top: 10px;
+        }
+        .indicador {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #d1d5db;
             transition: all 0.3s ease;
         }
-
-        .footer-menu .footer-item .icon-wrapper svg {
-            width: 1.5rem !important;
-            height: 1.5rem !important;
-            stroke: #1a1a1a;
+        .indicador.active {
+            background: #d97706;
+            width: 24px;
+            border-radius: 4px;
         }
 
-        .footer-menu .footer-item span {
-            font-size: 0.6rem;
-            font-weight: 600;
-            text-align: center;
-            line-height: 1.1;
-            color: #1f2937;
+        /* CARDS COMPACTOS */
+        .card-modern {
+            padding: 1rem !important;
+            border-radius: 1rem !important;
         }
-
-        .footer-menu .footer-item:hover .icon-wrapper {
-            background: #e5e5e5;
-            transform: scale(1.05);
+        .card-modern .icon-wrapper {
+            width: 2.5rem !important;
+            height: 2.5rem !important;
+            margin-bottom: 0.5rem !important;
+            border-radius: 0.75rem !important;
         }
-
-        .footer-menu .footer-item:active {
-            transform: scale(0.95);
+        .card-modern .icon-wrapper svg {
+            width: 1.25rem !important;
+            height: 1.25rem !important;
         }
+        .card-modern h4 { font-size: 0.875rem !important; font-weight: 700 !important; }
+        .card-modern p { font-size: 0.7rem !important; margin-top: 0.15rem !important; }
 
-        /* Mostra o rodapé apenas em telas pequenas */
+        /* Ajustes mobile */
         @media (max-width: 640px) {
-            .footer-menu {
-                display: block;
-            }
-            
-            /* Esconde o grid de cards em telas pequenas */
-            .cards-grid {
-                display: none !important;
-            }
-            
-            /* Esconde o título do menu principal em telas pequenas */
-            .menu-title {
-                display: none !important;
-            }
-            
-            /* Ajusta o padding do body para o rodapé */
-            body {
-                padding-bottom: 90px;
-            }
+            .banner-title-small .title { font-size: 1.5rem !important; line-height: 1.3 !important; }
+            .banner-title-small .highlight { font-size: 1.5rem !important; display: inline !important; }
+            .banner-title-small .title br { display: none !important; }
+            .banner-title-small .title .break-mobile { display: inline !important; }
 
-            /* Ajusta o menu lateral para não ficar escondido pelo rodapé */
-            .menu {
-                padding-bottom: 80px !important;
-            }
-            
-            /* Container do carrossel para telas pequenas */
+            .banner-white .relative { padding: 1.5rem !important; }
+            .convite-box { padding: 10px 12px !important; }
+            .convite-box .dia { font-size: 11px !important; padding: 1px 10px !important; }
+            .convite-box .horario { font-size: 13px !important; }
+            .convite-box p { font-size: 12px !important; }
+            .btn-convite { font-size: 12px !important; padding: 6px 16px !important; }
+            .banner-white .flex-shrink-0 { width: 8rem !important; }
+
+            .convite-box-semterco { padding: 10px 12px !important; }
+            .convite-box-semterco .dia { font-size: 11px !important; padding: 1px 10px !important; }
+            .convite-box-semterco p { font-size: 12px !important; }
+
+            /* CARROSSEL COM TRANSIÇÃO DESLIZANTE */
             .convite-carrossel-container {
                 overflow: hidden;
                 position: relative;
-                min-height: 100px;
+                min-height: 130px;
             }
             
             .convite-slide {
-                transition: transform 0.5s ease;
-                transform: translateX(100%);
+                transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
                 position: absolute;
                 width: 100%;
                 top: 0;
                 left: 0;
+                opacity: 0;
+                transform: translateX(100%);
             }
             
             .convite-slide.active {
+                opacity: 1;
                 transform: translateX(0);
                 position: relative;
             }
             
             .convite-slide.exit {
+                opacity: 0;
                 transform: translateX(-100%);
             }
         }
 
-        @media (max-width: 380px) {
-            .footer-menu .footer-item .icon-wrapper {
-                width: 2.5rem !important;
-                height: 2.5rem !important;
-            }
-            .footer-menu .footer-item .icon-wrapper svg {
-                width: 1.2rem !important;
-                height: 1.2rem !important;
-            }
-            .footer-menu .footer-item span {
-                font-size: 0.5rem;
-            }
-            .footer-menu .scroll-container {
-                gap: 12px;
-            }
-        }
-
-        /* Garante que em telas grandes continue com os cards normais */
         @media (min-width: 641px) {
-            .footer-menu {
-                display: none !important;
-            }
-            
-            .cards-grid {
-                display: grid !important;
-            }
-            
-            .menu-title {
-                display: block !important;
-            }
-            
-            body {
-                padding-bottom: 0;
-            }
-            
-            /* Remove estilos do carrossel em telas grandes */
+            .banner-title-small .title .break-mobile { display: none !important; }
+
+            /* Em telas grandes, sem animação de slide, apenas troca direta */
             .convite-carrossel-container {
                 overflow: visible;
                 position: static;
@@ -654,6 +324,7 @@
                 transition: none;
                 transform: none;
                 position: static;
+                opacity: 1;
                 width: auto;
             }
             
@@ -665,12 +336,100 @@
                 display: none;
             }
         }
+
+        /* RODAPÉ FIXO */
+        .footer-menu {
+            display: none;
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            background: white;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+            padding: 10px 12px;
+            border-top: 1px solid #e5e7eb;
+        }
+        .footer-menu .scroll-container {
+            display: flex;
+            overflow-x: auto;
+            gap: 16px;
+            padding: 4px 0;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        .footer-menu .scroll-container::-webkit-scrollbar { display: none; }
+        .footer-menu .footer-item {
+            flex: 0 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #4b5563;
+            min-width: 60px;
+            transition: all 0.3s ease;
+        }
+        .footer-menu .footer-item .icon-wrapper {
+            width: 3rem !important;
+            height: 3rem !important;
+            background: #f5f5f5;
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 4px;
+            transition: all 0.3s ease;
+        }
+        .footer-menu .footer-item .icon-wrapper svg {
+            width: 1.5rem !important;
+            height: 1.5rem !important;
+            stroke: #1a1a1a;
+        }
+        .footer-menu .footer-item span {
+            font-size: 0.6rem;
+            font-weight: 600;
+            text-align: center;
+            line-height: 1.1;
+            color: #1f2937;
+        }
+        .footer-menu .footer-item:hover .icon-wrapper {
+            background: #e5e5e5;
+            transform: scale(1.05);
+        }
+        .footer-menu .footer-item:active { transform: scale(0.95); }
+
+        @media (max-width: 640px) {
+            .footer-menu { display: block; }
+            .cards-grid { display: none !important; }
+            .menu-title { display: none !important; }
+            body { padding-bottom: 90px; }
+            .menu { padding-bottom: 80px !important; }
+        }
+
+        @media (max-width: 380px) {
+            .footer-menu .footer-item .icon-wrapper {
+                width: 2.5rem !important;
+                height: 2.5rem !important;
+            }
+            .footer-menu .footer-item .icon-wrapper svg {
+                width: 1.2rem !important;
+                height: 1.2rem !important;
+            }
+            .footer-menu .footer-item span { font-size: 0.5rem; }
+            .footer-menu .scroll-container { gap: 12px; }
+        }
+
+        @media (min-width: 641px) {
+            .footer-menu { display: none !important; }
+            .cards-grid { display: grid !important; }
+            .menu-title { display: block !important; }
+            body { padding-bottom: 0; }
+        }
     </style>
 </head>
 
 <body>
 
-    <!-- MODAL DE CONFIRMAÇÃO MODERNO -->
+    <!-- MODAL DE CONFIRMAÇÃO -->
     <div id="modalSair" class="modal-overlay">
         <div class="modal-box">
             <div class="modal-icon">
@@ -684,19 +443,14 @@
                 Você será redirecionado para a página inicial.
             </p>
             <div class="modal-actions">
-                <button class="modal-btn modal-btn-cancel" onclick="fecharModal()">
-                    Cancelar
-                </button>
-                <button class="modal-btn modal-btn-confirm" onclick="confirmarSair()">
-                    Sim, Sair
-                </button>
+                <button class="modal-btn modal-btn-cancel" onclick="fecharModal()">Cancelar</button>
+                <button class="modal-btn modal-btn-confirm" onclick="confirmarSair()">Sim, Sair</button>
             </div>
         </div>
     </div>
 
-    <!-- MENU LATERAL COM INFORMAÇÕES -->
-    <aside id="menu"
-        class="menu fixed top-0 left-[-320px] w-80 h-screen bg-white shadow-2xl z-50 flex flex-col overflow-y-auto">
+    <!-- MENU LATERAL -->
+    <aside id="menu" class="menu fixed top-0 left-[-320px] w-80 h-screen bg-white shadow-2xl z-50 flex flex-col overflow-y-auto">
 
         <div class="relative bg-white p-6 border-b border-gray-100">
             <button onclick="fecharMenu()" 
@@ -713,11 +467,25 @@
             </div>
         </div>
 
-        <!-- INFORMAÇÕES DE CONTATO -->
         <div class="p-6 space-y-4">
-            <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Local: Capela de Jesus Mestre</h3>
+            <!-- ITEM GRUPOS NO MENU -->
+            <a href="grupos.html" class="flex items-center gap-3 p-3 rounded-xl bg-blue-50 hover:bg-blue-100 transition-all duration-300 border border-blue-100">
+                <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                    </svg>
+                </div>
+                <div class="flex-1">
+                    <p class="font-semibold text-sm text-gray-800">Grupos</p>
+                    <p class="text-xs text-gray-500">Vicariato de Olinda</p>
+                </div>
+                <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+            </a>
+
+            <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wider pt-2">Local: Capela de Jesus Mestre</h3>
             
-            <!-- Endereço -->
             <div class="flex items-start gap-3 text-sm text-gray-700">
                 <svg class="w-5 h-5 flex-shrink-0 mt-0.5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
@@ -730,7 +498,6 @@
                 </div>
             </div>
 
-            <!-- Telefone -->
             <div class="flex items-start gap-3 text-sm text-gray-700">
                 <svg class="w-5 h-5 flex-shrink-0 mt-0.5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
@@ -742,7 +509,6 @@
                 </div>
             </div>
 
-            <!-- Email -->
             <div class="flex items-start gap-3 text-sm text-gray-700">
                 <svg class="w-5 h-5 flex-shrink-0 mt-0.5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
@@ -753,7 +519,6 @@
                 </div>
             </div>
 
-            <!-- Redes Sociais -->
             <div class="pt-2">
                 <p class="font-medium text-sm text-gray-700 mb-3">Redes Sociais</p>
                 <div class="flex gap-3">
@@ -780,7 +545,6 @@
                 </div>
             </div>
 
-            <!-- BOTÃO SAIR - MAIS PRÓXIMO DAS REDES SOCIAIS -->
             <div class="pt-3 border-t border-gray-100">
                 <button onclick="abrirModal()"
                     class="btn-sair w-full text-white font-semibold py-3 rounded-xl flex items-center justify-center gap-3 shadow-lg">
@@ -818,16 +582,14 @@
         </div>
     </header>
 
-    <!-- BANNER BRANCO COM PROPAGANDA -->
+    <!-- BANNER -->
     <section class="max-w-7xl mx-auto mt-6 px-4 sm:px-5">
         <div class="banner-white rounded-3xl shadow-xl relative">
-            <!-- Decorações -->
             <div class="banner-decoration"></div>
             <div class="banner-decoration"></div>
             
             <div class="relative z-10 p-8 sm:p-12 flex flex-col md:flex-row items-center gap-8 banner-title-small">
                 <div class="flex-1 text-center md:text-left"> 
-                    <!-- Título com ajuste para telas pequenas -->
                     <h2 class="title text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight">
                         <span class="highlight">
                             Terço <span class="break-mobile"> </span>dos Homens
@@ -838,9 +600,9 @@
                         "Nada sem Vós. Nada sem nós."
                     </p>
 
-                    <!-- CONVITE DINÂMICO -->
+                    <!-- CONVITE DINÂMICO COM CARROSSEL -->
                     <div id="conviteContainer" class="convite-carrossel-container">
-                        <!-- O conteúdo será inserido pelo JavaScript -->
+                        <!-- Conteúdo inserido pelo JavaScript -->
                     </div>
                 </div>
                 
@@ -853,7 +615,7 @@
         </div>
     </section>
 
-    <!-- CARDS 2 POR LINHA (VISÍVEL EM TELAS GRANDES) -->
+    <!-- CARDS MENU PRINCIPAL -->
     <section class="max-w-7xl mx-auto px-4 sm:px-5 mt-8">
         <div class="menu-title flex items-center justify-between mb-4">
             <div>
@@ -863,7 +625,6 @@
         </div>
 
         <div class="cards-grid">
-            <!-- Card 1 -->
             <a href="conduzir.html" class="card-modern rounded-2xl p-4 shadow-sm hover:shadow-xl">
                 <div class="icon-wrapper w-10 h-10 rounded-xl flex items-center justify-center mb-2">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -874,7 +635,6 @@
                 <p class="text-gray-500 text-xs mt-0.5">Passo a passo completo</p>
             </a>
 
-            <!-- Card 2 -->
             <a href="intencoes.html" class="card-modern rounded-2xl p-4 shadow-sm hover:shadow-xl">
                 <div class="icon-wrapper w-10 h-10 rounded-xl flex items-center justify-center mb-2">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -885,7 +645,6 @@
                 <p class="text-gray-500 text-xs mt-0.5">Manual digital completo</p>
             </a>
 
-            <!-- Card 3 -->
             <a href="aprenda.html" class="card-modern rounded-2xl p-4 shadow-sm hover:shadow-xl">
                 <div class="icon-wrapper w-10 h-10 rounded-xl flex items-center justify-center mb-2">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -906,7 +665,6 @@
                 <p class="text-gray-500 text-xs mt-0.5">Cânticos do Terço</p>
             </a>
 
-                    <!-- Card 5 - Liturgia -->
             <a href="liturgia.html" class="card-modern rounded-2xl p-4 shadow-sm hover:shadow-xl">
                 <div class="icon-wrapper w-10 h-10 rounded-xl flex items-center justify-center mb-2">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -916,17 +674,12 @@
                 <h4 class="font-bold text-gray-800 text-sm">Liturgia</h4>
                 <p class="text-gray-500 text-xs mt-0.5">Leituras do dia</p>
             </a>
-
-            
         </div>
     </section>
 
-    <!-- ================================================================ -->
-    <!-- RODAPÉ FIXO COM SCROLL HORIZONTAL (APENAS TELAS PEQUENAS) -->
-    <!-- ================================================================ -->
+    <!-- RODAPÉ FIXO -->
     <nav class="footer-menu">
-        <div class="scroll-container" id="footerScroll">
-            <!-- Conduzir o Terço -->
+        <div class="scroll-container">
             <a href="conduzir.html" class="footer-item">
                 <div class="icon-wrapper">
                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -936,7 +689,6 @@
                 <span>Conduzir</span>
             </a>
 
-            <!-- Manual -->
             <a href="intencoes.html" class="footer-item">
                 <div class="icon-wrapper">
                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -946,8 +698,7 @@
                 <span>Intenções</span>
             </a>
 
-              <!-- NOVO ITEM: GRUPOS -->
-              <a href="grupos.html" class="footer-item">
+            <a href="grupos.html" class="footer-item">
                 <div class="icon-wrapper" style="background: #dbeafe;">
                     <svg fill="none" stroke="#1e40af" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
@@ -956,7 +707,6 @@
                 <span>Grupos</span>
             </a>
 
-            <!-- Orações -->
             <a href="aprenda.html" class="footer-item">
                 <div class="icon-wrapper">
                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -976,7 +726,7 @@
                 <span>Mistérios</span>
             </a>
 
-            <a href="hino.html" class="footer-item active">
+            <a href="hino.html" class="footer-item">
                 <div class="icon-wrapper">
                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/>
@@ -985,7 +735,7 @@
                 <span>Hino</span>
             </a>
 
-            <a href="liturgia.html" class="footer-item active">
+            <a href="liturgia.html" class="footer-item">
                 <div class="icon-wrapper">
                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
@@ -998,222 +748,250 @@
 
     <script>
         // ================================================================
-        // DADOS DOS DIAS DA SEMANA
+        // PROGRAMAÇÃO SEMANAL DOS GRUPOS
         // ================================================================
-        const diasSemana = [
-            { 
-                dia: 'Segunda', 
-                igreja: 'Paróquia de São Lucas', 
-                horario: '19:30', 
-                emoji: '🎯', 
-                semTerco: false,
-                texto: 'Venha rezar o Terço!',
-                tag: 'Paróquia de São Lucas'
+        const programacaoSemana = {
+            // 0 = Domingo
+            0: {
+                dia: 'Domingo',
+                igrejas: []
             },
-            { 
-                dia: 'Terça', 
-                igreja: 'Santuário Mãe Rainha', 
-                horario: '19:30', 
-                emoji: '🎯', 
-                semTerco: false,
-                texto: 'Venha rezar o Terço!',
-                tag: 'Santuário Mãe Rainha'
+
+            // 1 = Segunda-feira
+            1: {
+                dia: 'Segunda',
+                igrejas: [
+                    { nome: 'Paróquia de São Lucas', bairro: 'Ouro Preto', horario: '19:30' },
+                    { nome: 'Paróquia de São Benedito', bairro: 'Aguazinha', horario: '19:30' },
+                    { nome: 'Paróquia de Nossa Senhora da Conceição', bairro: 'Cidade Tabajara', horario: '19:30' },
+                    { nome: 'Capela de São João Batista', bairro: 'Córrego do Abacaxi', horario: '19:30' }
+                ]
             },
-            { 
-                dia: 'Quarta', 
-                igreja: 'Capela de São Pedro e São Paulo', 
-                horario: '19:30', 
-                emoji: '🎯', 
-                semTerco: false,
-                texto: 'Venha rezar o Terço!',
-                tag: 'Capela de São Pedro e São Paulo'
+
+            // 2 = Terça-feira
+            2: {
+                dia: 'Terça',
+                igrejas: [
+                    { nome: 'Paróquia de Nossa Senhora de Guadalupe', bairro: 'Guadalupe', horario: '19:30' },
+                    { nome: 'Paróquia de São José', bairro: 'Casa Caiada', horario: '19:30' },
+                    { nome: 'Capela de São Francisco de Assis', bairro: 'Jardim Brasil 2', horario: '19:30' },
+                    { nome: 'Capela de Nossa Senhora do Perpétuo Socorro', bairro: 'Vila Popular', horario: '19:30' },
+                    { nome: 'Capela de São José', bairro: 'Sapucaia', horario: '19:30' },
+                    { nome: 'Capela do Divino Espírito Santo', bairro: 'Jardim Atlântico', horario: '19:30' },
+                    { nome: 'Santuário Mãe Rainha', bairro: 'Olinda', horario: '19:30' }
+                ]
             },
-            { 
-                dia: 'Quinta', 
-                igreja: 'SEM TERÇO', 
-                horario: '--:--', 
-                emoji: '📌', 
-                semTerco: true,
-                texto: 'Não há Terço hoje.',
-                tag: 'Sem Terço'
+
+            // 3 = Quarta-feira
+            3: {
+                dia: 'Quarta',
+                igrejas: [
+                    { nome: 'Paróquia Nossa Senhora da Ajuda', bairro: 'Peixinhos', horario: '19:30' },
+                    { nome: 'Paróquia do Sagrado Coração de Jesus', bairro: 'Águas Compridas', horario: '19:30' },
+                    { nome: 'Capela de São Francisco de Assis', bairro: '04 de Outubro (Tabajara)', horario: '19:30' },
+                    { nome: 'Capela São Pedro e São Paulo', bairro: 'Embrião', horario: '19:30' },
+                    { nome: 'Capela da Ressurreição', bairro: 'Cohab', horario: '19:30' },
+                    { nome: 'Paróquia Santa Rita de Cássia', bairro: 'Jardim Fragoso', horario: '19:30' }
+                ]
             },
-            { 
-                dia: 'Sexta', 
-                igreja: 'Capela de Jesus Mestre e N.S. Aparecida', 
-                horario: '19:30', 
-                emoji: '🎯', 
-                semTerco: false,
-                texto: 'Venha rezar o Terço!',
-                tag: 'Jesus Mestre e N.S. Aparecida'
+
+            // 4 = Quinta-feira
+            4: {
+                dia: 'Quinta',
+                igrejas: [
+                    { nome: 'Paróquia da Assunção de Maria', bairro: 'Rio Doce', horario: '19:30' },
+                    { nome: 'Paróquia Nossa Senhora de Fátima', bairro: 'Bairro Novo', horario: '19:30' },
+                    { nome: 'Capela Santana da Prainha', bairro: 'Rio Doce', horario: '19:30' }
+                ]
+            },
+
+            // 5 = Sexta-feira
+            5: {
+                dia: 'Sexta',
+                igrejas: [
+                    { nome: 'Capela de Jesus Mestre', bairro: 'Ouro Preto', horario: '19:30' },
+                    { nome: 'Capela Nossa Senhora Aparecida', bairro: 'Jatobá', horario: '19:30' }
+                ]
+            },
+
+            // 6 = Sábado
+            6: {
+                dia: 'Sábado',
+                igrejas: []
             }
-        ];
+        };
 
-        let slideAtual = 0;
+        let igrejaAtualIndex = 0;
         let intervaloTroca = null;
+        let diaAtualDaSemana = 1;
 
         // ================================================================
-        // FUNÇÃO PARA GERAR O HTML DO CONVITE
+        // GERAR HTML DO CONVITE
         // ================================================================
-        function gerarHTMLConvite(data) {
-            if (data.semTerco) {
+        function gerarHTMLConvite(diaInfo, igreja) {
+            // Dia sem programação
+            if (!diaInfo.igrejas || diaInfo.igrejas.length === 0) {
                 return `
                     <div class="convite-box-semterco">
                         <div class="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
                             <div>
-                                <span class="dia">📌 ${data.dia.toUpperCase()}</span>
+                                <span class="dia">📌 ${diaInfo.dia.toUpperCase()}</span>
                             </div>
                             <div class="flex-1">
                                 <p class="text-sm font-semibold text-gray-600">
-                                    🙏 Não há Terço hoje.
+                                    🙏 Programação em breve para este dia.
                                 </p>
                             </div>
                         </div>
                         <div class="mt-2 flex flex-wrap items-center gap-2">
                             <span class="text-xs text-gray-500 bg-white/70 px-3 py-1 rounded-full">
-                                📅 Volte amanhã!
+                                📅 Aguarde mais informações
                             </span>
-                        </div>
-                    </div>
-                `;
-            } else {
-                return `
-                    <div class="convite-box">
-                        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
-                            <div>
-                                <span class="dia">${data.emoji} ${data.dia.toUpperCase()}</span>
-                                <span class="font-bold text-gray-800 ml-2">às <span class="horario">${data.horario}</span></span>
-                            </div>
-                            <div class="flex-1">
-                                <p class="text-sm font-semibold text-gray-700">
-                                    🙏 ${data.texto}
-                                </p>
-                            </div>
-                        </div>
-                        <div class="mt-2 flex flex-wrap items-center gap-2">
-                            <span class="text-xs text-gray-600 bg-white/70 px-3 py-1 rounded-full">
-                                ⛪ ${data.tag}
-                            </span>
-                            <span class="text-xs text-gray-600 bg-white/70 px-3 py-1 rounded-full">
-                                📍 Todos os homens são bem-vindos
-                            </span>
-                            <a href="#" class="btn-convite">
-                                📅 Quero Participar
-                            </a>
                         </div>
                     </div>
                 `;
             }
+
+            // Dia com programação
+            const total = diaInfo.igrejas.length;
+            const mostrarIndicadores = total > 1;
+
+            return `
+                <div class="convite-box">
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
+                        <div>
+                            <span class="dia">🎯 ${diaInfo.dia.toUpperCase()}</span>
+                            <span class="font-bold text-gray-800 ml-2">às <span class="horario">${igreja.horario}</span></span>
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-sm font-semibold text-gray-700">
+                                🙏 Venha rezar o Terço!
+                            </p>
+                        </div>
+                    </div>
+                    <div class="mt-2 flex flex-wrap items-center gap-2">
+                        <span class="text-xs text-gray-600 bg-white/70 px-3 py-1 rounded-full">
+                            ⛪ ${igreja.nome}
+                        </span>
+                        <span class="text-xs text-gray-600 bg-white/70 px-3 py-1 rounded-full">
+                            📍 ${igreja.bairro}
+                        </span>
+                        <a href="#" class="btn-convite">
+                            📅 Quero Participar
+                        </a>
+                    </div>
+                    ${mostrarIndicadores ? `
+                        <div class="indicadores">
+                            ${diaInfo.igrejas.map((_, i) => `
+                                <span class="indicador ${i === igrejaAtualIndex ? 'active' : ''}"></span>
+                            `).join('')}
+                        </div>
+                    ` : ''}
+                </div>
+            `;
         }
 
         // ================================================================
-        // FUNÇÃO PARA RENDERIZAR O CONVITE
+        // RENDERIZAR CONVITE COM TRANSIÇÃO DESLIZANTE
         // ================================================================
-        function renderizarConvite(index, direcao = 'next') {
-            const data = diasSemana[index];
+        function renderizarConvite() {
+            const diaInfo = programacaoSemana[diaAtualDaSemana];
             const container = document.getElementById('conviteContainer');
             const statusIgreja = document.getElementById('igrejaStatus');
-            
-            // Atualiza o status no header
-            statusIgreja.textContent = data.semTerco ? 'Sem Terço Hoje' : data.tag;
-            
-            const html = gerarHTMLConvite(data);
-            
-            // Verifica se é tela pequena (mobile)
+
+            // Dia sem programação
+            if (!diaInfo.igrejas || diaInfo.igrejas.length === 0) {
+                statusIgreja.textContent = `${diaInfo.dia}: Em breve`;
+                container.innerHTML = gerarHTMLConvite(diaInfo, null);
+                return;
+            }
+
+            const igreja = diaInfo.igrejas[igrejaAtualIndex];
+            statusIgreja.textContent = `${diaInfo.dia}: ${igreja.nome}`;
+
+            const html = gerarHTMLConvite(diaInfo, igreja);
             const isMobile = window.innerWidth <= 640;
-            
+
             if (isMobile) {
-                // Pega slides antigos ANTES de adicionar o novo
+                // === TRANSIÇÃO DESLIZANTE (mobile) ===
                 const slidesAntigos = container.querySelectorAll('.convite-slide');
                 
-                // Se não existem slides ainda, limpa o container completamente
                 if (slidesAntigos.length === 0) {
                     container.innerHTML = '';
                 }
                 
-                // Cria um novo slide
                 const novoTile = document.createElement('div');
                 novoTile.className = 'convite-slide';
                 novoTile.innerHTML = html;
-                
-                // Adiciona o novo slide ao container
                 container.appendChild(novoTile);
                 
-                // Força reflow para a transição funcionar
+                // Força reflow
                 novoTile.offsetHeight;
                 
-                // Marca slides antigos como exit e novo como active
+                // Ativa o novo e desliza o antigo pra fora
                 slidesAntigos.forEach(slide => {
                     slide.classList.remove('active');
                     slide.classList.add('exit');
                 });
                 novoTile.classList.add('active');
                 
-                // Remove slides antigos após a transição
+                // Remove os antigos depois da animação
                 setTimeout(() => {
-                    const slidesParaRemover = container.querySelectorAll('.convite-slide.exit');
-                    slidesParaRemover.forEach(slide => {
-                        container.removeChild(slide);
+                    container.querySelectorAll('.convite-slide.exit').forEach(slide => {
+                        if (slide.parentNode === container) {
+                            container.removeChild(slide);
+                        }
                     });
-                }, 500); // Tempo da transição (0.5s)
+                }, 500);
             } else {
-                // Em telas grandes, mantém o comportamento original
-                container.innerHTML = html;
+                // === DESKTOP: troca direta, mas com um fade suave ===
+                container.style.transition = 'opacity 0.3s ease';
+                container.style.opacity = '0';
+                
+                setTimeout(() => {
+                    container.innerHTML = html;
+                    container.style.opacity = '1';
+                }, 300);
             }
         }
 
         // ================================================================
-        // FUNÇÃO PARA MUDAR O SLIDE
+        // PRÓXIMA IGREJA DO DIA
         // ================================================================
-        function mudarSlide() {
-            slideAtual = (slideAtual + 1) % diasSemana.length;
-            renderizarConvite(slideAtual, 'next');
+        function proximaIgreja() {
+            const diaInfo = programacaoSemana[diaAtualDaSemana];
+            if (!diaInfo.igrejas || diaInfo.igrejas.length === 0) return;
+            
+            igrejaAtualIndex = (igrejaAtualIndex + 1) % diaInfo.igrejas.length;
+            renderizarConvite();
         }
 
         // ================================================================
-        // FUNÇÃO PARA INICIAR O CARROSSEL
+        // INICIAR CARROSSEL
         // ================================================================
         function iniciarCarrossel() {
-            // Encontra o dia atual para começar
             const hoje = new Date();
-            const diaSemana = hoje.getDay();
-            
-            const mapaDia = {
-                1: 0, // Segunda
-                2: 1, // Terça
-                3: 2, // Quarta
-                4: 3, // Quinta
-                5: 4  // Sexta
-            };
+            diaAtualDaSemana = hoje.getDay();
+            igrejaAtualIndex = 0;
 
-            let indiceInicial = 0;
-            if (diaSemana === 0 || diaSemana === 6) {
-                indiceInicial = 0; // Segunda
-            } else {
-                indiceInicial = mapaDia[diaSemana] !== undefined ? mapaDia[diaSemana] : 0;
-            }
-            
-            slideAtual = indiceInicial;
-            
-            // Limpa o container antes de iniciar
+            // Limpa qualquer slide antigo
             const container = document.getElementById('conviteContainer');
             container.innerHTML = '';
-            
-            renderizarConvite(slideAtual);
-            
-            // Limpa intervalo anterior se existir
-            if (intervaloTroca) {
-                clearInterval(intervaloTroca);
+
+            renderizarConvite();
+
+            if (intervaloTroca) clearInterval(intervaloTroca);
+
+            const diaInfo = programacaoSemana[diaAtualDaSemana];
+            if (diaInfo.igrejas && diaInfo.igrejas.length > 1) {
+                const isMobile = window.innerWidth <= 640;
+                const intervalo = isMobile ? 5000 : 6000;
+                intervaloTroca = setInterval(proximaIgreja, intervalo);
             }
-            
-            // Determina o intervalo baseado no tamanho da tela
-            const isMobile = window.innerWidth <= 640;
-            const intervalo = isMobile ? 5000 : 6000;
-            
-            intervaloTroca = setInterval(mudarSlide, intervalo);
         }
 
         // ================================================================
-        // FUNÇÕES DO MENU E MODAL
+        // MENU E MODAL
         // ================================================================
         const menu = document.getElementById("menu");
         let aberto = false;
@@ -1260,17 +1038,15 @@
             }
         });
 
-        // Adiciona listener para redimensionamento da tela
-        window.addEventListener('resize', function() {
-            // Reinicia o carrossel quando houver mudança de tamanho de tela
-            clearInterval(intervaloTroca);
-            iniciarCarrossel();
-        });
-
         // ================================================================
         // INICIALIZAÇÃO
         // ================================================================
         document.addEventListener('DOMContentLoaded', function() {
+            iniciarCarrossel();
+        });
+
+        window.addEventListener('resize', function() {
+            clearInterval(intervaloTroca);
             iniciarCarrossel();
         });
     </script>
