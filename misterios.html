@@ -10,495 +10,68 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        * {
-            font-family: 'Inter', sans-serif;
-        }
+        * { font-family: 'Inter', sans-serif; }
+        body { background: linear-gradient(135deg, #f0f4ff 0%, #e6edf7 100%); min-height: 100vh; padding-bottom: 80px; }
+        .menu { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .menu-close-btn { transition: all 0.3s ease; }
+        .menu-close-btn:hover { transform: rotate(90deg); }
+        .header-white { background: #ffffff; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); }
+        .header-white .menu-icon { color: #1e3a8a; }
+        .header-white h1 { color: #1e3a8a; }
+        .header-white p { color: #6b7280; }
+        .online-status { background: #f3f4f6; color: #6b7280; padding: 4px 12px; border-radius: 9999px; font-size: 11px; display: flex; align-items: center; gap: 6px; }
+        .online-status .dot { width: 6px; height: 6px; background: #22c55e; border-radius: 50%; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+        .btn-sair { background: #dc2626; transition: all 0.3s ease; }
+        .btn-sair:hover { background: #b91c1c; transform: scale(1.02); }
+        .btn-sair:active { transform: scale(0.95); }
+        .social-icon { transition: all 0.3s ease; }
+        .social-icon:hover { transform: scale(1.1); background: #f3f4f6; }
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(8px); z-index: 9999; justify-content: center; align-items: center; animation: fadeIn 0.3s ease; }
+        .modal-overlay.active { display: flex; }
+        .modal-box { background: white; border-radius: 24px; padding: 40px; max-width: 420px; width: 90%; text-align: center; animation: slideUp 0.4s ease; box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3); }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
+        .modal-icon { width: 64px; height: 64px; background: #fef2f2; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
+        .modal-icon svg { width: 32px; height: 32px; color: #dc2626; }
+        .modal-title { font-size: 22px; font-weight: 700; color: #1f2937; margin-bottom: 8px; }
+        .modal-subtitle { font-size: 15px; color: #6b7280; line-height: 1.6; margin-bottom: 24px; }
+        .modal-actions { display: flex; gap: 12px; justify-content: center; }
+        .modal-btn { padding: 12px 32px; border-radius: 12px; font-weight: 600; font-size: 15px; transition: all 0.3s ease; cursor: pointer; border: none; }
+        .modal-btn-cancel { background: #f3f4f6; color: #4b5563; }
+        .modal-btn-cancel:hover { background: #e5e7eb; transform: scale(1.02); }
+        .modal-btn-confirm { background: #dc2626; color: white; }
+        .modal-btn-confirm:hover { background: #b91c1c; transform: scale(1.02); }
+        .modal-btn:active { transform: scale(0.95); }
+        .btn-home-header { display: none; background: transparent; border: none; cursor: pointer; padding: 0.3rem; border-radius: 0.5rem; transition: all 0.3s ease; color: #4b5563; }
+        .btn-home-header:hover { background: #f3f4f6; color: #1e3a8a; transform: scale(1.05); }
+        .btn-home-header:active { transform: scale(0.95); }
+        .btn-home-header svg { width: 1.5rem; height: 1.5rem; }
+        @media (min-width: 641px) { .btn-home-header { display: flex; align-items: center; justify-content: center; } }
 
-        body {
-            background: linear-gradient(135deg, #f0f4ff 0%, #e6edf7 100%);
-            min-height: 100vh;
-            padding-bottom: 80px;
-        }
-
-        .menu {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .menu-close-btn {
-            transition: all 0.3s ease;
-        }
-
-        .menu-close-btn:hover {
-            transform: rotate(90deg);
-        }
-
-        .header-white {
-            background: #ffffff;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-        }
-
-        .header-white .menu-icon {
-            color: #1e3a8a;
-        }
-
-        .header-white h1 {
-            color: #1e3a8a;
-        }
-
-        .header-white p {
-            color: #6b7280;
-        }
-
-        .online-status {
-            background: #f3f4f6;
-            color: #6b7280;
-            padding: 4px 12px;
-            border-radius: 9999px;
-            font-size: 11px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .online-status .dot {
-            width: 6px;
-            height: 6px;
-            background: #22c55e;
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.4; }
-        }
-
-        .btn-sair {
-            background: #dc2626;
-            transition: all 0.3s ease;
-        }
-
-        .btn-sair:hover {
-            background: #b91c1c;
-            transform: scale(1.02);
-        }
-
-        .btn-sair:active {
-            transform: scale(0.95);
-        }
-
-        .social-icon {
-            transition: all 0.3s ease;
-        }
-
-        .social-icon:hover {
-            transform: scale(1.1);
-            background: #f3f4f6;
-        }
-
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(8px);
-            z-index: 9999;
-            justify-content: center;
-            align-items: center;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .modal-overlay.active {
-            display: flex;
-        }
-
-        .modal-box {
-            background: white;
-            border-radius: 24px;
-            padding: 40px;
-            max-width: 420px;
-            width: 90%;
-            text-align: center;
-            animation: slideUp 0.4s ease;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px) scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-
-        .modal-icon {
-            width: 64px;
-            height: 64px;
-            background: #fef2f2;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 16px;
-        }
-
-        .modal-icon svg {
-            width: 32px;
-            height: 32px;
-            color: #dc2626;
-        }
-
-        .modal-title {
-            font-size: 22px;
-            font-weight: 700;
-            color: #1f2937;
-            margin-bottom: 8px;
-        }
-
-        .modal-subtitle {
-            font-size: 15px;
-            color: #6b7280;
-            line-height: 1.6;
-            margin-bottom: 24px;
-        }
-
-        .modal-actions {
-            display: flex;
-            gap: 12px;
-            justify-content: center;
-        }
-
-        .modal-btn {
-            padding: 12px 32px;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 15px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: none;
-        }
-
-        .modal-btn-cancel {
-            background: #f3f4f6;
-            color: #4b5563;
-        }
-
-        .modal-btn-cancel:hover {
-            background: #e5e7eb;
-            transform: scale(1.02);
-        }
-
-        .modal-btn-confirm {
-            background: #dc2626;
-            color: white;
-        }
-
-        .modal-btn-confirm:hover {
-            background: #b91c1c;
-            transform: scale(1.02);
-        }
-
-        .modal-btn:active {
-            transform: scale(0.95);
-        }
-
-        .btn-home-header {
-            display: none;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            padding: 0.3rem;
-            border-radius: 0.5rem;
-            transition: all 0.3s ease;
-            color: #4b5563;
-        }
-
-        .btn-home-header:hover {
-            background: #f3f4f6;
-            color: #1e3a8a;
-            transform: scale(1.05);
-        }
-
-        .btn-home-header:active {
-            transform: scale(0.95);
-        }
-
-        .btn-home-header svg {
-            width: 1.5rem;
-            height: 1.5rem;
-        }
-
-        @media (min-width: 641px) {
-            .btn-home-header {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-        }
-
-        /* Cards dos Mistérios - Estilo sóbrio */
-        .misterio-card {
-            background: white;
-            border-radius: 1rem;
-            padding: 1.25rem;
-            margin-bottom: 0.75rem;
-            border: 1px solid #e5e7eb;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .misterio-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-            border-color: #1e40af;
-        }
-
-        .misterio-card .card-icon {
-            width: 3rem;
-            height: 3rem;
-            background: #f5f5f5;
-            border-radius: 0.75rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            transition: all 0.3s ease;
-        }
-
-        .misterio-card:hover .card-icon {
-            background: #e5e5e5;
-            transform: scale(1.05);
-        }
-
-        .misterio-card .card-icon svg {
-            width: 1.5rem;
-            height: 1.5rem;
-            stroke: #1a1a1a;
-        }
-
-        .misterio-card .card-info h3 {
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: #1f2937;
-        }
-
-        .misterio-card .card-info p {
-            font-size: 0.75rem;
-            color: #6b7280;
-            margin-top: 0.15rem;
-        }
-
-        /* Modal dos Mistérios */
-        .misterio-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(8px);
-            z-index: 9999;
-            justify-content: center;
-            align-items: center;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .misterio-modal.active {
-            display: flex;
-        }
-
-        .misterio-modal-content {
-            background: white;
-            border-radius: 24px;
-            padding: 30px;
-            max-width: 550px;
-            width: 90%;
-            max-height: 80vh;
-            overflow-y: auto;
-            animation: slideUp 0.4s ease;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
-            position: relative;
-        }
-
-        .misterio-modal-close {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            background: #f3f4f6;
-            border: none;
-            border-radius: 50%;
-            width: 36px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1.2rem;
-            color: #4b5563;
-        }
-
-        .misterio-modal-close:hover {
-            background: #e5e7eb;
-            transform: rotate(90deg);
-        }
-
-        .misterio-item-lista {
-            background: #f9fafb;
-            border-left: 4px solid #1e3a8a;
-            padding: 1rem;
-            border-radius: 0.75rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .misterio-item-lista h4 {
-            font-weight: 700;
-            color: #1f2937;
-            margin-bottom: 0.25rem;
-            font-size: 0.95rem;
-        }
-
-        .misterio-item-lista .ref-biblica {
-            font-size: 0.8rem;
-            color: #6b7280;
-            margin-bottom: 0.5rem;
-        }
-
-        .misterio-item-lista p {
-            font-size: 0.9rem;
-            color: #4b5563;
-            line-height: 1.6;
-        }
-
-        .modal-titulo-misterio {
-            color: #1e3a8a;
-            font-size: 1.25rem;
-            font-weight: 800;
-            margin-bottom: 0.25rem;
-        }
-
-        .modal-subtitulo-misterio {
-            color: #6b7280;
-            font-size: 0.85rem;
-            margin-bottom: 1.5rem;
-        }
+        /* Cards dos Mistérios */
+        .misterio-card { background: white; border-radius: 1rem; padding: 1.25rem; margin-bottom: 0.75rem; border: 1px solid #e5e7eb; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem; text-decoration: none; }
+        .misterio-card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08); border-color: #1e40af; }
+        .misterio-card .card-icon { width: 3rem; height: 3rem; background: #f5f5f5; border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.3s ease; }
+        .misterio-card:hover .card-icon { background: #e5e5e5; transform: scale(1.05); }
+        .misterio-card .card-icon svg { width: 1.5rem; height: 1.5rem; stroke: #1a1a1a; }
+        .misterio-card .card-info h3 { font-size: 0.95rem; font-weight: 700; color: #1f2937; }
+        .misterio-card .card-info p { font-size: 0.75rem; color: #6b7280; margin-top: 0.15rem; }
+        .misterio-card .card-arrow { margin-left: auto; color: #9ca3af; transition: all 0.3s ease; }
+        .misterio-card:hover .card-arrow { color: #1e40af; transform: translateX(3px); }
 
         /* Rodapé */
-        .footer-menu {
-            display: none;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: white;
-            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
-            z-index: 100;
-            padding: 10px 12px;
-            border-top: 1px solid #e5e7eb;
-        }
-
-        .footer-menu .scroll-container {
-            display: flex;
-            overflow-x: auto;
-            gap: 16px;
-            padding: 4px 0;
-            scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
-        }
-
-        .footer-menu .scroll-container::-webkit-scrollbar {
-            display: none;
-        }
-
-        .footer-menu .footer-item {
-            flex: 0 0 auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-decoration: none;
-            color: #4b5563;
-            min-width: 60px;
-            transition: all 0.3s ease;
-        }
-
-        .footer-menu .footer-item .icon-wrapper {
-            width: 3rem !important;
-            height: 3rem !important;
-            background: #f5f5f5;
-            border-radius: 0.75rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 4px;
-            transition: all 0.3s ease;
-        }
-
-        .footer-menu .footer-item .icon-wrapper svg {
-            width: 1.5rem !important;
-            height: 1.5rem !important;
-            stroke: #1a1a1a;
-        }
-
-        .footer-menu .footer-item span {
-            font-size: 0.6rem;
-            font-weight: 600;
-            text-align: center;
-            line-height: 1.1;
-            color: #1f2937;
-        }
-
-        .footer-menu .footer-item:hover .icon-wrapper {
-            background: #e5e5e5;
-            transform: scale(1.05);
-        }
-
-        @media (max-width: 640px) {
-            .footer-menu {
-                display: block;
-            }
-        }
-
-        @media (max-width: 380px) {
-            .footer-menu .footer-item .icon-wrapper {
-                width: 2.5rem !important;
-                height: 2.5rem !important;
-            }
-            .footer-menu .footer-item .icon-wrapper svg {
-                width: 1.2rem !important;
-                height: 1.2rem !important;
-            }
-            .footer-menu .footer-item span {
-                font-size: 0.5rem;
-            }
-            .footer-menu .scroll-container {
-                gap: 12px;
-            }
-        }
-
-        @media (min-width: 641px) {
-            .footer-menu {
-                display: none !important;
-            }
-            body {
-                padding-bottom: 0;
-            }
-        }
+        .footer-menu { display: none; position: fixed; bottom: 0; left: 0; right: 0; background: white; box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1); z-index: 100; padding: 10px 12px; border-top: 1px solid #e5e7eb; }
+        .footer-menu .scroll-container { display: flex; overflow-x: auto; gap: 16px; padding: 4px 0; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+        .footer-menu .scroll-container::-webkit-scrollbar { display: none; }
+        .footer-menu .footer-item { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; text-decoration: none; color: #4b5563; min-width: 60px; transition: all 0.3s ease; }
+        .footer-menu .footer-item .icon-wrapper { width: 3rem !important; height: 3rem !important; background: #f5f5f5; border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; margin-bottom: 4px; transition: all 0.3s ease; }
+        .footer-menu .footer-item .icon-wrapper svg { width: 1.5rem !important; height: 1.5rem !important; stroke: #1a1a1a; }
+        .footer-menu .footer-item span { font-size: 0.6rem; font-weight: 600; text-align: center; line-height: 1.1; color: #1f2937; }
+        .footer-menu .footer-item:hover .icon-wrapper { background: #e5e5e5; transform: scale(1.05); }
+        @media (max-width: 640px) { .footer-menu { display: block; } }
+        @media (max-width: 380px) { .footer-menu .footer-item .icon-wrapper { width: 2.5rem !important; height: 2.5rem !important; } .footer-menu .footer-item .icon-wrapper svg { width: 1.2rem !important; height: 1.2rem !important; } .footer-menu .footer-item span { font-size: 0.5rem; } .footer-menu .scroll-container { gap: 12px; } }
+        @media (min-width: 641px) { .footer-menu { display: none !important; } body { padding-bottom: 0; } }
     </style>
 </head>
 
@@ -518,20 +91,9 @@
                 Você será redirecionado para a página inicial.
             </p>
             <div class="modal-actions">
-                <button class="modal-btn modal-btn-cancel" onclick="fecharModal()">
-                    Cancelar
-                </button>
-                <button class="modal-btn modal-btn-confirm" onclick="confirmarSair()">
-                    Sim, Sair
-                </button>
+                <button class="modal-btn modal-btn-cancel" onclick="fecharModal()">Cancelar</button>
+                <button class="modal-btn modal-btn-confirm" onclick="confirmarSair()">Sim, Sair</button>
             </div>
-        </div>
-    </div>
-
-    <!-- MODAL DOS MISTÉRIOS -->
-    <div id="misterioModal" class="misterio-modal">
-        <div class="misterio-modal-content" id="misterioModalContent">
-            <!-- Conteúdo inserido pelo JavaScript -->
         </div>
     </div>
 
@@ -662,12 +224,12 @@
     <main class="max-w-3xl mx-auto px-4 sm:px-5 mt-6">
         <div class="text-center mb-6">
             <h1 class="text-2xl font-extrabold text-gray-800">📿 Mistérios do Santo Rosário</h1>
-            <p class="text-sm text-gray-500 mt-1">Clique em cada mistério para ver as meditações e referências bíblicas</p>
+            <p class="text-sm text-gray-500 mt-1">Escolha um mistério para meditar</p>
         </div>
 
         <div class="space-y-3">
-            <!-- Mistérios Gozosos - Ícone de Bebê -->
-            <div class="misterio-card" onclick="abrirMisterio('gozosos')">
+            <!-- Mistérios Gozosos -->
+            <a href="gozosos.html" class="misterio-card">
                 <div class="card-icon">
                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <circle cx="12" cy="8" r="4" stroke-width="2"/>
@@ -678,10 +240,13 @@
                     <h3>Mistérios Gozosos</h3>
                     <p>Segunda-feira e Sábado</p>
                 </div>
-            </div>
+                <svg class="card-arrow w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+            </a>
 
-            <!-- Mistérios Dolorosos - Ícone de Cruz -->
-            <div class="misterio-card" onclick="abrirMisterio('dolorosos')">
+            <!-- Mistérios Dolorosos -->
+            <a href="dolorosos.html" class="misterio-card">
                 <div class="card-icon">
                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v18M6 9h12"/>
@@ -691,10 +256,13 @@
                     <h3>Mistérios Dolorosos</h3>
                     <p>Terça-feira e Sexta-feira</p>
                 </div>
-            </div>
+                <svg class="card-arrow w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+            </a>
 
-            <!-- Mistérios Gloriosos - Ícone de Coroa -->
-            <div class="misterio-card" onclick="abrirMisterio('gloriosos')">
+            <!-- Mistérios Gloriosos -->
+            <a href="gloriosos.html" class="misterio-card">
                 <div class="card-icon">
                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 16l2-6h10l2 6M3 16h18M8 16v4m8-4v4M12 9V5"/>
@@ -705,10 +273,13 @@
                     <h3>Mistérios Gloriosos</h3>
                     <p>Quarta-feira e Domingo</p>
                 </div>
-            </div>
+                <svg class="card-arrow w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+            </a>
 
-            <!-- Mistérios Luminosos - Ícone de Vela -->
-            <div class="misterio-card" onclick="abrirMisterio('luminosos')">
+            <!-- Mistérios Luminosos -->
+            <a href="luminosos.html" class="misterio-card">
                 <div class="card-icon">
                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18V6m-4 14h8m-4-2v-2m0-4V8"/>
@@ -719,7 +290,10 @@
                     <h3>Mistérios Luminosos</h3>
                     <p>Quinta-feira</p>
                 </div>
-            </div>
+                <svg class="card-arrow w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+            </a>
         </div>
     </main>
 
@@ -778,194 +352,6 @@
     </nav>
 
     <script>
-        // Dados dos Mistérios
-        const misteriosData = {
-            gozosos: {
-                titulo: 'Mistérios Gozosos',
-                subtitulo: 'Segunda-feira e Sábado',
-                items: [
-                    {
-                        numero: '1º',
-                        titulo: 'Anunciação do Anjo a Maria',
-                        ref: 'Lucas 1,26-38',
-                        texto: 'O Anjo Gabriel é enviado por Deus a Nazaré para anunciar a Maria que ela será a Mãe do Salvador. Maria, com humildade e fé, aceita a vontade de Deus: "Eis aqui a serva do Senhor, faça-se em mim segundo a tua palavra."'
-                    },
-                    {
-                        numero: '2º',
-                        titulo: 'Visitação de Maria a Santa Isabel',
-                        ref: 'Lucas 1,39-56',
-                        texto: 'Maria visita sua prima Isabel, que está grávida de João Batista. Ao encontrar Maria, Isabel exclama: "Bendita és tu entre as mulheres e bendito é o fruto do teu ventre!" Maria responde com o cântico do Magnificat.'
-                    },
-                    {
-                        numero: '3º',
-                        titulo: 'Nascimento de Jesus em Belém',
-                        ref: 'Lucas 2,1-20',
-                        texto: 'José e Maria viajam a Belém para o censo. Jesus nasce em uma humilde manjedoura, pois não havia lugar para eles na hospedaria. Os anjos anunciam aos pastores o nascimento do Salvador.'
-                    },
-                    {
-                        numero: '4º',
-                        titulo: 'Apresentação de Jesus no Templo',
-                        ref: 'Lucas 2,22-40',
-                        texto: 'Maria e José apresentam o Menino Jesus no Templo. Simeão, um homem justo e piedoso, toma o Menino nos braços e proclama que Ele é a Luz das Nações. Ana, a profetisa, também louva a Deus.'
-                    },
-                    {
-                        numero: '5º',
-                        titulo: 'Encontro de Jesus no Templo',
-                        ref: 'Lucas 2,41-52',
-                        texto: 'Aos doze anos, Jesus permanece no Templo de Jerusalém enquanto seus pais retornam a Nazaré. Após três dias, Maria e José o encontram no meio dos doutores da Lei, ouvindo e fazendo perguntas.'
-                    }
-                ]
-            },
-            dolorosos: {
-                titulo: 'Mistérios Dolorosos',
-                subtitulo: 'Terça-feira e Sexta-feira',
-                items: [
-                    {
-                        numero: '1º',
-                        titulo: 'Agonia de Jesus no Horto',
-                        ref: 'Mateus 26,36-46',
-                        texto: 'No Jardim do Getsêmani, Jesus sente profunda angústia e tristeza. Ele reza: "Meu Pai, se possível, afasta de mim este cálice, porém não se faça como eu quero, mas como tu queres." Seu suor se torna como gotas de sangue.'
-                    },
-                    {
-                        numero: '2º',
-                        titulo: 'Flagelação de Jesus',
-                        ref: 'João 19,1',
-                        texto: 'Pilatos manda flagelar Jesus. Amarrado a uma coluna, Ele é cruelmente açoitado pelos soldados romanos. Suporta este sofrimento em silêncio, oferecendo-se pela salvação da humanidade.'
-                    },
-                    {
-                        numero: '3º',
-                        titulo: 'Coroação de Espinhos',
-                        ref: 'Mateus 27,27-31',
-                        texto: 'Os soldados tecem uma coroa de espinhos e a colocam sobre a cabeça de Jesus. Zombam dele, ajoelhando-se e dizendo: "Salve, Rei dos Judeus!" Bateram-lhe com uma vara e cuspiram nele.'
-                    },
-                    {
-                        numero: '4º',
-                        titulo: 'Jesus carrega a Cruz a caminho do Calvário',
-                        ref: 'João 19,17',
-                        texto: 'Jesus carrega a pesada Cruz pelas ruas de Jerusalém em direção ao Calvário. Encontra sua Mãe Santíssima, as mulheres de Jerusalém e Simão Cireneu, que o ajuda a levar a Cruz.'
-                    },
-                    {
-                        numero: '5º',
-                        titulo: 'Crucificação e Morte de Jesus',
-                        ref: 'João 19,18-30',
-                        texto: 'Jesus é crucificado entre dois ladrões. Da Cruz, perdoa seus algozes, promete o Paraíso ao bom ladrão e entrega sua Mãe a João. Após três horas de agonia, exclama: "Tudo está consumado" e entrega seu espírito.'
-                    }
-                ]
-            },
-            gloriosos: {
-                titulo: 'Mistérios Gloriosos',
-                subtitulo: 'Quarta-feira e Domingo',
-                items: [
-                    {
-                        numero: '1º',
-                        titulo: 'Ressurreição de Jesus',
-                        ref: 'Mateus 28,1-10',
-                        texto: 'No primeiro dia da semana, Maria Madalena e a outra Maria vão ao sepulcro. Um anjo lhes anuncia: "Ele ressuscitou! Não está aqui!" Jesus triunfa sobre a morte e aparece aos seus discípulos.'
-                    },
-                    {
-                        numero: '2º',
-                        titulo: 'Ascensão de Jesus ao Céu',
-                        ref: 'Atos 1,6-11',
-                        texto: 'Quarenta dias após a Ressurreição, Jesus sobe aos Céus à vista dos apóstolos. Promete enviar o Espírito Santo e abençoa-os. Os anjos anunciam que Ele voltará um dia da mesma forma.'
-                    },
-                    {
-                        numero: '3º',
-                        titulo: 'Vinda do Espírito Santo sobre os Apóstolos',
-                        ref: 'Atos 2,1-13',
-                        texto: 'No dia de Pentecostes, o Espírito Santo desce sobre Maria e os apóstolos reunidos em oração. Línguas de fogo pousam sobre eles e começam a falar em diversas línguas, anunciando as maravilhas de Deus.'
-                    },
-                    {
-                        numero: '4º',
-                        titulo: 'Assunção de Nossa Senhora ao Céu',
-                        ref: 'Apocalipse 12,1',
-                        texto: 'Maria, a Mãe de Jesus, é elevada ao Céu em corpo e alma. A Igreja proclama este dogma: "A Imaculada Mãe de Deus, terminado o curso da vida terrestre, foi assunta em corpo e alma à glória celestial."'
-                    },
-                    {
-                        numero: '5º',
-                        titulo: 'Coroação de Maria como Rainha do Céu e da Terra',
-                        ref: 'Apocalipse 12,1-6',
-                        texto: 'Maria é coroada Rainha do Universo por seu Filho Jesus. Aparece no Céu como "uma Mulher vestida de sol, com a lua sob os pés e uma coroa de doze estrelas na cabeça". É a glória eterna da Mãe de Deus.'
-                    }
-                ]
-            },
-            luminosos: {
-                titulo: 'Mistérios Luminosos',
-                subtitulo: 'Quinta-feira',
-                items: [
-                    {
-                        numero: '1º',
-                        titulo: 'Batismo de Jesus no Rio Jordão',
-                        ref: 'Mateus 3,13-17',
-                        texto: 'Jesus vai ao encontro de João Batista no Rio Jordão para ser batizado. Ao sair da água, os céus se abrem, o Espírito Santo desce como uma pomba e uma voz do céu proclama: "Este é o meu Filho amado."'
-                    },
-                    {
-                        numero: '2º',
-                        titulo: 'Bodas de Caná',
-                        ref: 'João 2,1-12',
-                        texto: 'Nas Bodas de Caná da Galileia, Jesus realiza seu primeiro milagre a pedido de sua Mãe. Transforma água em vinho, manifestando sua glória e despertando a fé de seus discípulos.'
-                    },
-                    {
-                        numero: '3º',
-                        titulo: 'Anúncio do Reino de Deus',
-                        ref: 'Marcos 1,14-15',
-                        texto: 'Jesus proclama: "O Reino de Deus está próximo. Convertei-vos e crede no Evangelho!" Convida todos à conversão e ao perdão, ensinando o caminho da salvação e da misericórdia divina.'
-                    },
-                    {
-                        numero: '4º',
-                        titulo: 'Transfiguração de Jesus',
-                        ref: 'Mateus 17,1-9',
-                        texto: 'Jesus sobe ao Monte Tabor com Pedro, Tiago e João. Lá, transfigura-se diante deles: seu rosto brilha como o sol e suas vestes tornam-se brancas como a luz. Moisés e Elias aparecem conversando com Ele.'
-                    },
-                    {
-                        numero: '5º',
-                        titulo: 'Instituição da Eucaristia',
-                        ref: 'Lucas 22,14-20',
-                        texto: 'Na Última Ceia, Jesus institui a Eucaristia. Toma o pão e o vinho, dá graças e diz: "Isto é o meu Corpo... Este é o cálice da nova Aliança no meu Sangue." Entrega-nos o sacramento do seu amor eterno.'
-                    }
-                ]
-            }
-        };
-
-        function abrirMisterio(tipo) {
-            const data = misteriosData[tipo];
-            const modalContent = document.getElementById('misterioModalContent');
-            
-            let html = `
-                <button class="misterio-modal-close" onclick="fecharMisterioModal()">✕</button>
-                <h2 class="modal-titulo-misterio">📿 ${data.titulo}</h2>
-                <p class="modal-subtitulo-misterio">${data.subtitulo}</p>
-                <div class="space-y-3">
-            `;
-            
-            data.items.forEach(item => {
-                html += `
-                    <div class="misterio-item-lista">
-                        <h4>${item.numero} - ${item.titulo}</h4>
-                        <p class="ref-biblica">📖 ${item.ref}</p>
-                        <p>${item.texto}</p>
-                    </div>
-                `;
-            });
-            
-            html += `</div>`;
-            
-            modalContent.innerHTML = html;
-            document.getElementById('misterioModal').classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function fecharMisterioModal() {
-            document.getElementById('misterioModal').classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-
-        document.addEventListener('click', function(event) {
-            const modal = document.getElementById('misterioModal');
-            if (event.target === modal) {
-                fecharMisterioModal();
-            }
-        });
-
         const menu = document.getElementById("menu");
         let aberto = false;
 
