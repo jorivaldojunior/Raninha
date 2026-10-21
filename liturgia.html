@@ -153,14 +153,6 @@
         .whatsapp-btn:hover { transform: scale(1.12); background: #1ebe57; }
         .whatsapp-btn svg { width: 1.05rem; height: 1.05rem; fill: white; }
 
-        /* BANNER BRANCO */
-        .banner-white {
-            background: #ffffff;
-            border: 1px solid #e5e7eb;
-            position: relative;
-            overflow: hidden;
-        }
-
         /* MODAL */
         .modal-overlay {
             display: none;
@@ -213,24 +205,23 @@
         .modal-btn-confirm:hover { background: #b91c1c; transform: scale(1.02); }
         .modal-btn:active { transform: scale(0.95); }
 
-        /* Decoração do banner branco */
+        /* Decoração do banner */
+        .banner-white {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            position: relative;
+            overflow: hidden;
+        }
         .banner-decoration {
             position: absolute;
             border-radius: 50%;
             background: rgba(30, 58, 138, 0.03);
         }
-        .banner-decoration:nth-child(1) {
-            width: 300px; height: 300px;
-            top: -100px; right: -100px;
-        }
-        .banner-decoration:nth-child(2) {
-            width: 200px; height: 200px;
-            bottom: -80px; left: -80px;
-            background: rgba(30, 58, 138, 0.02);
-        }
+        .banner-decoration:nth-child(1) { width: 300px; height: 300px; top: -100px; right: -100px; }
+        .banner-decoration:nth-child(2) { width: 200px; height: 200px; bottom: -80px; left: -80px; background: rgba(30, 58, 138, 0.02); }
 
         /* ================================================================ */
-        /* ESTILOS ESPECÍFICOS DA LITURGIA */
+        /* ESTILOS DA LITURGIA */
         /* ================================================================ */
         .liturgia-hero-label {
             font-size: 11px;
@@ -279,6 +270,79 @@
         }
         .btn-load-liturgia:active { transform: scale(0.98); }
         .btn-load-liturgia:disabled { opacity: 0.65; cursor: wait; transform: none; }
+
+        /* NOVO: seletor de data */
+        .date-picker-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px dashed #e5e7eb;
+        }
+        .date-picker-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .date-picker-row {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .date-input {
+            flex: 1;
+            min-width: 140px;
+            padding: 10px 12px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            color: #1f2937;
+            outline: none;
+            transition: all 0.25s ease;
+            background: white;
+        }
+        .date-input:focus { border-color: #1e3a8a; box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1); }
+        .btn-consultar-data {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            background: #eff6ff;
+            color: #1e3a8a;
+            padding: 10px 16px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 13px;
+            transition: all 0.25s ease;
+            border: 2px solid #bfdbfe;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .btn-consultar-data:hover { background: #dbeafe; border-color: #93c5fd; transform: translateY(-1px); }
+        .btn-consultar-data:active { transform: scale(0.97); }
+        .btn-consultar-data:disabled { opacity: 0.65; cursor: wait; transform: none; }
+        .btn-hoje {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            background: white;
+            color: #4b5563;
+            padding: 8px 14px;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 12px;
+            transition: all 0.25s ease;
+            border: 1px solid #e5e7eb;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .btn-hoje:hover { background: #f3f4f6; color: #1e3a8a; border-color: #bfdbfe; }
+        .btn-hoje:active { transform: scale(0.97); }
 
         .liturgia-tabs {
             display: grid;
@@ -432,7 +496,7 @@
         .btn-voltar svg { width: 16px; height: 16px; }
 
         /* ================================================================ */
-        /* RODAPÉ FIXO DE NAVEGAÇÃO — padrão HOME */
+        /* RODAPÉ FIXO — padrão HOME */
         /* ================================================================ */
         .footer-menu {
             display: none;
@@ -666,7 +730,6 @@
     <!-- CONTEÚDO -->
     <main class="page-content" style="min-height: 100dvh; display: flex; flex-direction: column;">
 
-        <!-- HEADER -->
         <header class="header-white shadow-xl sticky top-0 z-40">
             <div class="max-w-7xl mx-auto flex justify-between items-center p-4">
                 <button onclick="abrirMenu()"
@@ -691,7 +754,6 @@
             </div>
         </header>
 
-        <!-- BOTÃO VOLTAR -->
         <div class="max-w-7xl mx-auto px-4 sm:px-5 mt-4 w-full">
             <a href="index.html" class="btn-voltar">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -701,14 +763,14 @@
             </a>
         </div>
 
-        <!-- HERO: DATA E BOTÃO DE CARREGAR -->
+        <!-- HERO: DATA E BOTÃO DE CARREGAR + SELETOR DE DATA -->
         <section class="max-w-7xl mx-auto mt-3 px-4 sm:px-5 w-full">
             <div class="banner-white rounded-3xl shadow-xl relative">
                 <div class="banner-decoration"></div>
                 <div class="banner-decoration"></div>
 
                 <div class="relative z-10 p-6 sm:p-8">
-                    <p class="liturgia-hero-label">Liturgia de hoje</p>
+                    <p class="liturgia-hero-label" id="heroLabel">Liturgia de hoje</p>
                     <p class="liturgia-hero-date" id="dataAtual"></p>
                     <p class="liturgia-hero-celebracao" id="celebracao">
                         Consulte as leituras da celebração de hoje.
@@ -717,6 +779,22 @@
                     <button class="btn-load-liturgia" id="buscar" type="button">
                         📖 Carregar liturgia completa
                     </button>
+
+                    <!-- NOVO: seletor de data -->
+                    <div class="date-picker-wrapper">
+                        <div class="flex items-center justify-between gap-2">
+                            <p class="date-picker-label">Escolher outra data</p>
+                            <button class="btn-hoje" id="btnHoje" type="button" title="Voltar para a liturgia de hoje">
+                                🗓️ Hoje
+                            </button>
+                        </div>
+                        <div class="date-picker-row">
+                            <input type="date" id="seletorData" class="date-input">
+                            <button class="btn-consultar-data" id="btnConsultarData" type="button">
+                                🔍 Consultar data
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -763,7 +841,7 @@
         </div>
     </main>
 
-    <!-- RODAPÉ FIXO DE NAVEGAÇÃO — padrão HOME -->
+    <!-- RODAPÉ FIXO -->
     <nav class="footer-menu">
         <div class="scroll-container">
             <a href="home.html" class="footer-item">
@@ -881,7 +959,7 @@
         });
 
         // ================================================================
-        // LITURGIA - LÓGICA ORIGINAL PRESERVADA
+        // LITURGIA — lógica original preservada + seletor de data
         // ================================================================
         const API = "https://liturgia.up.railway.app/v2/";
 
@@ -890,6 +968,11 @@
         const celebracao = document.getElementById("celebracao");
         const areaLiturgia = document.getElementById("areaLiturgia");
         const mensagem = document.getElementById("mensagem");
+        const heroLabel = document.getElementById("heroLabel");
+
+        const seletorData = document.getElementById("seletorData");
+        const btnConsultarData = document.getElementById("btnConsultarData");
+        const btnHoje = document.getElementById("btnHoje");
 
         const tituloLeitura = document.getElementById("tituloLeitura");
         const tituloLiturgico = document.getElementById("tituloLiturgico");
@@ -907,6 +990,8 @@
         };
 
         let dadosLiturgia = null;
+        // Guarda a data que está sendo consultada (formato {dia, mes, ano})
+        let dataSelecionada = null;
 
         function escaparHTML(valor) {
             return String(valor ?? "").replace(/[&<>"']/g, caractere => ({
@@ -924,15 +1009,48 @@
                 .trim();
         }
 
-        function dataLocal() {
+        // Data de hoje no formato {dia, mes, ano}
+        function dataHoje() {
             const agora = new Date();
-            return { dia: agora.getDate(), mes: agora.getMonth() + 1, ano: agora.getFullYear() };
+            return {
+                dia: agora.getDate(),
+                mes: agora.getMonth() + 1,
+                ano: agora.getFullYear()
+            };
         }
 
-        function mostrarData() {
-            dataAtual.textContent = new Intl.DateTimeFormat("pt-BR", {
-                weekday: "long", day: "numeric", month: "long", year: "numeric"
-            }).format(new Date());
+        // Formata a data para exibição em pt-BR
+        function formatarDataExibicao(data) {
+            const d = new Date(data.ano, data.mes - 1, data.dia);
+            return new Intl.DateTimeFormat("pt-BR", {
+                weekday: "long",
+                day: "numeric",
+                month: "long",
+                year: "numeric"
+            }).format(d);
+        }
+
+        // Converte string "YYYY-MM-DD" (do input date) em {dia, mes, ano}
+        function stringParaData(str) {
+            if (!str) return null;
+            const [ano, mes, dia] = str.split("-").map(Number);
+            if (!ano || !mes || !dia) return null;
+            return { dia, mes, ano };
+        }
+
+        // Converte {dia, mes, ano} em "YYYY-MM-DD" (para preencher o input)
+        function dataParaString(data) {
+            const pad = n => String(n).padStart(2, "0");
+            return `${data.ano}-${pad(data.mes)}-${pad(data.dia)}`;
+        }
+
+        // Mostra a data no hero (label + dataAtual) de acordo com a data selecionada
+        function atualizarCabecalhoData(data) {
+            const hoje = dataHoje();
+            const ehHoje = data.dia === hoje.dia && data.mes === hoje.mes && data.ano === hoje.ano;
+
+            heroLabel.textContent = ehHoje ? "Liturgia de hoje" : "Liturgia de";
+            dataAtual.textContent = formatarDataExibicao(data);
         }
 
         function ehReferencia(chave) { return /^(referencia|ref|citacao|passagem biblica)$/.test(normalizar(chave)); }
@@ -1167,49 +1285,110 @@
             });
         }
 
-        async function carregarLiturgia() {
+        // Carrega a liturgia de uma data específica
+        async function carregarLiturgia(data) {
+            const dataConsulta = data || dataHoje();
+
             buscarBtn.disabled = true;
             buscarBtn.textContent = "Carregando liturgia...";
+            btnConsultarData.disabled = true;
+
             mensagem.hidden = false;
             mensagem.classList.remove("erro");
-            mensagem.textContent = "Buscando as leituras do dia...";
+            mensagem.textContent = "Buscando as leituras...";
+
             areaLiturgia.hidden = true;
 
             try {
-                const { dia, mes, ano } = dataLocal();
+                const { dia, mes, ano } = dataConsulta;
                 const url = `${API}?dia=${dia}&mes=${mes}&ano=${ano}`;
                 const resposta = await fetch(url);
                 if (!resposta.ok) throw new Error("A API não conseguiu fornecer a liturgia.");
                 const dados = await resposta.json();
                 if (!dados || !dados.leituras) throw new Error("A resposta não contém as leituras esperadas.");
+
                 dadosLiturgia = dados;
-                celebracao.textContent = typeof dados.liturgia === "string" && dados.liturgia ? dados.liturgia : "Liturgia do dia";
+                dataSelecionada = dataConsulta;
+
+                celebracao.textContent =
+                    typeof dados.liturgia === "string" && dados.liturgia
+                        ? dados.liturgia
+                        : "Liturgia do dia";
+
+                atualizarCabecalhoData(dataConsulta);
                 prepararAbas();
-                const primeiraDisponivel = ["primeiraLeitura", "salmo", "segundaLeitura", "evangelho"].find(chave => temConteudo(dados.leituras[chave]));
+
+                const primeiraDisponivel = ["primeiraLeitura", "salmo", "segundaLeitura", "evangelho"]
+                    .find(chave => temConteudo(dados.leituras[chave]));
+
                 if (!primeiraDisponivel) throw new Error("Nenhuma leitura foi encontrada.");
+
                 selecionarLeitura(primeiraDisponivel);
                 mensagem.hidden = true;
             } catch (erro) {
                 console.error("Erro ao carregar a liturgia:", erro);
                 mensagem.hidden = false;
                 mensagem.classList.add("erro");
-                mensagem.textContent = "Não foi possível carregar a liturgia. Verifique sua conexão e tente novamente. Você também pode consultar a liturgia no site da CNBB.";
+                mensagem.textContent =
+                    "Não foi possível carregar a liturgia desta data. " +
+                    "Verifique sua conexão e tente novamente. " +
+                    "Você também pode consultar a liturgia no site da CNBB.";
             } finally {
                 buscarBtn.disabled = false;
                 buscarBtn.textContent = "📖 Atualizar liturgia";
+                btnConsultarData.disabled = false;
             }
         }
 
         abas.forEach(aba => {
             aba.addEventListener("click", () => selecionarLeitura(aba.dataset.leitura));
         });
-        buscarBtn.addEventListener("click", carregarLiturgia);
 
+        // Botão principal: recarrega a data selecionada ou hoje
+        buscarBtn.addEventListener("click", () => {
+            carregarLiturgia(dataSelecionada || dataHoje());
+        });
+
+        // Botão "Consultar data"
+        btnConsultarData.addEventListener("click", () => {
+            const data = stringParaData(seletorData.value);
+            if (!data) {
+                mensagem.hidden = false;
+                mensagem.classList.remove("erro");
+                mensagem.textContent = "Escolha uma data antes de consultar.";
+                return;
+            }
+            carregarLiturgia(data);
+        });
+
+        // Botão "Hoje"
+        btnHoje.addEventListener("click", () => {
+            const hoje = dataHoje();
+            seletorData.value = dataParaString(hoje);
+            carregarLiturgia(hoje);
+        });
+
+        // Se o usuário alterar o input manualmente, ao clicar em "Consultar data" já pega a nova data
+        // (nada extra é necessário)
+
+        // ================================================================
+        // INICIALIZAÇÃO
+        // ================================================================
         document.addEventListener('DOMContentLoaded', function() {
-            mostrarData();
+            // Preenche o input com a data de hoje e já exibe o cabeçalho
+            const hoje = dataHoje();
+            seletorData.value = dataParaString(hoje);
+            atualizarCabecalhoData(hoje);
+
+            // Permite consultar com Enter no campo de data
+            seletorData.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    btnConsultarData.click();
+                }
+            });
         });
     </script>
-
 </body>
 
 </html>
