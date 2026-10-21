@@ -35,13 +35,13 @@
             position: fixed;
             top: 0;
             left: -320px;
-            width: 20rem; /* w-80 */
+            width: 20rem;
             height: 100vh;
             height: 100dvh;
             max-height: 100dvh;
             background: #fff;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            z-index: 60; /* acima do footer-menu (z-100 é do footer, mas o menu fecha ao clicar fora; aqui garantimos que o menu fique visível acima do conteúdo) */
+            z-index: 60;
             display: flex;
             flex-direction: column;
             overflow: hidden;
@@ -49,27 +49,23 @@
         }
         #menu.aberto { left: 0; }
 
-        /* Em mobile, garante que o menu fique acima do rodapé de navegação */
         @media (max-width: 640px) {
-            #menu { z-index: 110; } /* acima do footer-menu (100) */
+            #menu { z-index: 110; }
         }
 
-        /* Miolo do menu: único que rola */
         #menu .menu-scroll {
             flex: 1 1 auto;
-            min-height: 0;              /* ESSENCIAL para o flex-1 funcionar com overflow */
+            min-height: 0;
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
             overscroll-behavior: contain;
         }
 
-        /* Topo e rodapé do menu: nunca encolhem */
         #menu .menu-top,
         #menu .menu-bottom {
             flex: 0 0 auto;
         }
 
-        /* Rodapé do menu respeita safe-area do iPhone */
         #menu .menu-bottom {
             padding-bottom: max(1rem, env(safe-area-inset-bottom));
             background: #fff;
@@ -453,7 +449,6 @@
             .footer-menu { display: block; }
             .cards-grid { display: none !important; }
             .menu-title { display: none !important; }
-            /* Reserva espaço no fim do conteúdo para o rodapé fixo não cobrir */
             main.page-content { padding-bottom: 90px; }
         }
 
@@ -887,6 +882,15 @@
                 </div>
                 <span>Liturgia</span>
             </a>
+            <!-- NOVO ITEM: CIFRAS -->
+            <a href="buscar_cifras.html" class="footer-item">
+                <div class="icon-wrapper">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/>
+                    </svg>
+                </div>
+                <span>Cifras</span>
+            </a>
         </div>
     </nav>
 
@@ -1068,7 +1072,6 @@
         function abrirMenu() {
             menu.classList.add('aberto');
             aberto = true;
-            // Trava o scroll do body quando o menu está aberto (mobile)
             document.body.style.overflow = 'hidden';
         }
 

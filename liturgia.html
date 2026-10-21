@@ -271,7 +271,7 @@
         .btn-load-liturgia:active { transform: scale(0.98); }
         .btn-load-liturgia:disabled { opacity: 0.65; cursor: wait; transform: none; }
 
-        /* NOVO: seletor de data */
+        /* Seletor de data */
         .date-picker-wrapper {
             display: flex;
             flex-direction: column;
@@ -480,20 +480,6 @@
         }
         .liturgia-nota a { color: #1e3a8a; text-decoration: underline; font-weight: 500; }
         .liturgia-nota a:hover { color: #1e40af; }
-
-        .btn-voltar {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 14px;
-            font-weight: 500;
-            color: #4b5563;
-            text-decoration: none;
-            transition: all 0.2s ease;
-            padding: 6px 0;
-        }
-        .btn-voltar:hover { color: #1e3a8a; gap: 8px; }
-        .btn-voltar svg { width: 16px; height: 16px; }
 
         /* ================================================================ */
         /* RODAPÉ FIXO — padrão HOME */
@@ -754,17 +740,8 @@
             </div>
         </header>
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-5 mt-4 w-full">
-            <a href="index.html" class="btn-voltar">
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-                </svg>
-                Voltar
-            </a>
-        </div>
-
         <!-- HERO: DATA E BOTÃO DE CARREGAR + SELETOR DE DATA -->
-        <section class="max-w-7xl mx-auto mt-3 px-4 sm:px-5 w-full">
+        <section class="max-w-7xl mx-auto mt-6 px-4 sm:px-5 w-full">
             <div class="banner-white rounded-3xl shadow-xl relative">
                 <div class="banner-decoration"></div>
                 <div class="banner-decoration"></div>
@@ -780,7 +757,7 @@
                         📖 Carregar liturgia completa
                     </button>
 
-                    <!-- NOVO: seletor de data -->
+                    <!-- Seletor de data -->
                     <div class="date-picker-wrapper">
                         <div class="flex items-center justify-between gap-2">
                             <p class="date-picker-label">Escolher outra data</p>
@@ -909,6 +886,15 @@
                 </div>
                 <span>Liturgia</span>
             </a>
+            <!-- NOVO ITEM: CIFRAS -->
+            <a href="buscar_cifras.html" class="footer-item">
+                <div class="icon-wrapper">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/>
+                    </svg>
+                </div>
+                <span>Cifras</span>
+            </a>
         </div>
     </nav>
 
@@ -990,7 +976,6 @@
         };
 
         let dadosLiturgia = null;
-        // Guarda a data que está sendo consultada (formato {dia, mes, ano})
         let dataSelecionada = null;
 
         function escaparHTML(valor) {
@@ -1009,28 +994,18 @@
                 .trim();
         }
 
-        // Data de hoje no formato {dia, mes, ano}
         function dataHoje() {
             const agora = new Date();
-            return {
-                dia: agora.getDate(),
-                mes: agora.getMonth() + 1,
-                ano: agora.getFullYear()
-            };
+            return { dia: agora.getDate(), mes: agora.getMonth() + 1, ano: agora.getFullYear() };
         }
 
-        // Formata a data para exibição em pt-BR
         function formatarDataExibicao(data) {
             const d = new Date(data.ano, data.mes - 1, data.dia);
             return new Intl.DateTimeFormat("pt-BR", {
-                weekday: "long",
-                day: "numeric",
-                month: "long",
-                year: "numeric"
+                weekday: "long", day: "numeric", month: "long", year: "numeric"
             }).format(d);
         }
 
-        // Converte string "YYYY-MM-DD" (do input date) em {dia, mes, ano}
         function stringParaData(str) {
             if (!str) return null;
             const [ano, mes, dia] = str.split("-").map(Number);
@@ -1038,17 +1013,14 @@
             return { dia, mes, ano };
         }
 
-        // Converte {dia, mes, ano} em "YYYY-MM-DD" (para preencher o input)
         function dataParaString(data) {
             const pad = n => String(n).padStart(2, "0");
             return `${data.ano}-${pad(data.mes)}-${pad(data.dia)}`;
         }
 
-        // Mostra a data no hero (label + dataAtual) de acordo com a data selecionada
         function atualizarCabecalhoData(data) {
             const hoje = dataHoje();
             const ehHoje = data.dia === hoje.dia && data.mes === hoje.mes && data.ano === hoje.ano;
-
             heroLabel.textContent = ehHoje ? "Liturgia de hoje" : "Liturgia de";
             dataAtual.textContent = formatarDataExibicao(data);
         }
@@ -1285,7 +1257,6 @@
             });
         }
 
-        // Carrega a liturgia de uma data específica
         async function carregarLiturgia(data) {
             const dataConsulta = data || dataHoje();
 
@@ -1344,12 +1315,10 @@
             aba.addEventListener("click", () => selecionarLeitura(aba.dataset.leitura));
         });
 
-        // Botão principal: recarrega a data selecionada ou hoje
         buscarBtn.addEventListener("click", () => {
             carregarLiturgia(dataSelecionada || dataHoje());
         });
 
-        // Botão "Consultar data"
         btnConsultarData.addEventListener("click", () => {
             const data = stringParaData(seletorData.value);
             if (!data) {
@@ -1361,26 +1330,17 @@
             carregarLiturgia(data);
         });
 
-        // Botão "Hoje"
         btnHoje.addEventListener("click", () => {
             const hoje = dataHoje();
             seletorData.value = dataParaString(hoje);
             carregarLiturgia(hoje);
         });
 
-        // Se o usuário alterar o input manualmente, ao clicar em "Consultar data" já pega a nova data
-        // (nada extra é necessário)
-
-        // ================================================================
-        // INICIALIZAÇÃO
-        // ================================================================
         document.addEventListener('DOMContentLoaded', function() {
-            // Preenche o input com a data de hoje e já exibe o cabeçalho
             const hoje = dataHoje();
             seletorData.value = dataParaString(hoje);
             atualizarCabecalhoData(hoje);
 
-            // Permite consultar com Enter no campo de data
             seletorData.addEventListener('keydown', function(e) {
                 if (e.key === 'Enter') {
                     e.preventDefault();

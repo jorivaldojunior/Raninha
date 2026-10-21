@@ -205,7 +205,7 @@
         .modal-btn-confirm:hover { background: #b91c1c; transform: scale(1.02); }
         .modal-btn:active { transform: scale(0.95); }
 
-        /* Botão Home no header - apenas telas grandes */
+        /* Botão Home no header */
         .btn-home-header {
             display: none;
             background: transparent;
@@ -224,25 +224,12 @@
             .btn-home-header { display: flex; align-items: center; justify-content: center; }
         }
 
-        /* Botão voltar */
-        .btn-voltar {
-            display: inline-flex; align-items: center; gap: 0.5rem;
-            background: white; color: #1e3a8a;
-            padding: 0.6rem 1rem; border-radius: 0.75rem;
-            font-size: 0.85rem; font-weight: 600;
-            border: 1px solid #e5e7eb;
-            cursor: pointer; transition: all 0.3s ease;
-            text-decoration: none; margin-bottom: 1.25rem;
-        }
-        .btn-voltar:hover { background: #f3f4f6; transform: translateX(-3px); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); }
-        .btn-voltar svg { width: 1rem; height: 1rem; }
-
         /* Cabeçalho da página */
         .page-header { text-align: center; margin-bottom: 2rem; }
         .page-header h1 { font-size: 1.75rem; font-weight: 800; color: #1e3a8a; margin-bottom: 0.25rem; }
         .page-header p { font-size: 0.9rem; color: #6b7280; }
 
-        /* Introdução do conjunto */
+        /* Introdução */
         .misterio-introducao {
             background: #eff6ff; border-left: 4px solid #1e3a8a;
             padding: 1.25rem 1.5rem; border-radius: 0.75rem;
@@ -250,7 +237,7 @@
         }
         .misterio-introducao p { font-size: 0.92rem; color: #374151; line-height: 1.75; font-style: italic; }
 
-        /* Itens dos mistérios */
+        /* Itens */
         .misterio-item-lista {
             background: white; border-radius: 1rem; padding: 1.5rem;
             margin-bottom: 1.25rem; box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
@@ -263,7 +250,6 @@
         .misterio-item-lista .meditacao { font-size: 0.92rem; color: #4b5563; line-height: 1.8; }
         .misterio-item-lista .oracoes { font-size: 0.78rem; color: #9ca3af; margin-top: 1rem; padding-top: 0.85rem; border-top: 1px dashed #e5e7eb; line-height: 1.9; }
 
-        /* Botão de leitura da passagem bíblica */
         .btn-ler-passagem {
             display: inline-flex; align-items: center; gap: 0.5rem;
             background: #1e3a8a; color: white;
@@ -276,7 +262,7 @@
         .btn-ler-passagem:active { transform: scale(0.98); }
         .btn-ler-passagem svg { width: 0.95rem; height: 0.95rem; }
 
-        /* Modal da passagem bíblica completa */
+        /* Modal da passagem bíblica */
         .passagem-modal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(10px);
@@ -303,9 +289,7 @@
         .passagem-referencia { font-size: 0.8rem; color: #6b7280; font-weight: 600; margin-bottom: 1.25rem; padding-bottom: 0.75rem; border-bottom: 1px solid #e5e7eb; }
         .passagem-texto { font-size: 0.92rem; color: #374151; line-height: 1.85; white-space: pre-line; }
 
-        /* ================================================================ */
-        /* RODAPÉ FIXO — padrão HOME */
-        /* ================================================================ */
+        /* RODAPÉ — padrão HOME */
         .footer-menu {
             display: none;
             position: fixed;
@@ -395,7 +379,7 @@
         </div>
     </div>
 
-    <!-- MODAL DA PASSAGEM BÍBLICA COMPLETA -->
+    <!-- MODAL DA PASSAGEM BÍBLICA -->
     <div id="passagemModal" class="passagem-modal">
         <div class="passagem-modal-content" id="passagemModalContent">
             <button class="passagem-modal-close" onclick="fecharPassagemModal()">✕</button>
@@ -578,26 +562,15 @@
     <!-- CONTEÚDO PRINCIPAL -->
     <main class="max-w-3xl mx-auto px-4 sm:px-5 mt-6">
 
-        <!-- Botão voltar -->
-        <a href="misterios.html" class="btn-voltar">
-            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-            </svg>
-            Voltar aos Mistérios
-        </a>
-
-        <!-- Cabeçalho -->
         <div class="page-header">
             <h1>👑 Mistérios Gloriosos</h1>
             <p>Reza-se nas quartas-feiras e domingos</p>
         </div>
 
-        <!-- Introdução -->
         <div class="misterio-introducao">
             <p>A vida que brota da vida, a vida que vence a morte. A glória de Deus entre os homens é Sua ressurreição. A vitoriosidade sobre a vida angustiosa, difícil e sofrida ocorre somente em Deus. É uma nova vida que nasce na vida e nos prepara para vive-la em plenitude. A glória de Deus é nos glorificar. Somos sua imagem e semelhança; assim nos criou.</p>
         </div>
 
-        <!-- Lista de Mistérios -->
         <div id="listaMisterios"></div>
     </main>
 
@@ -669,6 +642,15 @@
                 </div>
                 <span>Liturgia</span>
             </a>
+            <!-- NOVO ITEM: CIFRAS -->
+            <a href="buscar_cifras.html" class="footer-item">
+                <div class="icon-wrapper">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/>
+                    </svg>
+                </div>
+                <span>Cifras</span>
+            </a>
         </div>
     </nav>
 
@@ -717,7 +699,6 @@
             }
         ];
 
-        // Renderiza os mistérios na página
         function renderizarMisterios() {
             const container = document.getElementById('listaMisterios');
             let html = '';
@@ -747,7 +728,6 @@
             container.innerHTML = html;
         }
 
-        // Abre o modal da passagem bíblica
         function abrirPassagemModal(index) {
             const item = misteriosGloriosos[index];
             if (!item || !item.passagemCompleta) return;
@@ -765,17 +745,12 @@
             document.body.style.overflow = '';
         }
 
-        // Fechar modal clicando fora
         document.addEventListener('click', function(event) {
             const passagemModal = document.getElementById('passagemModal');
-            if (event.target === passagemModal) {
-                fecharPassagemModal();
-            }
+            if (event.target === passagemModal) fecharPassagemModal();
         });
 
-        // ================================================================
         // MENU LATERAL — padrão HOME
-        // ================================================================
         const menu = document.getElementById("menu");
         let aberto = false;
 
@@ -797,9 +772,7 @@
             if (!isClickInsideMenu && !isClickOnMenuButton && aberto) fecharMenu();
         });
 
-        // ================================================================
         // MODAL DE SAIR
-        // ================================================================
         const modalSair = document.getElementById('modalSair');
 
         function abrirModal() {
@@ -821,7 +794,6 @@
             if (event.target === modalSair) fecharModal();
         });
 
-        // Inicializa a página
         renderizarMisterios();
     </script>
 </body>
