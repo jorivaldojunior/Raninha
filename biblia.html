@@ -299,6 +299,63 @@
     body { padding-bottom: 0; }
     main.page-content { padding-bottom: 0; }
   }
+
+  /* ============================================================
+     AJUSTES DE RESPONSIVIDADE (telas pequenas) — só layout,
+     nenhum componente foi alterado
+     ============================================================ */
+  html { -webkit-text-size-adjust: 100%; }
+  img, svg { max-width: 100%; }
+  .input-container, .search-box { min-width: 0; }          /* campo não empurra o botão para fora */
+  .search-wrapper > *, .result, .result > * { min-width: 0; }
+  .result-title, .verse, .notice, .hint { overflow-wrap: anywhere; }
+
+  @media (max-width: 480px) {
+    .search-box { padding: 12px 14px; font-size: 16px; }   /* 16px evita o zoom automático do iPhone */
+    .btn-search { padding: 0 16px; font-size: 14px; }
+    .bible-hero-title { font-size: 18px; }
+    .bible-hero-sub { font-size: 13px; margin-bottom: 14px; }
+    .banner-white > .relative > .relative, .banner-white .z-10 { padding: 18px 16px !important; }
+    .hint { font-size: 11.5px; padding: 10px 12px; }
+    .autocomplete-dropdown { max-height: 40vh; }
+    .result { padding: 18px 14px; border-radius: 16px; }
+    .result-title { font-size: 19px; }
+    .verse { font-size: 16px; line-height: 1.75; text-align: left; }
+    .nav-chap { gap: 6px; }
+    .nav-chap button { padding: 10px 6px; font-size: 12px; }
+    .recent-chip { padding: 7px 12px; font-size: 12px; }
+  }
+  @media (max-width: 360px) {
+    .bible-hero-sub { display: none; }
+    .nav-chap button { font-size: 11px; }
+    .online-status { max-width: 110px; }
+  }
+
+  /* BOTÃO DE BUSCA DISCRETO — mesmo estilo dos ícones do rodapé */
+  .btn-search, .btn-search:hover, .btn-search:active {
+    padding: 0; font-size: 0; border: 1px solid #e5e7eb; box-shadow: none;
+  }
+  .btn-search {
+    flex: 0 0 3.25rem; width: 3.25rem; min-height: 3rem;
+    background: #f5f5f5; color: #1a1a1a;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 12px;
+  }
+  .btn-search svg { width: 1.4rem; height: 1.4rem; stroke: #1a1a1a; }
+  .btn-search:hover { background: #e5e5e5; transform: none; }
+  .btn-search:active { background: #dcdcdc; transform: scale(.95); }
+  .btn-search:focus-visible { outline: 2px solid #1e3a8a; outline-offset: 2px; }
+
+  /* CORREÇÃO: em telas estreitas o campo de busca ultrapassava seu espaço e cobria parte do botão */
+  .search-box { width: 100%; min-width: 0; }
+  .search-wrapper { width: 100%; align-items: stretch; }
+  .btn-search { position: relative; z-index: 2; flex: 0 0 3.25rem; min-width: 3.25rem; }
+  .btn-search svg { flex: 0 0 auto; max-width: none; }
+  @media (max-width: 360px) {
+    .search-wrapper { gap: 6px; }
+    .btn-search { flex-basis: 3rem; min-width: 3rem; width: 3rem; }
+    .search-box { padding: 12px 10px; }
+  }
 </style>
 </head>
 
@@ -480,7 +537,7 @@
               <input id="searchInput" type="text" class="search-box" placeholder="Ex: Apocalipse 6:8" autocomplete="off" autocapitalize="none" spellcheck="false">
               <div id="autocompleteList" class="autocomplete-dropdown"></div>
             </div>
-            <button id="btnBuscar" class="btn-search">Buscar</button>
+            <button id="btnBuscar" class="btn-search" type="button" aria-label="Buscar" title="Buscar"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 10.5a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z"/></svg></button>
           </div>
 
           <div class="hint">
