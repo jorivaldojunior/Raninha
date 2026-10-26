@@ -373,23 +373,27 @@
   .tb-danger { color: #dc2626; border-color: #fecaca; }
   .tb-danger:hover { background: #fef2f2; border-color: #fca5a5; color: #b91c1c; }
 
-  .cat-nav { margin: 0 -4px 14px; padding: 2px 4px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  /* Categorias — abas horizontais, sublinhado na ativa */
+  .cat-nav { position: relative; margin: 0 0 16px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; border-bottom: 1px solid #e5e7eb; }
   .cat-nav::-webkit-scrollbar { display: none; }
-  #catItems { display: flex; gap: 8px; width: max-content; padding-bottom: 2px; }
+  #catItems { display: flex; gap: 2px; width: max-content; min-width: 100%; }
   .cat-btn {
-    flex: 0 0 auto; width: 76px; display: flex; flex-direction: column; align-items: center;
-    background: #fff; color: #374151; border: 2px solid #e5e7eb; border-radius: 14px;
-    padding: 8px 4px; font-size: 11px; cursor: pointer; font-family: 'Inter', sans-serif;
-    transition: all .25s ease;
+    flex: 0 0 auto; display: inline-flex; align-items: center; gap: 7px;
+    background: none; border: 0; border-bottom: 2px solid transparent; margin-bottom: -1px; border-radius: 0;
+    padding: 12px 14px; font-size: 13px; font-weight: 600; letter-spacing: .01em; color: #6b7280; white-space: nowrap;
+    cursor: pointer; font-family: 'Inter', sans-serif; transition: color .2s ease, border-color .2s ease;
   }
-  .cat-btn:hover { border-color: #93c5fd; background: #eff6ff; }
-  .cat-btn.on { background: #1e3a8a; color: #fff; border-color: #1e3a8a; box-shadow: 0 4px 12px rgba(30,58,138,.25); }
-  .cat-ico { font-size: 22px; line-height: 1; }
-  .cat-name { margin-top: 4px; text-align: center; line-height: 1.15; font-weight: 600; }
-  .cat-count { margin-top: 2px; font-size: 10px; color: #9ca3af; }
-  .cat-btn.on .cat-count { color: #bfdbfe; }
+  .cat-btn:hover { color: #1e3a8a; }
+  .cat-btn.on { color: #1e3a8a; border-bottom-color: #1e3a8a; font-weight: 700; }
+  .cat-btn:focus-visible { outline: 2px solid #1e3a8a; outline-offset: -2px; border-radius: 6px; }
+  .cat-count { background: #f3f4f6; color: #6b7280; border-radius: 9999px; padding: 1px 7px; font-size: 11px; font-weight: 600; line-height: 1.5; }
+  .cat-btn.on .cat-count { background: #eff6ff; color: #1e3a8a; }
 
-  .count-line { font-size: 12px; color: #6b7280; margin-bottom: 10px; }
+  .count-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .count-line { font-size: 12px; color: #6b7280; margin: 0; }
+  .backup-acoes { display: flex; gap: 6px; }
+  .lnk { background: none; border: 1px solid #e5e7eb; color: #4b5563; border-radius: 9999px; padding: 4px 10px; font-size: 11px; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif; transition: all .25s ease; }
+  .lnk:hover { background: #eff6ff; border-color: #bfdbfe; color: #1e3a8a; }
   #list { display: grid; gap: 8px; }
   @media (min-width: 768px) { #list { grid-template-columns: repeat(2, 1fr); } #list > .box-vazio { grid-column: 1 / -1; } }
   .item {
@@ -430,7 +434,7 @@
   .dlg-acoes { display: flex; justify-content: flex-end; gap: 8px; margin-top: 18px; }
 
   @media (max-width: 480px) {
-    .cat-btn { width: 70px; }
+    .cat-btn { padding: 11px 11px; font-size: 12.5px; }
     .toolbar { gap: 6px; }
     .toolbar .tb { padding: 7px 10px; font-size: 12px; }
     #sheet .result-title { font-size: 20px; }
@@ -444,7 +448,7 @@
 
   @media print {
     body { background: #fff !important; padding: 0 !important; }
-    header, .footer-menu, #menu, #heroCifras, #banner, .toolbar, #back, .modal-overlay { display: none !important; }
+    header, .footer-menu, #menu, #heroCifras, #banner, .toolbar, .count-row, #back, .modal-overlay { display: none !important; }
     #sheet { border: 0 !important; box-shadow: none !important; max-width: none; padding: 0 !important; }
     .acorde { color: #000; }
   }
@@ -649,7 +653,14 @@
         <nav id="catMenu" class="cat-nav" aria-label="Categorias">
           <div id="catItems"></div>
         </nav>
-        <p id="count" class="count-line"></p>
+        <div class="count-row">
+          <p id="count" class="count-line"></p>
+          <div class="backup-acoes">
+            <button id="btnExport" class="lnk" type="button" title="Baixar um arquivo com todas as cifras">⬇ Exportar</button>
+            <button id="btnImport" class="lnk" type="button" title="Carregar cifras de um arquivo de backup">⬆ Importar</button>
+            <input id="fileImport" type="file" accept=".json,application/json" hidden>
+          </div>
+        </div>
         <div id="list"></div>
       </div>
 
@@ -924,11 +935,11 @@ function renderMenu(){
     const count = val ? songs.filter(s => norm(s.category) === norm(val)).length : songs.length;
     const on = norm(val) === norm(cat);
     return `<button data-i="${i}" aria-pressed="${on}" class="cat-btn ${on ? "on" : ""}">
-      <span class="cat-ico">${icon}</span>
-      <span class="cat-name">${esc(label)}</span>
-      <span class="cat-count">${count}</span></button>`;
+      <span class="cat-name">${esc(label)}</span><span class="cat-count">${count}</span></button>`;
   }).join("");
   document.querySelectorAll(".cat-btn").forEach(b => b.onclick = () => { cat = items[+b.dataset.i][0]; renderList(); });
+  const on = document.querySelector(".cat-btn.on"), nav = $("catMenu");
+  if (on) nav.scrollLeft = Math.max(0, on.offsetLeft - (nav.clientWidth - on.offsetWidth) / 2);
 }
 
 function renderList(){
@@ -1068,9 +1079,49 @@ $("copy").onclick = async () => {
   setTimeout(() => $("copy").textContent = "Copiar", 1500);
 };
 
-/* ---------- início ---------- */
-songs = loadDB();
-renderList();
+
+/* ---------- cifras que já vêm no arquivo (cole aqui o backup para elas virem salvas) ---------- */
+const SEED = [];
+const SEED_KEY = "cifras.seeded.v1";
+function applySeed(){
+  if (!SEED.length) return;
+  let done = []; try { done = JSON.parse(localStorage.getItem(SEED_KEY)) || []; } catch(e){}
+  const ids = new Set(songs.map(s => s.id));
+  let added = false;
+  SEED.forEach(s => { if (!done.includes(s.id) && !ids.has(s.id)) { songs.push({ ...s }); added = true; } });   // quem apagou uma cifra não a vê voltar
+  try { localStorage.setItem(SEED_KEY, JSON.stringify(SEED.map(s => s.id))); } catch(e){}
+  if (added) saveDB();
+}
+
+/* ---------- backup: exportar e importar ---------- */
+$("btnExport").onclick = () => {
+  if (!songs.length) return alert("Não há cifras para exportar.");
+  const blob = new Blob([JSON.stringify(songs, null, 2)], { type: "application/json" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "cifras-backup-" + new Date().toISOString().slice(0, 10) + ".json";
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+};
+$("btnImport").onclick = () => $("fileImport").click();
+$("fileImport").onchange = async e => {
+  const f = e.target.files[0]; e.target.value = "";
+  if (!f) return;
+  let data;
+  try { data = JSON.parse(await f.text()); } catch(err){ return alert("Esse arquivo não é um backup de cifras válido."); }
+  if (!Array.isArray(data)) return alert("Esse arquivo não é um backup de cifras válido.");
+  const ids = new Set(songs.map(s => s.id));
+  const igual = s => songs.some(x => norm(x.title) === norm(s.title) && norm(x.artist) === norm(s.artist) && x.body === s.body);
+  let n = 0;
+  data.forEach(s => {
+    if (!s || typeof s.title !== "string" || typeof s.body !== "string" || !s.title.trim() || !s.body.trim()) return;
+    const novo = { id: (typeof s.id === "string" && s.id && !ids.has(s.id)) ? s.id : uid(), title: s.title.trim(), artist: String(s.artist || "").trim(), category: String(s.category || "").trim(), body: s.body };
+    if (igual(novo)) return;
+    songs.push(novo); ids.add(novo.id); n++;
+  });
+  if (n) { saveDB(); cat = ""; $("q").value = ""; renderList(); }
+  alert(n ? n + " cifra(s) importada(s)." : "Nenhuma cifra nova: todas já estavam no caderno.");
+};
 
 /* ---------- ícone "Cifras" do rodapé: só volta ao início, sem sair da página ---------- */
 function irParaInicioCifras(){
@@ -1079,6 +1130,11 @@ function irParaInicioCifras(){
   window.scrollTo({ top: 0, behavior: "smooth" });
   $("q").focus();
 }
+
+/* ---------- início ---------- */
+songs = loadDB();
+applySeed();
+renderList();
 
   </script>
 </body>
