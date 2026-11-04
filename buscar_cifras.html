@@ -253,7 +253,7 @@
   .error { color: #dc2626; }
 
   /* ============================================================
-     RODAPÉ FIXO — padrão HOME
+     RODAPÉ FIXO — padrão HOME (com todos os ícones + Livros)
      ============================================================ */
   .footer-menu {
     display: none; position: fixed; bottom: 0; left: 0; right: 0;
@@ -306,12 +306,12 @@
      ============================================================ */
   html { -webkit-text-size-adjust: 100%; }
   img, svg { max-width: 100%; }
-  .input-container, .search-box { min-width: 0; }          /* campo não empurra o botão para fora */
+  .input-container, .search-box { min-width: 0; }
   .search-wrapper > *, .result, .result > * { min-width: 0; }
   .result-title, .verse, .notice, .hint { overflow-wrap: anywhere; }
 
   @media (max-width: 480px) {
-    .search-box { padding: 12px 14px; font-size: 16px; }   /* 16px evita o zoom automático do iPhone */
+    .search-box { padding: 12px 14px; font-size: 16px; }
     .btn-search { padding: 0 16px; font-size: 14px; }
     .bible-hero-title { font-size: 18px; }
     .bible-hero-sub { font-size: 13px; margin-bottom: 14px; }
@@ -346,7 +346,6 @@
   .btn-search:active { background: #dcdcdc; transform: scale(.95); }
   .btn-search:focus-visible { outline: 2px solid #1e3a8a; outline-offset: 2px; }
 
-  /* CORREÇÃO: em telas estreitas o campo de busca ultrapassava seu espaço e cobria parte do botão */
   .search-box { width: 100%; min-width: 0; }
   .search-wrapper { width: 100%; align-items: stretch; }
   .btn-search { position: relative; z-index: 2; flex: 0 0 3.25rem; min-width: 3.25rem; }
@@ -461,7 +460,7 @@
     left: 50%;
     bottom: calc(24px + env(safe-area-inset-bottom, 0px));
     transform: translateX(-50%);
-    z-index: 2147483000;   /* acima de header, menu, modal e dialog */
+    z-index: 2147483000;
     display: flex;
     flex-direction: column-reverse;
     gap: 10px;
@@ -469,7 +468,7 @@
     pointer-events: none;
   }
   @media (max-width: 640px) {
-    #toastStack { bottom: calc(96px + env(safe-area-inset-bottom, 0px)); } /* acima do rodapé fixo */
+    #toastStack { bottom: calc(96px + env(safe-area-inset-bottom, 0px)); }
   }
   .toast {
     display: flex;
@@ -528,7 +527,6 @@
     to   { opacity: 0; transform: translateY(20px) scale(.96); }
   }
 
-  /* Destaque visual no campo que precisa de correção */
   .campo-erro {
     border-color: #dc2626 !important;
     box-shadow: 0 0 0 3px rgba(220,38,38,.15) !important;
@@ -810,6 +808,10 @@
     </div>
   </dialog>
 
+  <!-- ============================================================
+       RODAPÉ — padrão do app, com todos os ícones + Livros
+       Cifras = página atual (ativo)
+       ============================================================ -->
   <nav class="footer-menu">
     <div class="scroll-container">
       <a href="home.html" class="footer-item">
@@ -893,6 +895,14 @@
         </div>
         <span>Cifras</span>
       </a>
+      <a href="livros.html" class="footer-item">
+        <div class="icon-wrapper">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+          </svg>
+        </div>
+        <span>Livros</span>
+      </a>
     </div>
   </nav>
 
@@ -941,11 +951,10 @@
       setTimeout(close, type === "error" ? 5500 : 4000);
     }
 
-    /* Destaca visualmente um campo que precisa de correção e leva o foco até ele */
     function marcarErro(el) {
       if (!el) return;
       el.classList.remove("campo-erro");
-      void el.offsetWidth;            // força reinício da animação
+      void el.offsetWidth;
       el.classList.add("campo-erro");
       el.focus({ preventScroll: false });
       el.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -981,7 +990,6 @@ const NOTES = ["C","C#","D","D#","E","F","F#","G","G#","A","A#","B"];
 const FLAT = {Db:"C#",Eb:"D#",Gb:"F#",Ab:"G#",Bb:"A#"};
 const CHORD = /^\(?[A-G][#b]?(?:m|M|maj|min|dim|aug|sus|add|º|°|\+|-)?(?:\d{1,2}|sus\d?|add\d+|dim|aug|M|[+º°-]|\([^)]*\))*(?:\/(?:[A-G][#b]?|\d{1,2}))?\)?$/;
 const NOTES_FLAT = ["C","Db","D","Eb","E","F","Gb","G","Ab","A","Bb","B"];
-// "Palavras" que podem aparecer numa linha de acordes sem serem acordes: (2x), x2, |, -, N.C., Intro:
 const NEUTRAL = /^(?:\(?(?:\d+x|x\d+)\)?|[|:\-–—.\/%()]+|N\.?C\.?|[\wÀ-ÿ]+:)$/i;
 const $ = id => document.getElementById(id);
 const esc = s => s.replace(/[&<>]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
@@ -989,12 +997,10 @@ const norm = s => (s||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f
 
 let songs = [], current = null, shift = 0, timer = null, fs = 15, editingId = null;
 
-/* ---------- banco de dados (JSON no localStorage) ---------- */
 function loadDB(){ try { const s = JSON.parse(localStorage.getItem(KEY)); if (Array.isArray(s)) return s; } catch(e){} return []; }
 function saveDB(){ try { localStorage.setItem(KEY, JSON.stringify(songs)); } catch(e){ toast("Não foi possível salvar no navegador. O armazenamento pode estar cheio ou bloqueado (por exemplo, em aba anônima).", "error"); } }
 function uid(){ return "m" + Date.now().toString(36) + Math.random().toString(36).slice(2,6); }
-/* ---------- acordes ---------- */
-const maskLabels = l => l.replace(/\[[^\]]*\]/g, m => " ".repeat(m.length));   // ignora rótulos como [Intro]
+const maskLabels = l => l.replace(/\[[^\]]*\]/g, m => " ".repeat(m.length));
 function isChordLine(l){
   let chords = 0;
   for (const t of maskLabels(l).trim().split(/\s+/).filter(Boolean)){
@@ -1006,11 +1012,7 @@ function isChordLine(l){
 const noteIndex = n => NOTES.indexOf(FLAT[n] || n);
 function tNote(n, st, flat){ const i = noteIndex(n); return i < 0 ? n : (flat ? NOTES_FLAT : NOTES)[(i + st + 120) % 12]; }
 const tChord = (c, st, flat) => c.replace(/[A-G][#b]?/g, m => tNote(m, st, flat));
-// Quebra a linha em pedaços e marca quais são acordes. Cobre 3 formatos:
-//  1) linha só de acordes (acima da letra)         G   D/F#   Em
-//  2) acordes entre colchetes dentro da letra      palavra [G]palavra [Am]palavra
-//  3) acordes soltos no meio da letra              palavra G palavra Am palavra
-const WEAK = /^(?:A|E|Em)$/;   // também são palavras comuns em português: só valem como acorde ao lado de outro acorde
+const WEAK = /^(?:A|E|Em)$/;
 const isBr = t => t[0] === "[" && t[t.length - 1] === "]";
 function segments(line){
   const segs = [...line.matchAll(/\[[^\]]*\]|\s+|[^\s\[]+|\[/g)].map(m => ({ t: m[0], c: false, ws: /^\s/.test(m[0]) }));
@@ -1027,14 +1029,12 @@ function segments(line){
       const p = segs[i];
       if (p.c || isBr(p.t) || !WEAK.test(p.t)) return;
       const prev = segs[idx[k - 1]], next = segs[idx[k + 1]];
-      // "A", "E" e "Em" no começo da linha/frase são palavras; no meio da linha ou ao lado de outro acorde, são acordes
       const startsSentence = k === 0 || /[.!?:;]$/.test(prev.t);
       if (!startsSentence || (prev && prev.c) || (next && next.c)) p.c = true;
     });
   }
   return segs;
 }
-// Devolve a linha já transposta, em pedaços {t: texto, c: é acorde?}
 function lineParts(line, st, flat){
   const full = isChordLine(line), out = [];
   let debt = 0;
@@ -1045,14 +1045,13 @@ function lineParts(line, st, flat){
     } else if (p.c){
       let t = p.t;
       if (st) t = isBr(p.t) ? "[" + tChord(p.t.slice(1, -1).trim(), st, flat) + "]" : tChord(p.t, st, flat);
-      debt = full ? p.t.length - t.length : 0;   // só alinha espaços em linha de acordes
+      debt = full ? p.t.length - t.length : 0;
       out.push({ t, c: true });
     } else out.push({ t: p.t, c: false });
   }
   return out;
 }
 const tLine = (line, st, flat) => lineParts(line, st, flat).map(p => p.t).join("");
-// Descobre o tom da música (primeiro acorde) para escolher bemol ou sustenido ao transpor
 function keyInfo(lines){
   for (const l of lines){
     const p = segments(l).find(x => x.c);
@@ -1069,14 +1068,12 @@ function useFlats(info, st){
   return info.minor ? [0,2,3,5,7,10].includes(t) : [1,3,5,8,10].includes(t);
 }
 
-/* ---------- telas ---------- */
-/* ---------- menu de categorias ---------- */
 const CATS = [
   ["Entrada","🚪"], ["Ato penitencial","🙏"], ["Glória","✨"], ["Salmo","📖"], ["Aclamação","🕊️"],
   ["Ofertório","🧺"], ["Santo","🔔"], ["Cordeiro","🐑"], ["Comunhão","🍞"], ["Final","🌅"],
   ["Mariana","🌹"], ["Adoração","🙌"]
 ];
-let cat = "";   // categoria selecionada ("" = todas)
+let cat = "";
 function renderMenu(){
   const known = CATS.map(c => norm(c[0]));
   const extra = [...new Set(songs.map(s => s.category).filter(c => c && !known.includes(norm(c))))];
@@ -1122,7 +1119,6 @@ function renderList(){
   document.querySelectorAll(".item").forEach(el => el.onclick = () => openSong(songs.find(s => s.id === el.dataset.id)));
   if (n){ $("list").insertAdjacentHTML("beforeend", onlineBox("Não é a que você procura?")); bindOnline(); }
 }
-/* ---------- busca online + colar automático ---------- */
 let pending = false;
 function onlineBox(msg){
   const q = $("q").value.trim(), enc = encodeURIComponent(q);
@@ -1180,7 +1176,6 @@ function openSong(s){
 function closeSong(){ stopScroll(); $("sheet").classList.add("hidden"); $("home").classList.remove("hidden"); }
 function stopScroll(){ clearInterval(timer); timer = null; $("scroll").textContent = "▶ Rolagem"; }
 
-/* ---------- eventos ---------- */
 $("q").oninput = () => { if (!$("sheet").classList.contains("hidden")) closeSong(); renderList(); };
 $("back").onclick = closeSong;
 $("up").onclick = () => { shift++; renderSheet(); };
@@ -1236,8 +1231,6 @@ $("copy").onclick = async () => {
   toast("Cifra copiada para a área de transferência.", "success");
 };
 
-
-/* ---------- cifras que já vêm no arquivo (cole aqui o backup para elas virem salvas) ---------- */
 const SEED = [];
 const SEED_KEY = "cifras.seeded.v1";
 function applySeed(){
@@ -1245,12 +1238,11 @@ function applySeed(){
   let done = []; try { done = JSON.parse(localStorage.getItem(SEED_KEY)) || []; } catch(e){}
   const ids = new Set(songs.map(s => s.id));
   let added = false;
-  SEED.forEach(s => { if (!done.includes(s.id) && !ids.has(s.id)) { songs.push({ ...s }); added = true; } });   // quem apagou uma cifra não a vê voltar
+  SEED.forEach(s => { if (!done.includes(s.id) && !ids.has(s.id)) { songs.push({ ...s }); added = true; } });
   try { localStorage.setItem(SEED_KEY, JSON.stringify(SEED.map(s => s.id))); } catch(e){}
   if (added) saveDB();
 }
 
-/* ---------- backup: exportar e importar ---------- */
 $("btnExport").onclick = () => {
   if (!songs.length) return toast("Não há cifras para exportar.", "warning");
   const blob = new Blob([JSON.stringify(songs, null, 2)], { type: "application/json" });
@@ -1281,7 +1273,6 @@ $("fileImport").onchange = async e => {
   toast(n ? `${n} cifra(s) importada(s) com sucesso.` : "Nenhuma cifra nova: todas já estavam no caderno.", n ? "success" : "info");
 };
 
-/* ---------- ícone "Cifras" do rodapé: só volta ao início, sem sair da página ---------- */
 function irParaInicioCifras(){
   if (!$("sheet").classList.contains("hidden")) closeSong();
   $("q").value = ""; cat = ""; renderList();
@@ -1289,11 +1280,9 @@ function irParaInicioCifras(){
   $("q").focus();
 }
 
-/* ---------- início ---------- */
 songs = loadDB();
 applySeed();
 renderList();
-
   </script>
 </body>
 </html>
