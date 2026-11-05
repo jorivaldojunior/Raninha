@@ -200,6 +200,21 @@
     pointer-events: none;
   }
 
+  /* Catecismo: a imagem (1000x1000) tem fundo branco em volta do livro.
+     Recorte exato da capa amarela (x:205-768, y:64-938) para preencher 100% do livro 3D. */
+  .img-capa-cheia {
+    position: absolute;
+    width: 177.62% !important;
+    height: 114.42% !important;
+    max-width: none !important;
+    left: -36.41% !important;
+    top: -7.32% !important;
+    object-fit: fill !important;
+    display: block !important;
+    z-index: 1;
+    pointer-events: none;
+  }
+
   .book-cover.capa-catecismo {
     background: radial-gradient(circle at 30% 20%, #ffe680 0%, #ffd54a 40%, #ffc107 80%, #f0a800 100%);
     color: #ffffff;
@@ -715,13 +730,8 @@
         </div>
 
         <div class="book-card" onclick="abrirLivro('catecismo')">
-          <div class="book-cover capa-catecismo">
-            <div class="cover-content">
-              <span class="text-[10px] mb-1 tracking-widest">IGREJA</span>
-              <span class="font-black text-sm leading-tight">CATECISMO</span>
-              <div class="divider h-0.5 w-8 my-2" style="background:#fff; box-shadow:0 0 8px rgba(255,255,255,0.9);"></div>
-              <span class="text-[11px] tracking-widest uppercase">Católico</span>
-            </div>
+          <div class="book-cover">
+            <img src="./assets/image2.webp" alt="Capa Catecismo" class="img-capa-cheia">
           </div>
           <div class="book-shadow"></div>
         </div>
@@ -915,6 +925,7 @@ A frase que abre a obra resume seu espírito: *"Fizeste-nos para Ti, e o nosso c
 
     let capituloAtual = 0;
     let fs = 18;
+
 
     function abrirMenu() { document.getElementById('menu').classList.add('aberto'); }
     function fecharMenu() { document.getElementById('menu').classList.remove('aberto'); }
