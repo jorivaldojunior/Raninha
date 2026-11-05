@@ -49,7 +49,7 @@
   .btn-sair:hover { background: #b91c1c; transform: scale(1.02); }
   .btn-sair:active { transform: scale(.95); }
 
-  /* ==== MENU LATERAL — classes do padrão do app ==== */
+  /* ==== MENU LATERAL ==== */
   .social-icon { transition: all .3s ease; }
   .social-icon:hover { transform: scale(1.1); background: #f3f4f6; }
   .social-item { display: flex; flex-direction: column; align-items: center; gap: 6px; text-decoration: none; transition: all .3s ease; }
@@ -114,23 +114,26 @@
   }
   .book-card:hover { transform: translateY(-4px); }
 
+  /* CONTAINER DO LIVRO 3D */
   .book-cover {
     position: relative;
     width: 130px;
-    height: 190px;
-    border-radius: 6px;
+    height: 202px; /* proporção do livro da imagem */
+    border-radius: 6px 8px 8px 6px;
     box-shadow:
       0 2px 4px rgba(0,0,0,0.10),
       0 10px 24px rgba(0,0,0,0.22),
       0 20px 40px rgba(0,0,0,0.15);
     border: none;
-    background-color: #f3f4f6;
+    background-color: transparent; /* AJUSTE: sem fundo cinza atrás da imagem */
     overflow: hidden;
     transform-style: preserve-3d;
     transform: rotateY(-8deg) rotateX(2deg);
     transition: transform 0.45s cubic-bezier(.2,.8,.2,1), box-shadow 0.45s ease;
+    padding: 0 !important;
   }
 
+  /* Efeito da lombada escura */
   .book-cover::before {
     content: "";
     position: absolute;
@@ -142,6 +145,7 @@
     pointer-events: none;
   }
 
+  /* Efeito de brilho */
   .book-cover::after {
     content: "";
     position: absolute;
@@ -180,59 +184,29 @@
     opacity: 0.85;
   }
 
+  /* AJUSTE: a imagem É o livro inteiro (estante e índice) */
+  /* A imagem (768x1024) é um mockup: o livro ocupa só o centro, com fundo cinza em volta.
+     Aqui recortamos exatamente a área do livro (x:157-611, y:182-889) para ele preencher 100% da capa. */
+  .img-capa-real {
+    position: absolute;
+    width: 169.16% !important;
+    height: 144.84% !important;
+    max-width: none !important;
+    left: -34.58% !important;
+    top: -25.74% !important;
+    object-fit: fill !important;
+    display: block !important;
+    z-index: 1;
+    pointer-events: none;
+  }
+
   .book-cover.capa-catecismo {
-    background:
-      radial-gradient(circle at 30% 20%, #ffe680 0%, #ffd54a 40%, #ffc107 80%, #f0a800 100%);
+    background: radial-gradient(circle at 30% 20%, #ffe680 0%, #ffd54a 40%, #ffc107 80%, #f0a800 100%);
     color: #ffffff;
   }
-  .book-cover.capa-catecismo::before {
-    background: linear-gradient(to right, rgba(120,70,0,0.40), rgba(120,70,0,0.10) 70%, transparent);
-  }
-  .book-cover.capa-catecismo .cover-content span,
-  .book-cover.capa-catecismo .cover-content div {
-    color: #ffffff;
-    font-weight: 900;
-    letter-spacing: 1.5px;
-    text-shadow:
-      0 1px 2px rgba(120,70,0,0.6),
-      0 2px 6px rgba(120,70,0,0.5),
-      0 0 12px rgba(255,255,255,0.45);
-  }
-  .book-cover.capa-catecismo .cover-content .divider {
-    background: #ffffff !important;
-    box-shadow: 0 0 8px rgba(255,255,255,0.9);
-  }
-
-  .book-cover.capa-confissoes {
-    background:
-      radial-gradient(circle at 30% 15%, #dc2626 0%, #b91c1c 45%, #7f1010 100%);
-    color: #ffffff;
-  }
-  .book-cover.capa-confissoes::before {
-    background: linear-gradient(to right, rgba(0,0,0,0.40), rgba(0,0,0,0.10) 70%, transparent);
-  }
-  .book-cover.capa-confissoes .cover-content span,
-  .book-cover.capa-confissoes .cover-content div {
-    color: #ffffff;
-    font-weight: 900;
-    letter-spacing: 1.5px;
-    text-shadow:
-      0 1px 2px rgba(0,0,0,0.55),
-      0 2px 6px rgba(0,0,0,0.45),
-      0 0 12px rgba(255,255,255,0.35);
-  }
-  .book-cover.capa-confissoes .cover-content .divider {
-    background: #ffffff !important;
-    box-shadow: 0 0 8px rgba(255,255,255,0.8);
-  }
-
   .book-cover.capa-breve {
-    background:
-      radial-gradient(circle at 30% 20%, #f3f4f6 0%, #d1d5db 60%, #9ca3af 100%);
+    background: radial-gradient(circle at 30% 20%, #f3f4f6 0%, #d1d5db 60%, #9ca3af 100%);
     color: #4b5563;
-  }
-  .book-cover.capa-breve::before {
-    background: linear-gradient(to right, rgba(0,0,0,0.25), rgba(0,0,0,0.05) 70%, transparent);
   }
 
   .book-cover .cover-content {
@@ -284,33 +258,11 @@
     max-width: 400px;
     width: 100%;
     text-align: center;
-    box-shadow:
-      0 30px 60px -12px rgba(0,0,0,0.35),
-      0 0 0 1px rgba(255,255,255,0.6) inset;
+    box-shadow: 0 30px 60px -12px rgba(0,0,0,0.35), 0 0 0 1px rgba(255,255,255,0.6) inset;
     position: relative;
     animation: slideUp 0.35s cubic-bezier(.2,.8,.2,1);
     overflow: hidden;
   }
-
-  .modal-em-breve-content::before {
-    content: "";
-    position: absolute;
-    top: -60px; left: -60px;
-    width: 160px; height: 160px;
-    background: radial-gradient(circle, rgba(251,191,36,0.25) 0%, rgba(251,191,36,0) 70%);
-    border-radius: 50%;
-    pointer-events: none;
-  }
-  .modal-em-breve-content::after {
-    content: "";
-    position: absolute;
-    bottom: -70px; right: -70px;
-    width: 180px; height: 180px;
-    background: radial-gradient(circle, rgba(59,130,246,0.18) 0%, rgba(59,130,246,0) 70%);
-    border-radius: 50%;
-    pointer-events: none;
-  }
-
   .modal-em-breve-icon {
     width: 88px;
     height: 88px;
@@ -332,7 +284,6 @@
     position: relative;
     z-index: 2;
   }
-
   .modal-em-breve-badge {
     display: inline-block;
     background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
@@ -346,7 +297,6 @@
     margin-bottom: 14px;
     box-shadow: 0 2px 6px rgba(146,64,14,0.15);
   }
-
   .modal-em-breve-title {
     font-size: 22px;
     font-weight: 800;
@@ -360,11 +310,6 @@
     color: #64748b;
     margin: 0 0 26px;
   }
-  .modal-em-breve-text strong {
-    color: #334155;
-    font-weight: 700;
-  }
-
   .modal-em-breve-btn {
     width: 100%;
     background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
@@ -380,10 +325,7 @@
     position: relative;
     z-index: 2;
   }
-  .modal-em-breve-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 22px rgba(30,58,138,0.45);
-  }
+  .modal-em-breve-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 22px rgba(30,58,138,0.45); }
   .modal-em-breve-btn:active { transform: translateY(0); }
 
   .book-view { display: none; }
@@ -414,26 +356,25 @@
     perspective: 900px;
     flex-shrink: 0;
   }
+
+  /* CONTAINER DA CAPA NO ÍNDICE */
   .book-header-cover {
     position: relative;
     width: 110px;
-    height: 165px;
-    border-radius: 6px;
-    background: #b91c1c;
+    height: 171px; /* proporção do livro da imagem */
+    border-radius: 6px 8px 8px 6px;
+    background: transparent; /* AJUSTE: sem fundo vermelho atrás da imagem */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
     color: #fff;
-    padding: 12px;
+    padding: 0 !important;
     overflow: hidden;
     transform-style: preserve-3d;
     transform: rotateY(-10deg) rotateX(3deg);
-    box-shadow:
-      0 2px 4px rgba(0,0,0,0.10),
-      0 12px 28px rgba(0,0,0,0.28),
-      0 22px 44px rgba(0,0,0,0.18);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.10), 0 12px 28px rgba(0,0,0,0.28), 0 22px 44px rgba(0,0,0,0.18);
     transition: transform 0.5s cubic-bezier(.2,.8,.2,1), box-shadow 0.5s ease;
   }
   .book-header-cover::before {
@@ -446,52 +387,9 @@
     z-index: 3;
     pointer-events: none;
   }
-  .book-header-cover::after {
-    content: "";
-    position: absolute;
-    top: 0; left: -60%;
-    width: 60%;
-    height: 100%;
-    background: linear-gradient(115deg,
-        rgba(255,255,255,0) 0%,
-        rgba(255,255,255,0.35) 45%,
-        rgba(255,255,255,0) 100%);
-    transform: skewX(-18deg);
-    z-index: 2;
-    pointer-events: none;
-    transition: left 0.6s ease;
-  }
   .book-header:hover .book-header-cover {
     transform: rotateY(-16deg) rotateX(5deg) translateZ(6px);
-    box-shadow:
-      0 4px 8px rgba(0,0,0,0.18),
-      0 20px 40px rgba(0,0,0,0.32),
-      0 34px 60px rgba(0,0,0,0.22);
-  }
-  .book-header:hover .book-header-cover::after { left: 120%; }
-
-  .book-header-cover .cover-content {
-    position: relative;
-    z-index: 4;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 6px;
-    text-align: center;
-    color: #ffffff;
-  }
-  .book-header-cover .cover-content span,
-  .book-header-cover .cover-content div {
-    color: #ffffff;
-    font-weight: 900;
-    letter-spacing: 1.5px;
-    text-shadow:
-      0 1px 2px rgba(0,0,0,0.55),
-      0 2px 6px rgba(0,0,0,0.45),
-      0 0 12px rgba(255,255,255,0.35);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.18), 0 20px 40px rgba(0,0,0,0.32), 0 34px 60px rgba(0,0,0,0.22);
   }
 
   .book-header-info h2 { font-size: 24px; font-weight: 800; color: #b91c1c; margin-bottom: 4px; }
@@ -549,7 +447,7 @@
   }
 
   /* ============================================================
-     RODAPÉ FIXO — padrão do app (com todos os ícones)
+     RODAPÉ FIXO
      ============================================================ */
   .footer-menu {
     display: none; position: fixed; bottom: 0; left: 0; right: 0;
@@ -665,9 +563,7 @@
     </div>
   </div>
 
-  <!-- ============================================================
-       MENU LATERAL — completo, padrão do app
-       ============================================================ -->
+  <!-- MENU LATERAL -->
   <aside id="menu" role="navigation" aria-label="Menu lateral">
     <div class="menu-top relative bg-white p-6 border-b border-gray-100">
       <button onclick="fecharMenu()" class="absolute top-4 right-4 menu-close-btn bg-gray-100 hover:bg-gray-200 rounded-full p-2">
@@ -810,14 +706,10 @@
       <h2 class="carousel-title">Clássicos</h2>
       <div class="carousel-scroll">
 
+        <!-- LIVRO 1: CONFISSÕES (imagem ocupa o livro todo) -->
         <div class="book-card" onclick="abrirLivro('confissoes')">
-          <div class="book-cover capa-confissoes">
-            <div class="cover-content">
-              <span class="text-[10px] opacity-95 mb-1 tracking-widest">SANTO</span>
-              <span class="font-black text-base leading-tight">AGOSTINHO</span>
-              <div class="divider h-0.5 w-10 my-2"></div>
-              <span class="text-sm tracking-widest uppercase">Confissões</span>
-            </div>
+          <div class="book-cover">
+            <img src="./assets/image.jpg" alt="Capa Confissões" class="img-capa-real">
           </div>
           <div class="book-shadow"></div>
         </div>
@@ -827,7 +719,7 @@
             <div class="cover-content">
               <span class="text-[10px] mb-1 tracking-widest">IGREJA</span>
               <span class="font-black text-sm leading-tight">CATECISMO</span>
-              <div class="divider h-0.5 w-8 my-2"></div>
+              <div class="divider h-0.5 w-8 my-2" style="background:#fff; box-shadow:0 0 8px rgba(255,255,255,0.9);"></div>
               <span class="text-[11px] tracking-widest uppercase">Católico</span>
             </div>
           </div>
@@ -850,13 +742,9 @@
       <button onclick="voltarEstante()" class="btn-tb mb-4">← Voltar para a Estante</button>
       <div class="book-header">
         <div class="book-header-cover-wrap">
-          <div class="book-header-cover capa-confissoes">
-            <div class="cover-content">
-              <span class="text-[10px] mb-1 tracking-widest">SANTO</span>
-              <span class="font-black text-sm leading-tight">AGOSTINHO</span>
-              <div class="divider h-0.5 w-8 my-2" style="background:#fff;box-shadow:0 0 8px rgba(255,255,255,0.8)"></div>
-              <span class="text-[11px] tracking-widest uppercase">Confissões</span>
-            </div>
+          <!-- CAPA NO ÍNDICE (imagem ocupa o livro todo) -->
+          <div class="book-header-cover">
+            <img src="./assets/image.jpg" alt="Capa Confissões" class="img-capa-real">
           </div>
         </div>
         <div class="book-header-info">
@@ -1140,7 +1028,8 @@ A frase que abre a obra resume seu espírito: *"Fizeste-nos para Ti, e o nosso c
       document.getElementById('leituraSubtitulo').textContent = info.titulo;
       document.getElementById('leituraTitulo').textContent = info.desc;
 
-      let txt = TEXTOS_CONFISSOES[id - 1] || "Texto não encontrado.";
+      // Verifica se TEXTOS_CONFISSOES existe (carregado do textos.js)
+      let txt = (typeof TEXTOS_CONFISSOES !== 'undefined' && TEXTOS_CONFISSOES[id - 1]) ? TEXTOS_CONFISSOES[id - 1] : "Texto não encontrado. Verifique se o arquivo textos.js foi carregado corretamente.";
       txt = txt.replace(/\r\n/g, '\n');
 
       const paragrafos = txt
